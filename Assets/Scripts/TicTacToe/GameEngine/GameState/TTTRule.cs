@@ -15,25 +15,3 @@ public class TTTRule : Rule {
     }
 	
 }
-
-
-
-
-public interface IRule {
-
-    TTTGameResult applyTo(TTTGameState state);
-}
-
-
-public class Rule1 : IRule {
-    
-    public Rule1(string x) {
-
-    }
-    public TTTGameResult applyTo(TTTGameState state) {
-        throw new System.NotImplementedException();
-    }
-}
-
-public class Rule2 : IRule { 
-}

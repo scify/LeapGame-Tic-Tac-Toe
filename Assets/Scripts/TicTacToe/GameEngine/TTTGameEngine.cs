@@ -11,7 +11,7 @@ public class TTTGameEngine : GameEngine {
     public override void run() {
         state = new TTTGameState();
         renderer = new TTTStateRenderer();
-        rules = new TTTRuleSet();
+        rules = new TTTRuleset();
         events = new Queue<GameEvent>();
     }
 

@@ -64,15 +64,15 @@
     <Compile Include="Assets\Scripts\GameEngine\WorldObject.cs" />
     <Compile Include="Assets\Scripts\SoundGraphicsEngine\AudioEngine.cs" />
     <Compile Include="Assets\Scripts\SoundGraphicsEngine\GraphicsEngine.cs" />
+    <Compile Include="Assets\Scripts\SoundGraphicsEngine\IUnityRenderable.cs" />
     <Compile Include="Assets\Scripts\SoundGraphicsEngine\StateRenderer.cs" />
     <Compile Include="Assets\Scripts\StorageManagement\ObjectStorage.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTGameResult.cs" />
+    <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTGameState.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTRule.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTRuleset.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTSoundObject.cs" />
-    <Compile Include="Assets\Scripts\TicTacToe\GameEngine\GameState\TTTGameState.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\GameEngine\TTTGameEngine.cs" />
-    <Compile Include="Assets\Scripts\SoundGraphicsEngine\IUnityRenderable.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\RenderingEngine\TTTStateRenderer.cs" />
     <Compile Include="Assets\Scripts\TicTacToe\UserInterface\TTTUserInterface.cs" />
     <Compile Include="Assets\Scripts\UserInterface\AIPlayer.cs" />

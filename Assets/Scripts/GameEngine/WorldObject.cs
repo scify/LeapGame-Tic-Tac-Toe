@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class WorldObject {
 
     public Vector3 position;
+    public bool hidden;
 
 	public WorldObject() {
 	}
