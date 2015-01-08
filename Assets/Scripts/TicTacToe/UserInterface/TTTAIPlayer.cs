@@ -4,6 +4,8 @@ using System;
 
 public class TTTAIPlayer : AIPlayer {
 
+    private bool thinking = false;
+
     public TTTAIPlayer(string code, string name) : base(code, name) {
 	}
 
