@@ -6,9 +6,16 @@ public class AudioEngine {
 	public AudioEngine() {
 	}
 
-	public AudioClip getSound(string sFile, Vector3 player, Vector3 soundOrigin) {
+    public AudioClip getSound(string sFile, Vector3 soundOrigin) {
+        return null;
+    }
+
+	public AudioClip getSound(string sFile, int player, Vector3 soundOrigin) {
 		return null;
 	}
+    public AudioClip getSound(string sFile, int player, Vector3 playerOrigin, Vector3 soundOrigin) {
+        return null;
+    }
 
 	public AudioClip getSoundStream(string sFile, Vector3 player, Vector3 soundOrigin) {
 		return null;

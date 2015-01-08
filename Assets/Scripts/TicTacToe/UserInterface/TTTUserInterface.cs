@@ -17,7 +17,7 @@ public class TTTUserInterface : MonoBehaviour {
             return;
         }
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            engine.postEvent(new UIEvent("up", "move", "player0"));
+            engine.postEvent(new UIEvent("_up", "move", "player0"));
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) {
             engine.postEvent(new UIEvent("down", "move", "player0"));

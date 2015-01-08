@@ -7,10 +7,49 @@ public class TTTEngineInitiator : MonoBehaviour {
     public float offset_y;
 
 	void Start () {
-        TTTRuleset rules = new TTTRuleset();
 
+        List<Actor> actors = new List<Actor>();
+        actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {
+            if (wo is TTTStaticObject && engine is TTTGameEngine) {
+                if ((wo as TTTStaticObject).prefab.Contains("TTT/O")) {
+                    string audioClip = "Sounds/O";
+                    //TODO: replace with call to auEngine
+                    (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
+                } else if ((wo as TTTStaticObject).prefab.Contains("TTT/X")) {
+                    string audioClip = "Sounds/X";
+                    //TODO: replace with call to auEngine
+                    (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
+                }
+            }
+        }));
+
+        List<WorldObject> environment = new List<WorldObject>();
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Horizontal", new Vector3(0, 0, 2), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Horizontal", new Vector3(0, 0, -2), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Vertical", new Vector3(3.2f, 0, 0), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Vertical", new Vector3(-3.2f, 0, 0), false));
+
+        List<Player> players = new List<Player>();
+        players.Add(new Player("player0", "Nick"));
+        players.Add(new TTTAIPlayer("player1", "AI"));
+
+        TTTStateRenderer renderer = new TTTStateRenderer();
+        AudioEngine auEngine = new AudioEngine();
+        //TODO: initialize audio engine with default params?
+
+        TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("ALL", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             return !eve.initiator.StartsWith("player") || eve.initiator.Equals("player" + state.curPlayer);
+        }));
+
+        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            if (state.timestamp >= 10 && eve.payload.Equals("enter")) {
+                (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
+                return false;
+            }
+            return true;
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
@@ -31,16 +70,24 @@ public class TTTEngineInitiator : MonoBehaviour {
                 foreach (Actor actor in state.actors) {
                     bool overlap = false;
                     foreach (WorldObject wo in state.environment) {
-                        if (wo.position == actor.position) {
+                        if (wo.position == actor.position && !(wo is TTTSoundObject)) {
                             overlap = true;
                         }
                     }
+                    string audioClip;
                     if (overlap) {
-                        engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/Audio/Audio_Error", actor.position, false));
+                        audioClip = "Sounds/Error";
+                        //TODO: replace with call to auEngine
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                     } else {
+                        int x = (int)(actor.position.x / offset_x + 1);
+                        int y = (int)(actor.position.z / offset_y + 1);
+                        state.board[x, y] = state.curPlayer;
                         string symbol = state.curPlayer == 0 ? "X" : "O";
                         engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
-                        engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/Audio/Audio_" + symbol, actor.position, false));
+                        audioClip = "Sounds/" + symbol;
+                        //TODO: replace with call to auEngine
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position));
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
                         state.timestamp++;
                     }
@@ -54,10 +101,6 @@ public class TTTEngineInitiator : MonoBehaviour {
                 int xy = int.Parse(eve.payload);
                 int x = (xy % 10) - 1;
                 int y = (xy / 10) - 1;
-                if (x < -1 || x > 1 || y < -1 || y > 1) {
-                    Debug.Log("Invalid input: " + eve.payload);
-                    return false;
-                }
                 foreach (Actor actor in state.actors) {
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
                 }
@@ -67,14 +110,41 @@ public class TTTEngineInitiator : MonoBehaviour {
 
         rules.Add(new TTTRule("move", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (eve.payload.Length != 2) {
-                Debug.Log("move with arrows");
+                int dx = 0;
+                int dy = 0;
+                switch (eve.payload) {
+                    case "_up":
+                        dy = -1;
+                        break;
+                    case "down":
+                        dy = 1;
+                        break;
+                    case "left":
+                        dx = -1;
+                        break;
+                    case "right":
+                        dx = 1;
+                        break;
+                    default:
+                        break;
+                }
+                foreach (Actor actor in state.actors) {
+                    int x = (int)(actor.position.x / offset_x) + dx;
+                    int y = (int)(actor.position.z / offset_y) + dy;
+                    if (x < -1 || x > 1 || y < -1 || y > 1) {
+                        string audioClip = "Sounds/Wall";
+                        //TODO: replace with call to auEngine
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
+                        return false;
+                    }
+                    actor.position = new Vector3(offset_x * x, 0, offset_y * y);
+                }
             }
             return true;
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (eve.payload.Equals("enter")) {
-                Debug.Log("win condition runs here");
                 bool finished = false;
                 for (int i = 0; i < 3; i++) {
                     if (state.board[i, 0] == state.board[i, 1] && state.board[i, 0] == state.board[i, 2] && state.board[i, 0] != -1) {
@@ -95,50 +165,20 @@ public class TTTEngineInitiator : MonoBehaviour {
                 if (finished) {
                     (state.result as TTTGameResult).winner = state.curPlayer;
                     (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Won;
-                    state.timestamp++;
+                    state.timestamp = 10;
+                    state.curPlayer = 0;
                     return false;
                 }
                 if (state.timestamp == 9) {
                     (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Draw;
                     state.timestamp++;
+                    state.curPlayer = 0;
                     return false;
                 }
             }
             return true;
         }));
 
-        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            if (state.timestamp >= 10 && eve.payload.Equals("enter")) {
-                (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
-                return false;
-            }
-            return true;
-        }));
-
-        List<Actor> actors = new List<Actor>();
-        actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {
-            if (wo is TTTStaticObject && engine is TTTGameEngine) {
-                if ((wo as TTTStaticObject).prefab.Contains("TTT/O")) {
-                    (engine as TTTGameEngine).state.environment.Add(new TTTStaticObject("Prefabs/TTT/Audio/Audio_O", wo.position, false));
-                } else if ((wo as TTTStaticObject).prefab.Contains("TTT/X")) {
-                    (engine as TTTGameEngine).state.environment.Add(new TTTStaticObject("Prefabs/TTT/Audio/Audio_X", wo.position, false));
-                }
-            }
-        }));
-
-        List<WorldObject> environment = new List<WorldObject>();
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Horizontal", new Vector3(0, 0, 2), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Horizontal", new Vector3(0, 0, -2), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Vertical", new Vector3(3.2f, 0, 0), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Line_Vertical", new Vector3(-3.2f, 0, 0), false));
-
-        List<Player> players = new List<Player>();
-        players.Add(new Player("player0", "Nick"));
-        players.Add(new TTTAIPlayer("player1", "AI"));
-
-        TTTStateRenderer renderer = new TTTStateRenderer();
         gameObject.AddComponent<TTTGameEngine>();
         gameObject.AddComponent<TTTUserInterface>();
         gameObject.GetComponent<TTTGameEngine>().initialize(rules, actors, environment, players, renderer);

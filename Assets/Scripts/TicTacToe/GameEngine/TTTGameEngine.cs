@@ -56,6 +56,9 @@ public class TTTGameEngine : GameEngine {
             rules.applyTo(state, curEvent, this);
         }
         renderer.render(state);
+        if (state.result.gameOver()) {
+            cleanUp();
+        }
 	}
 
     public override void postEvent(GameEvent eve) {

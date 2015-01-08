@@ -21,8 +21,8 @@ public class TTTAIPlayer : AIPlayer {
                 }
             }
             KeyValuePair<int, int> point = points[new System.Random().Next(points.Count)];
-            int x = point.Key;
-            int y = point.Value;
+            int x = point.Value;
+            int y = point.Key;
             engine.postEvent(new GameEvent(x + "" + y, "move", code));
             engine.postEvent(new GameEvent("enter", "action", code));
         }
