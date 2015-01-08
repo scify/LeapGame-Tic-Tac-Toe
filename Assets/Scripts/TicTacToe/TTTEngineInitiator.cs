@@ -36,7 +36,7 @@ public class TTTEngineInitiator : MonoBehaviour {
         players.Add(new TTTAIPlayer("player1", "AI"));
 
         TTTStateRenderer renderer = new TTTStateRenderer();
-        AudioEngine auEngine = new AudioEngine();
+        AudioEngine auEngine = new AudioEngine("Tic-Tac-Toe");
         //TODO: initialize audio engine with default params?
 
         TTTRuleset rules = new TTTRuleset();

@@ -64,9 +64,6 @@ public class AudioEngine {
 	~AudioEngine() {
 		AudioEngine.nOfAudioEngines--;
 	}
-    public AudioClip getSound(string sFile, int player, Vector3 playerOrigin, Vector3 soundOrigin) {
-        return null;
-    }
 
 
 
