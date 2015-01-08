@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-//using System.IO.IOException; TODO Check if is needed. 
 using System.Xml;
 using UnityEngine;
 
@@ -40,6 +39,7 @@ public class AudioFilesSettings {
 		
 		/* First get all files from the sound settings XML */
 		try {
+
 			DirectoryInfo theInfo = new DirectoryInfo (AudioFilesSettings.settingsBaseDir);
 
 			FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
@@ -47,25 +47,22 @@ public class AudioFilesSettings {
 			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
 
 			/* Initiliase the Lists that are used */
-			this.audioFilesCases = new List<string>();
-			this.audioFilesPath = new List<List<string> >();
-			this.audioFilesPositions = new List<Vector3>();
-			this.audioFilesSettingsNames = new List<string>();
+			this.theAudioFiles = new List<List<AudioFileForGame>> ();
 
 			/* Get the Xml Document */
 			XmlDocument gameSettings = new XmlDocument();
 			gameSettings.Load(AudioFilesSettings.settingsBaseDir + files[0].Name);
 
 			/* Get the amount of maximum players */
-			XmlNode tmpNode = gameSettings.DocumentElement.SelectSingleNode("//general/players/maximum");
+			XmlNode tmpNode = gameSettings.DocumentElement.SelectSingleNode("/theFile/general/players/maximum");
 			this.nOfPlayers_max = Convert.ToInt16(tmpNode.InnerText);
 
 			/* Get the amount of minimum players */
-			tmpNode = gameSettings.DocumentElement.SelectSingleNode("//general/players/minimum");
+			tmpNode = gameSettings.DocumentElement.SelectSingleNode("/theFile/general/players/minimum");
 			this.nOfPlayers_min = Convert.ToInt16(tmpNode.InnerText);
 
 			/* Get all settings */
-			tmpNode = gameSettings.DocumentElement.SelectSingleNode("//audio");
+			tmpNode = gameSettings.DocumentElement.SelectSingleNode("audio");
 			int playerTmpIndx;
 			string tmpString;
 
@@ -73,6 +70,7 @@ public class AudioFilesSettings {
 
 				/* The player index */
 				playerTmpIndx = Convert.ToInt16(playerNode.Attributes["index"].InnerText) - 1;
+				this.theAudioFiles.Add(new List<AudioFileForGame>());
 
 				/* Iterate through XML nodes and get the info needed */
 				foreach(XmlNode tmpSetting in playerNode.ChildNodes) {
@@ -81,18 +79,11 @@ public class AudioFilesSettings {
 
 					foreach(XmlNode tmpAudioFile in tmpSetting.ChildNodes) {
 
-						tmpString = tmpAudioFile.SelectSingleNode("/position_vals").InnerText;
+						tmpString = tmpAudioFile.SelectSingleNode("position_vals").InnerText;
 
 						this.theAudioFiles[playerTmpIndx].Add(new AudioFileForGame(tmpAudioFile.Attributes["case"].InnerText, 
-                   			new UnityEngine.Vector3(Convert.ToSingle(tmpString[0]), Convert.ToSingle(tmpString[1]), Convert.ToSingle(tmpString[2])),
-                           	tmpAudioFile.SelectSingleNode("/path").InnerText));
-						                                                         
-
-						this.audioFilesCases.Add(tmpAudioFile.Attributes["case"].InnerText);
-						this.audioFilesPath[playerTmpIndx].Add(tmpAudioFile.SelectSingleNode("/path").InnerText);
-						
-						this.audioFilesPositions.Add(new UnityEngine.Vector3(Convert.ToSingle(tmpString[0]), Convert.ToSingle(tmpString[1]), Convert.ToSingle(tmpString[2])));
-
+							new UnityEngine.Vector3(Convert.ToSingle(tmpString.Substring(0, 1)), Convert.ToSingle(tmpString.Substring(1, 1)), Convert.ToSingle(tmpString.Substring(2, 1))),
+                           	"Sounds/" + tmpAudioFile.SelectSingleNode("path").InnerText));
 					}
 				}
 			}
@@ -103,8 +94,30 @@ public class AudioFilesSettings {
 
 	} /* End public AudioFilesSettings */
 
+
+
+	/**
+	 * Gets the path of a sound for a given player and position.
+	 * 
+	 * This public method accepts the player's index, the case and the sound origin
+	 * and returns the path of the appropriate sound.
+	 * 
+	 * @param player - the index of the player (int)
+	 * @param theCase - the case of the sound (string)
+	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
+	 * @return string - the path of the sound
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
-		return null;
+
+		return this.theAudioFiles [player].Find (
+			delegate (AudioFileForGame af) {
+						if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin))
+								return true;
+						else
+								return false;
+				}).ThePath;
 	}
 
 
@@ -204,28 +217,6 @@ public class AudioFilesSettings {
 
 	public string getPathForSound(int nOfPlayer, string theCase, Vector3 position) {
 
-		/*if (AudioEngine.positionUpRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpRight");
-		} else if (AudioEngine.positionUpCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpCenter");
-		} else if (AudioEngine.positionUpLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpLeft");
-		} else if (AudioEngine.positionMiddleLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleLeft");
-		} else if (AudioEngine.positionMiddleCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleCenter");
-		} else if (AudioEngine.positionMiddleRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleRight");
-		} else if (AudioEngine.positionBottomRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomLeft");
-		} else if (AudioEngine.positionBottomCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomCenter");
-		} else if (AudioEngine.positionBottomLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomRight");
-		} else {
-			throw new InvalidDataException("Wrong player position");
-		}*/
-
 		return null;
 	}
 
@@ -289,30 +280,18 @@ public class AudioFilesSettings {
 		}
 
 		public string TheCase {
-			get {
-				return theCase;
-			}
-			set {
-				theCase = value;
-			}
+			get { return theCase; }
+			set { theCase = value; }
 		}
 
 		public UnityEngine.Vector3 ThePosition {
-			get {
-				return thePosition;
-			}
-			set {
-				thePosition = value;
-			}
+			get { return thePosition; }
+			set { thePosition = value; }
 		}
 
 		public string ThePath {
-			get {
-				return thePath;
-			}
-			set {
-				thePath = value;
-			}
+			get { return thePath; }
+			set { thePath = value; }
 		}
 
 		private string theCase;
@@ -330,9 +309,9 @@ public class AudioFilesSettings {
 	private List<UnityEngine.Vector3> audioFilesPositions; /*!< List of positions' values for each audio file */
 	private List<string> audioFilesSettingsNames; /*!< List of settings for audio files (default, etc) */
 	
-	private static string settingsPathDefault = "Assets/Resources/Sounds/TicTacToe/default/"; /*!< Default path for setting */
+	private static string settingsPathDefault = "Sounds/TicTacToe/default/"; /*!< Default path for setting */
 	private static string settingsFileName = "audioSettings.xml"; /*!< The name of the file holding the audio files' settings */
-	private static string settingsBaseDir = "Assets/Resources/Sounds"; /*!< Default base dir for the settings file */
+	private static string settingsBaseDir = "Sounds"; /*!< Default base dir for the settings file */
 	private static string messageGreaterPlayerIndex = "The specified index of player is greater than the amount of total players"; /*!< Message for exception of player index */
 	private static string messageParentPathNotFound = "Path does not exist"; /*!< Message for path not exists */
 }
