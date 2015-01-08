@@ -1,18 +1,37 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class TTTGameEngine : GameEngine {
+
+    public TTTStateRenderer renderer;
+    public TTTRuleset rules;
+    public TTTGameState state;
+    public List<Actor> actors;
+    public List<WorldObject> environment;
+    public List<Player> players;
+    public Queue<GameEvent> events;
+
+    private bool initialized = false;
+
+    public void initialize(TTTRuleset rules, List<Actor> actors, List<WorldObject> environment, List<Player> players, TTTStateRenderer renderer) {
+        this.rules = rules;
+        this.actors = actors;
+        this.environment = environment;
+        this.players = players;
+        this.renderer = renderer;
+        state = new TTTGameState(actors, environment, players);
+        events = new Queue<GameEvent>();
+        state.curPlayer = new System.Random().Next(players.Count);
+        initialized = true;
+    }
 
 	public void Start() {
         run();
 	}
 
     public override void run() {
-        state = new TTTGameState();
-        renderer = new TTTStateRenderer();
-        rules = new TTTRuleset();
-        events = new Queue<GameEvent>();
     }
 
     public void Update() {
@@ -20,11 +39,39 @@ public class TTTGameEngine : GameEngine {
     }
 
     public override void loop() {
-
+        if (!initialized) {
+            return;
+        }
+        foreach (Player p in players) {
+            if (p is TTTAIPlayer) {
+                (p as TTTAIPlayer).notify(this);
+            }
+        }
+        while (events.Count != 0) {
+            if (state.result.gameOver()) {
+                cleanUp();
+                return;
+            }
+            GameEvent curEvent = events.Dequeue();
+            rules.applyTo(state, curEvent, this);
+        }
+        renderer.render(state);
 	}
 
+    public override void postEvent(GameEvent eve) {
+        events.Enqueue(eve);
+    }
+
+    public override GameState getState() {
+        return state;
+    }
+
+    public override StateRenderer getRenderer() {
+        return renderer;
+    }
+
     public override void cleanUp() {
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel(0);
 	}
 
 }

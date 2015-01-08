@@ -7,16 +7,30 @@ public class TTTGameState : GameState {
 
     public int[,] board = new int[3, 3];
 
-	public TTTGameState() {
+    public TTTGameState(List<Actor> actors, List<WorldObject> environment, List<Player> players) {
         timestamp = 0;
-        actors = new List<Actor>();
-        environment = new List<WorldObject>();
-        players = new List<Player>();
+        this.actors = actors;
+        this.environment = environment;
+        this.players = players;
         curPlayer = 0;
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++ ) {
+            for (int j = 0; j < 3; j++) {
                 board[i, j] = -1;
             }
         }
-	}
+        result = new TTTGameResult(TTTGameResult.GameStatus.Ongoing, -1);
+    }
+
+    public TTTGameState(TTTGameState previousState) {
+        timestamp = previousState.timestamp;
+        actors = new List<Actor>(previousState.actors);
+        environment = new List<WorldObject>(previousState.environment);
+        players = new List<Player>(previousState.players);
+        curPlayer = previousState.curPlayer;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i, j] = previousState.board[i, j];
+            }
+        }
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StaticObject : WorldObject {
 
-	public StaticObject() {
+    public StaticObject(Vector3 position, bool hidden) : base(position, hidden) {
 	}
 
 }

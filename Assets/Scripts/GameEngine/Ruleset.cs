@@ -1,19 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Ruleset : List<Rule> {
-
-	public bool isValid(GameState state) {
-		foreach (Rule r in this) {
-			if (!r.applyTo(state).isValid()) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public GameResult apply(GameState state) {
-		return null;
-	}
+public abstract class Ruleset<T> : List<T> where T : Rule {
+    
+    public abstract void applyTo(GameState state, GameEvent eve, GameEngine engine);
 	
 }

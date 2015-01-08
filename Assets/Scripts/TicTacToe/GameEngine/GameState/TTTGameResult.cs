@@ -1,31 +1,27 @@
 using System;
 
-public abstract class TTTGameResult {
+public class TTTGameResult : GameResult {
 
     public enum GameStatus {
         Ongoing = 0,
-        Invalid = 1,
-        Won = 2,
-        Draw = 3
+        Won = 1,
+        Draw = 2,
+        Over = 3
     }
 
-    private GameStatus status;
-    private int winner;
+    public GameStatus status;
+    public int winner;
 
     public TTTGameResult(GameStatus status, int winner) {
         this.status = status;
         this.winner = winner;
 	}
 
-    public bool gameOver() {
-        return status == GameStatus.Draw || status == GameStatus.Won;
+    public override bool gameOver() {
+        return status == GameStatus.Over;
     }
 
-    public bool isValid() {
-        return status != GameStatus.Invalid;
-    }
-
-    public int getWinner() {
+    public override int getWinner() {
         return winner;
     }
 }

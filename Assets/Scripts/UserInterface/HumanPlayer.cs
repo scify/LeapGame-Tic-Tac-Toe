@@ -5,6 +5,8 @@ public class HumanPlayer : Player {
 	
     public UserInterface ui;
 
-	public HumanPlayer() {
+    public HumanPlayer(string code, string name, UserInterface ui) : base(code, name) {
+        this.ui = ui;
 	}
+
 }

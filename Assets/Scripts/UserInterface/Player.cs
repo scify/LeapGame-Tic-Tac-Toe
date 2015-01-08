@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Player {
 
-    public GameEngine engine;
+    public string code;
+    public string name;
 
-	public Player() {
+	public Player(string code, string name) {
+        this.code = code;
+        this.name = name;
 	}
 }

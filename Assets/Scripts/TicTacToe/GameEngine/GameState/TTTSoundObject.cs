@@ -5,7 +5,7 @@ public class TTTSoundObject : SoundObject, IUnityRenderable {
 
     public string prefab;
 
-    public TTTSoundObject(string prefab, Vector3 position) {
+    public TTTSoundObject(string prefab, Vector3 position) : base(position, false) {
         this.prefab = prefab;
         this.position = position;
 	}

@@ -27,7 +27,9 @@ public class TTTStateRenderer : StateRenderer {
         foreach (T so in set) {
             if (so is IUnityRenderable) {
                 if (!rendered.ContainsKey(so)) {
-                    rendered.Add(so, (GameObject)Object.Instantiate(Resources.Load((so as IUnityRenderable).getPrefab()), so.position, new Quaternion()));
+                    GameObject go = (GameObject)Object.Instantiate(Resources.Load((so as IUnityRenderable).getPrefab()));
+                    go.transform.position = so.position;
+                    rendered.Add(so, go);
                 } else {
                     rendered[so].transform.position = so.position;
                 }

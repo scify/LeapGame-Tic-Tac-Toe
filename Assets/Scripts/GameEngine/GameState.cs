@@ -10,6 +10,7 @@ public class GameState {
 	public List<Player> players;
 	public List<WorldObject> environment;
     public int curPlayer;
+    public GameResult result;
 
 	public GameState() {
 		timestamp = 0;

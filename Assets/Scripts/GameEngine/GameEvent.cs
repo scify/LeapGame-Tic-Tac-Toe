@@ -3,11 +3,14 @@ using System.Collections;
 
 public class GameEvent {
 
-    string payload;
-    string type;
-    string initiator;
+    public string payload;
+    public string type;
+    public string initiator;
 
-	public GameEvent() {
+	public GameEvent(string payload, string type, string initiator) {
+        this.payload = payload;
+        this.type = type;
+        this.initiator = initiator;
 	}
 	
 }

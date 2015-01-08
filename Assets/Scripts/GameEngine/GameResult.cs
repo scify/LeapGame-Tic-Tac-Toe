@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 public abstract class GameResult {
 
@@ -7,5 +8,5 @@ public abstract class GameResult {
 	
 	public abstract bool gameOver();
 
-    public abstract bool isValid();
+    public abstract int getWinner();
 }
