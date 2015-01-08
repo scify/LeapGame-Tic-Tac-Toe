@@ -5,7 +5,6 @@
  * @author Konstantinos Drossos
  */
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
@@ -165,6 +164,8 @@ public class AudioEngine {
 
 	public void updateSoundStreamPosition(AudioClip clipToUpdate, Vector3 player, Vector3 soundOrigin) {
 	}
+
+
 
 	/**
 	 * Getter for amount of audio engines
