@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<general gamename="TicTacToe">
+	<players>
+		<maximum>2</maximum>
+		<minimum>2</minimum>
+	</players>
+</general>
+<audio>
+	<player index="1">
+		<settings name="default">
+			<audio_file case="up-left-empty">
+				<path>"sounds/default/player1/e01"</path>
+				<position_vals>011</position_vals>
+			</audio_file>
+		</settings>
+	</player>
+	<player index="2">
+		<settings name="default">
+			<audio_file case="up-left-empty">
+				<path>"sounds/default/player2/e01"</path>
+				<position_vals>011</position_vals>
+			</audio_file>
+		</settings>
+	</player>
+</audio>
