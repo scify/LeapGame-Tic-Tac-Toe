@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IOException;
+//using System.IO.IOException;
 using System.Xml;
+using UnityEngine;
 
 /**
  * The audio file settings for players.
@@ -10,6 +11,7 @@ using System.Xml;
  * This class handles the audio file settings for
  * all players in a specified game. 
  * 
+ * @access Public
  * @author Konstantinos Drossos
  */
 public class AudioFilesSettings {
@@ -18,23 +20,65 @@ public class AudioFilesSettings {
 	 * Constructor of the AudioFilesSettings class.
 	 * 
 	 * The constructor of the AudioFilesSettings class accepts
-	 * the total amount of players for the intented game and the
-	 * base/parent path of the audio files. 
+	 * the game name and sets up the audio files' settings for the
+	 * specified game. 
 	 * 
 	 * @access Public
 	 * @author Konstantinos Drossos
-	 * @param nOfPlayers - the amount of maximum players for the game (int)
-	 * @parm parentPath - the parent path of the audio files (string)
+	 * @param gameName - the name of the game to be played (string)
 	 */
-	public AudioFilesSettings (int nOfPlayers, string parentPath) {
+	public AudioFilesSettings (string gameName) {
 
-		/* First check if the specified parent path exists. If
-		   not, issue a proper exception. */
-		if (!File.Exists(parentPath)) 
-			throw new FileNotFoundException(this.messageParentPathNotFound, parentPath);
+		if (!Directory.Exists (AudioFilesSettings.dirSettings))
+						throw new ApplicationException ("Error to audio settings path!");
 
-		/* If all good, assign the number of players for this game */
-		this.nOfPlayers = nOfPlayers;
+		/* First get all files from the sound settings XML */
+		try {
+			DirectoryInfo theInfo = new DirectoryInfo (AudioFilesSettings.dirSettings);
+
+			FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
+
+			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
+
+			XmlDocument gameSettings = new XmlDocument();
+			gameSettings.Load(AudioFilesSettings.dirSettings + files[0].Name);
+
+			/* Get the amount of maximum players */
+			XmlNode tmpNode = gameSettings.DocumentElement.SelectSingleNode("//general/players/maximum");
+			this.nOfPlayers_max = Convert.ToInt16(tmpNode.InnerText);
+
+			/* Get the amount of minimum players */
+			tmpNode = gameSettings.DocumentElement.SelectSingleNode("//general/players/minimum");
+			this.nOfPlayers_min = Convert.ToInt16(tmpNode.InnerText);
+
+			/* Get all settings */
+			tmpNode = gameSettings.DocumentElement.SelectSingleNode("//audio");
+			int playerTmpIndx;
+			string tmpString;
+
+			foreach (XmlNode playerNode in tmpNode.ChildNodes) {
+
+				playerTmpIndx = Convert.ToInt16(playerNode.Attributes["index"].InnerText) - 1;
+
+				foreach(XmlNode tmpSetting in playerNode.ChildNodes) {
+
+					this.settingsNames.Add(tmpSetting.Attributes["name"].InnerText);
+
+					foreach(XmlNode tmpAudioFile in tmpSetting.ChildNodes) {
+
+						this.casesOfAudioFiles.Add(tmpAudioFile.Attributes["case"].InnerText);
+						this.pathOfAudioFiles[playerTmpIndx].Add(tmpAudioFile.SelectSingleNode("/path").InnerText);
+						tmpString = tmpAudioFile.SelectSingleNode("/position_vals").InnerText;
+						this.positionsForAudioFiles.Add(new UnityEngine.Vector3(Convert.ToSingle(tmpString[0]), Convert.ToSingle(tmpString[1]), Convert.ToSingle(tmpString[2])));
+
+					}
+				}
+			}
+
+		} catch (Exception) {
+			// TODO Add exception handling just in case!
+		}
+
 	}
 
 	public string getPlayerSoundsPath (int nOfPlayer) {
@@ -58,15 +102,40 @@ public class AudioFilesSettings {
 	 * @return List<string> - the actual audio files' paths for all players
 	 */ 
 	public List<string> getPlayersPaths() {
+		return null;
 	}
 
 	public string getPlayerSettingsName (int nOfPlayer) {
+		return null;
 	}
 
 	public void setPlayerPath(int nOfPlayer, string newPath) {
 	}
 
-	public string getPathForSound(int nOfPlayer, string theCase) {
+	public string getPathForSound(int nOfPlayer, string theCase, Vector3 position) {
+
+		/*if (AudioEngine.positionUpRight == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpRight");
+		} else if (AudioEngine.positionUpCenter == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpCenter");
+		} else if (AudioEngine.positionUpLeft == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpLeft");
+		} else if (AudioEngine.positionMiddleLeft == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleLeft");
+		} else if (AudioEngine.positionMiddleCenter == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleCenter");
+		} else if (AudioEngine.positionMiddleRight == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleRight");
+		} else if (AudioEngine.positionBottomRight == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomLeft");
+		} else if (AudioEngine.positionBottomCenter == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomCenter");
+		} else if (AudioEngine.positionBottomLeft == soundOrigin) {
+			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomRight");
+		} else {
+			throw new InvalidDataException("Wrong player position");
+		}*/
+
 		return null;
 	}
 
@@ -85,7 +154,8 @@ public class AudioFilesSettings {
 	 * @return bool - True if the player exists, false otherwise
 	 */ 
 	private bool playerExists (int nOfPlayer) {
-		return nOfPlayer > this.nOfPlayers ? false : true;
+		if (nOfPlayer > this.nOfPlayers_max || nOfPlayer < this.nOfPlayers_min) return false;
+		else return true;
 	}
 
 	private Dictionary<string, List<string> > getSettingsFromFile() {
@@ -97,6 +167,7 @@ public class AudioFilesSettings {
 	}
 
 	private Dictionary<string, List<string> > getSettingsFromFile(string thePath, string settingsFileName) {
+		return null;
 		
 	}
 
@@ -106,16 +177,28 @@ public class AudioFilesSettings {
 	/*!< Message for path not exists */
 	private string messageParentPathNotFound = "Path does not exist";
 	
-	/*!< Path to files for each player */
-	private Dictionary<int, string> audioFilesForPlayers;	
+	/*!< Path to each file for each player */
+	private List<List<string> > pathOfAudioFiles;
+
+	/*!< List of cases for each audio file */
+	private List<string> casesOfAudioFiles;
+
+	/*!< List of positions' values for each audio file */
+	private List<UnityEngine.Vector3> positionsForAudioFiles;
+
+	private List<string> settingsNames;
 	
 	/*!< Number of players */
-	private int nOfPlayers;	
+	private int nOfPlayers_max;	
+	private int nOfPlayers_min;	
 
 	/*!< The path for the file holding the paths for the default audio files */
 	private string defaultSettingsPath = "Assets/Resources/Sounds/TicTacToe/default/";
 
 	/*!< The name of the file holding the audio files' settings */
 	private string settingsFileName = "audioSettings.xml";
+
+	/*!< The name of the directory which will hold the audio settings files */
+	private static readonly string dirSettings = "Assets/Resources/Sounds";
 }
 
