@@ -51,6 +51,7 @@ public class AudioFilesSettings {
 			this.audioFilesPath = new List<List<string> >();
 			this.audioFilesPositions = new List<Vector3>();
 			this.audioFilesSettingsNames = new List<string>();
+			this.theAudioFiles = new List<List<AudioFileForGame>> ();
 
 			/* Get the Xml Document */
 			XmlDocument gameSettings = new XmlDocument();
@@ -104,6 +105,9 @@ public class AudioFilesSettings {
 	} /* End public AudioFilesSettings */
 
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
+
+
+
 		return null;
 	}
 
@@ -263,6 +267,16 @@ public class AudioFilesSettings {
 		return this.audioFilesCases.Exists (c => c.Equals(theCase));
 	} /* End private bool existsCase (string theCase) */
 
+	private string getAudioFilePath (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
+		int audioFileIndex = this.theAudioFiles [player].FindIndex (
+				delegate(AudioFileForGame theAudioFile) {
+					if ( theAudioFile.TheCase == theCase && theAudioFile.ThePosition == soundOrigin) return true;
+					else return false;
+			});
+
+		return this.theAudioFiles[player][audioFileIndex].ThePath;
+	}
+
 
 
 	private Dictionary<string, List<string> > getSettingsFromFile() {
@@ -330,11 +344,22 @@ public class AudioFilesSettings {
 	private List<UnityEngine.Vector3> audioFilesPositions; /*!< List of positions' values for each audio file */
 	private List<string> audioFilesSettingsNames; /*!< List of settings for audio files (default, etc) */
 	
-	private static string settingsPathDefault = "Assets/Resources/Sounds/TicTacToe/default/"; /*!< Default path for setting */
+	private static string settingsPathDefault = "Sounds/TicTacToe/default/"; /*!< Default path for setting */
 	private static string settingsFileName = "audioSettings.xml"; /*!< The name of the file holding the audio files' settings */
-	private static string settingsBaseDir = "Assets/Resources/Sounds"; /*!< Default base dir for the settings file */
+	private static string settingsBaseDir = "Sounds"; /*!< Default base dir for the settings file */
 	private static string messageGreaterPlayerIndex = "The specified index of player is greater than the amount of total players"; /*!< Message for exception of player index */
 	private static string messageParentPathNotFound = "Path does not exist"; /*!< Message for path not exists */
+
+	/*private static readonly Vector3 positionUpRight = Vector3.up + Vector3.right;
+	private static readonly Vector3 positionUpCenter = Vector3.up;
+	private static readonly Vector3 positionUpLeft = Vector3.up + Vector3.left;
+	private static readonly Vector3 positionMiddleLeft = Vector3.left;
+	private static readonly Vector3 positionMiddleCenter = Vector3.zero;
+	private static readonly Vector3 positionMiddleRight = Vector3.right;
+	private static readonly Vector3 positionBottomLeft = Vector3.down + Vector3.left;
+	private static readonly Vector3 positionBottomCenter = Vector3.down;
+	private static readonly Vector3 positionBottomRight = Vector3.down + Vector3.right;
+	*/
 }
 
 /* Scripts/SoundGraphicsEngine/AudioFilesSettings.cs */
