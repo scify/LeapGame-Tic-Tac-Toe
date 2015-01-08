@@ -20,8 +20,12 @@ public class AudioEngine {
 	/**
 	 * Constructor
 	 */
-	public AudioEngine() {
+	public AudioEngine(string gameName):this(0, gameName) {}
+
+	public AudioEngine(int player, string gameName) {
 		AudioEngine.nOfAudioEngines++;
+		this.currentPlayer = player;
+		this.audioFilesSettings = new AudioFilesSettings (gameName);
 	}
 
 	/**
@@ -31,6 +35,7 @@ public class AudioEngine {
 		AudioEngine.nOfAudioEngines--;
 	}
 
+
 	/**
 	 * Get the sound for a position
 	 */
@@ -38,38 +43,24 @@ public class AudioEngine {
 		return null;
 	}
 
-	public AudioClip getSound(string sFile, int player, UnityEngine.Vector3 soundOrigin) {
-
-
-
-		string theAudioFilePath;
-
-		/*if (AudioEngine.positionUpRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpRight");
-		} else if (AudioEngine.positionUpCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpCenter");
-		} else if (AudioEngine.positionUpLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "UpLeft");
-		} else if (AudioEngine.positionMiddleLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleLeft");
-		} else if (AudioEngine.positionMiddleCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleCenter");
-		} else if (AudioEngine.positionMiddleRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "MiddleRight");
-		} else if (AudioEngine.positionBottomRight == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomLeft");
-		} else if (AudioEngine.positionBottomCenter == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomCenter");
-		} else if (AudioEngine.positionBottomLeft == soundOrigin) {
-			theAudioFilePath = this.audioFilesSettings.getPathForSound(player, "BottomRight");
-		} else {
-			throw new InvalidDataException("Wrong player position");
-		}*/
-
-
-
-		return null;
+	public AudioClip getSound(string theCase, UnityEngine.Vector3 soundOrigin) {
+		return this.getSound (theCase, this.currentPlayer, soundOrigin);
 	}
+
+    public AudioClip getSound(string theCase, UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
+		return this.getSound(theCase, this.currentPlayer, this.calculateSoundOrigin(playerPosition, soundOrigin));
+	}
+
+	public AudioClip getSound(string theCase, int player, UnityEngine.Vector3 soundOrigin) {
+
+		if (player.Equals (0)) {
+			if (this.currentPlayer.Equals (0)) throw new KeyNotFoundException ("Player: " + player + " not found!");
+			player = this.currentPlayer;
+		}
+
+		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForPlayer (player, theCase, soundOrigin), typeof(AudioClip));
+	}
+
 
 	public AudioClip getSoundStream(string sFile, Vector3 player, Vector3 soundOrigin) {
 		return null;
@@ -78,12 +69,8 @@ public class AudioEngine {
 	public void updateSoundStreamPosition(AudioClip clipToUpdate, Vector3 player, Vector3 soundOrigin) {
 	}
 
-	void setSoundCollection(string newSoundCollection) {
-		this.soundCollection = newSoundCollection;
-	}
-
-	string getSoundCollection() {
-		return this.soundCollection;
+	private UnityEngine.Vector3 calculateSoundOrigin(UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
+		return new UnityEngine.Vector3 ();
 	}
 
 	/*!< Amount of existing audioEngines */
@@ -91,8 +78,7 @@ public class AudioEngine {
 
 	private AudioFilesSettings audioFilesSettings;
 	
-	/*!< The sounds that will be used in reproduction */
-	private string soundCollection; 
+	private int currentPlayer; 
 
 	private static readonly Vector3 positionUpRight = Vector3.up + Vector3.right;
 	private static readonly Vector3 positionUpCenter = Vector3.up;
@@ -106,5 +92,5 @@ public class AudioEngine {
 
 }
 
-/* AudioEngine.cs */
+/* Scripts/SoundGraphicsEngine/AudioEngine.cs */
 /* END OF FILE */
