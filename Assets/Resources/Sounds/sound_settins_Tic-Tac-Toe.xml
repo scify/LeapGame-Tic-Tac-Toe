@@ -1,0 +1,341 @@
+<?xml version='1.0'?>
+<theFile>
+	<general gamename="Tic-Tac-Toe">
+		<players>
+			<maximum>2</maximum>
+			<minimum>2</minimum>
+		</players>
+	</general>
+	<audio>
+		<player index="1">
+			<settings name="default">
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player1/b0"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player1/b1"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player1/b2"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player1/b3"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player1/e22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player1/os22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+			</settings>
+		</player>
+		<player index="2">
+			<settings name="default">
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player2/b0"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player2/b1"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player2/b2"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="boundary">
+					<path>"tic-tac-toe/default/player2/b3"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="empty">
+					<path>"tic-tac-toe/default/player2/e22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="selected">
+					<path>"tic-tac-toe/default/player2/os22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="ofilled">
+					<path>"tic-tac-toe/default/player1/o22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="xfilled">
+					<path>"tic-tac-toe/default/player2/x22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+			</settings>
+		</player>
+	</audio>
+</theFile>
