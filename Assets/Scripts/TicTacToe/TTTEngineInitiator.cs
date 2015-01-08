@@ -13,11 +13,11 @@ public class TTTEngineInitiator : MonoBehaviour {
             if (wo is TTTStaticObject && engine is TTTGameEngine) {
                 if ((wo as TTTStaticObject).prefab.Contains("TTT/O")) {
                     string audioClip = "Sounds/O";
-                    //TODO: replace with call to auEngine
+                    //TODO: replace with call to auEngine (new Vector3(wo.position.x / offset_x, wo.position.z / offset_y))
                     (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
                 } else if ((wo as TTTStaticObject).prefab.Contains("TTT/X")) {
                     string audioClip = "Sounds/X";
-                    //TODO: replace with call to auEngine
+                    //TODO: replace with call to auEngine (new Vector3(wo.position.x / offset_x, wo.position.z / offset_y))
                     (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
                 }
             }
@@ -77,7 +77,7 @@ public class TTTEngineInitiator : MonoBehaviour {
                     string audioClip;
                     if (overlap) {
                         audioClip = "Sounds/Error";
-                        //TODO: replace with call to auEngine
+                        //TODO: replace with call to auEngine (new Vector3(actor.position.x / offset_x, actor.position.z / offset_y))
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                     } else {
                         int x = (int)(actor.position.x / offset_x + 1);
@@ -86,7 +86,7 @@ public class TTTEngineInitiator : MonoBehaviour {
                         string symbol = state.curPlayer == 0 ? "X" : "O";
                         engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
                         audioClip = "Sounds/" + symbol;
-                        //TODO: replace with call to auEngine
+                        //TODO: replace with call to auEngine (new Vector3(actor.position.x / offset_x, actor.position.z / offset_y))
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position));
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
                         state.timestamp++;
@@ -133,7 +133,7 @@ public class TTTEngineInitiator : MonoBehaviour {
                     int y = (int)(actor.position.z / offset_y) + dy;
                     if (x < -1 || x > 1 || y < -1 || y > 1) {
                         string audioClip = "Sounds/Wall";
-                        //TODO: replace with call to auEngine
+                        //TODO: replace with call to auEngine (new Vector3(actor.position.x / offset_x, actor.position.z / offset_y))
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         return false;
                     }
