@@ -86,11 +86,11 @@ public class AudioFilesSettings {
 
 						/* Treat possible quotation marks */
 						if (tmpPath.Substring(0, 1).Equals("\"")) tmpPath = tmpPath.Substring(1);
-						if (tmpPath.Substring(tmpPath.Length, 1).Equals("\"")) tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
+						if (tmpPath.Substring(tmpPath.Length-1, 1).Equals("\"")) tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
 
 						/* Check if there is an ending by chekcing the fourth from the end char and append the chosen ending */
 						if (!tmpPath.Substring(tmpPath.Length - 4).Equals("."))
-							tmpPath = tmpPath + ".wav";
+							tmpPath = tmpPath;// + ".wav";
 
 
 						this.theAudioFiles[playerTmpIndx].Add(new AudioFileForGame(tmpAudioFile.Attributes["case"].InnerText,
@@ -124,13 +124,22 @@ public class AudioFilesSettings {
 	 */
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
 
-		return this.theAudioFiles [player].Find (
+		string tmpString = this.theAudioFiles [player].Find (
+			delegate (AudioFileForGame af) {
+			if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin))
+				return true;
+			else
+				return false;
+		}).ThePath;
+
+		/*return this.theAudioFiles [player].Find (
 			delegate (AudioFileForGame af) {
 						if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin))
 								return true;
 						else
 								return false;
-				}).ThePath;
+				}).ThePath;*/
+		return tmpString;
 	}
 
 
