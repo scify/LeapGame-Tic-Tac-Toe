@@ -66,6 +66,7 @@ public class AudioFilesSettings {
 			int playerTmpIndx;
 			string tmpString;
             string[] posStrings;
+			string tmpPath;
 
 			foreach (XmlNode playerNode in tmpNode.ChildNodes) {
 
@@ -81,17 +82,27 @@ public class AudioFilesSettings {
 					foreach(XmlNode tmpAudioFile in tmpSetting.ChildNodes) {
                         tmpString = tmpAudioFile.SelectSingleNode("position_vals").InnerText;
                         posStrings = tmpString.Split('=');
+						tmpPath = tmpAudioFile.SelectSingleNode("path").InnerText;
+
+						/* Treat possible quotation marks */
+						if (tmpPath.Substring(0, 1).Equals("\"")) tmpPath = tmpPath.Substring(1);
+						if (tmpPath.Substring(tmpPath.Length, 1).Equals("\"")) tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
+
+						/* Check if there is an ending by chekcing the fourth from the end char and append the chosen ending */
+						if (!tmpPath.Substring(tmpPath.Length - 4).Equals("."))
+							tmpPath = tmpPath + ".wav";
+
 
 						this.theAudioFiles[playerTmpIndx].Add(new AudioFileForGame(tmpAudioFile.Attributes["case"].InnerText,
                             new UnityEngine.Vector3(Convert.ToSingle(posStrings[0]), Convert.ToSingle(posStrings[1]), Convert.ToSingle(posStrings[2])),
-                            "Sounds/" + tmpAudioFile.SelectSingleNode("path").InnerText + ".wav"));
+                            "Sounds/" + tmpPath));
 					}
 				}
 			}
 
 		} catch (Exception e) {
             Debug.Log(e.Message);
-			// TODO Add exception handling just in case!
+			//TODO Add proper try/catch usage
 		}
 
 	} /* End public AudioFilesSettings */
