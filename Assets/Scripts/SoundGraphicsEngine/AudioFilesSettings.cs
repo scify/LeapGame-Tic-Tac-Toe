@@ -34,13 +34,13 @@ public class AudioFilesSettings {
 	public AudioFilesSettings (string gameName) {
 
 		/* Check just in case */
-		if (!Directory.Exists (AudioFilesSettings.settingsBaseDir))
+        if (!Directory.Exists(AudioFilesSettings.settingsBaseDir))
 			throw new ApplicationException ("Error to audio settings path!" + AudioFilesSettings.messageParentPathNotFound);
 		
 		/* First get all files from the sound settings XML */
 		try {
 
-			DirectoryInfo theInfo = new DirectoryInfo (AudioFilesSettings.settingsBaseDir);
+			DirectoryInfo theInfo = new DirectoryInfo(AudioFilesSettings.settingsBaseDir);
 
 			FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
 
@@ -311,7 +311,7 @@ public class AudioFilesSettings {
 	
 	private static string settingsPathDefault = "Sounds/TicTacToe/default/"; /*!< Default path for setting */
 	private static string settingsFileName = "audioSettings.xml"; /*!< The name of the file holding the audio files' settings */
-	private static string settingsBaseDir = "Sounds"; /*!< Default base dir for the settings file */
+    private static string settingsBaseDir = Application.dataPath + "/Resources/Sounds"; /*!< Default base dir for the settings file */
 	private static string messageGreaterPlayerIndex = "The specified index of player is greater than the amount of total players"; /*!< Message for exception of player index */
 	private static string messageParentPathNotFound = "Path does not exist"; /*!< Message for path not exists */
 }
