@@ -177,6 +177,76 @@ public class AudioEngine {
 
 
 	/**
+	 * Gets the total amount of existing audio settings.
+	 * 
+	 * This public method returns the total amount of audio
+	 * settings that exist for the current game according to 
+	 * AudioFilesSettings object. 
+	 * 
+	 * @return int - the total amount of settings
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public int getAmountOfSoundSettings() { 
+		return this.audioFilesSettings.getAmountOfSoundSettings ();
+	} /* End public int getAmountOfSoundSettings() */
+	
+	
+	
+	/**
+	 * Gets all sound settings.
+	 * 
+	 * This public method returns all sound settings that 
+	 * exist for the current game according to 
+	 * AudioFilesSettings object.  
+	 * 
+	 * @return List<string> - the existing settings
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public List<string> getAllSoundSettings() {
+		return this.audioFilesSettings.getAllSoundsCases ();
+	} /* End public List<string> getAllSoundSettings() */
+	
+	
+	
+	/**
+	 * Checks if a setting exists.
+	 * 
+	 * This public method checks if a specified setting
+	 * exists for the current game according to 
+	 * AudioFilesSettings object. Accepts the setting in
+	 * question and returns a boolean value representing its
+	 * existence. The search is case sensitive. 
+	 * 
+	 * @param theCase - the case in question (string)
+	 * @return bool - true if the case exists, false otherwise. 
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public bool isSettingExists(string theCase) {
+		return this.audioFilesSettings.isSettingExists (theCase);
+	} /* End public bool isSettingExists(string theCase) */
+	
+	
+	/**
+	 * Returns the cases for sound reproduction.
+	 * 
+	 * This public method returns all acceptable cases
+	 * for sound reproduction of the particular game.
+	 * 
+	 * @return List<string> - the cases
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public List<string> getAllSoundsCases() {
+		return null;
+		//return this.audioFilesCases;
+	} /* End public List<string> getAllSoundsCases() */
+
+
+
+	/**
 	 * Calculates the origin of sound.
 	 * 
 	 * Ths private method calculates the appropriate origin

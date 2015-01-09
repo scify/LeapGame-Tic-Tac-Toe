@@ -90,6 +90,60 @@ public class AudioFilesSettings {
 
 
 	/**
+	 * Gets the total amount of existing audio settings.
+	 * 
+	 * This public method returns the total amount of audio
+	 * settings that exist for the current game. If the variable
+	 * holding the settings is not initialised, the method throws
+	 * MemberAccessException. 
+	 * 
+	 * @return int - the total amount of settings
+	 * @throw MemberAccessException - if the appropriate variable is not initialised
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public int getAmountOfSoundSettings() { 
+		if (this.audioSettings == null) throw new MemberAccessException("Uninitialised variable");
+		return this.audioSettings.Count; 
+	} /* End public int getAmountOfSoundSettings() */
+
+
+
+	/**
+	 * Gets all sound settings.
+	 * 
+	 * This public method returns all sound settings that 
+	 * exist for the current game. 
+	 * 
+	 * @return List<string> - the existing settings
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public List<string> getAllSoundSettings() {
+		return this.audioSettings;
+	} /* End public List<string> getAllSoundSettings() */
+
+
+
+	/**
+	 * Checks if a setting exists.
+	 * 
+	 * This public method checks if a specified setting
+	 * exists for the current game. Accepts the setting in
+	 * question and returns a boolean value representing its
+	 * existence. The search is case sensitive. 
+	 * 
+	 * @param theCase - the case in question (string)
+	 * @return bool - true if the case exists, false otherwise. 
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public bool isSettingExists(string theCase) {
+		return this.audioSettings.Exists (c => c.Equals (theCase));
+	} /* End public bool isSettingExists(string theCase) */
+
+
+	/**
 	 * Returns the cases for sound reproduction.
 	 * 
 	 * This public method returns all acceptable cases
@@ -133,64 +187,6 @@ public class AudioFilesSettings {
 
 		return new UnityEngine.Vector3();
 	} /* End public UnityEngine.Vector3 getSoundPosition(int nOfPlayer, string theCase) */
-
-
-
-	/**
-	 * Returns all paths of sounds for a player.
-	 * 
-	 * This public method accepts a player index and 
-	 * returns the paths of all sounds for that player.
-	 * 
-	 * @param nOfPlayer - the index of player (int)
-	 * @return List<string> - the paths of all sounds for the player
-	 * @exception ArgumentOutOfRangeException - if the index of player is out of range
-	 * @access Public
-	 * @author Konstantinos Drossos
-	 */
-	public List<string> getPathForAllSoundsOfPlayer (int nOfPlayer) {
-
-		if (this.existsPlayer(nOfPlayer))
-			throw new ArgumentOutOfRangeException ("nOfPlayer", 
-			                                       nOfPlayer, AudioFilesSettings.messageGreaterPlayerIndex);
-
-		//return this.audioFilesPath [nOfPlayer];
-		return null;
-	} /* End public List<string> getPathForAllSoundsOfPlayer (int nOfPlayer) */
-
-
-
-	/**
-	 * Gets the specific audio files paths for all players.
-	 * 
-	 * This public method returns the actual paths in which
-	 * are the audio files for all players. The paths are 
-	 * returned in a List<string> object where the index of the
-	 * strings is the corresponding index of the player. 
-	 * 
-	 * @return List<string> - the actual audio files' paths for all players
-	 * @access Public
-	 * @author Konstantinos Drossos
-	 */ 
-	public List<string> getPlayersPaths() {
-		return null;
-	} /* End public List<string> getPlayersPaths() */
-
-
-
-	public string getPlayerSettingsName (int nOfPlayer) {
-		return null;
-	}
-
-
-
-	public void setPlayerPath(int nOfPlayer, string newPath) {
-	}
-
-	public string getPathForSound(int nOfPlayer, string theCase, Vector3 position) {
-
-		return null;
-	}
 
 
 
@@ -240,7 +236,12 @@ public class AudioFilesSettings {
 	 * @author Konstantinos Drossos
 	 */
 	private void xmlParsingGeneralSection(ref XmlDocument xmlDoc) {
+
+		/* Get the players' amount */
 		this.xmlParsingGetPlayersAmount (ref xmlDoc);
+
+		/* Get the available cases */
+		this.xmlParsingGetExistingSettings (ref xmlDoc);
 	}
 
 
@@ -249,15 +250,22 @@ public class AudioFilesSettings {
 	 * 
 	 */
 	private void xmlParsingAudioFileSection(ref XmlDocument xmlDoc) {
-		XmlNode audioNode = xmlDoc.DocumentElement.SelectSingleNode("/theFile/audio");
+
+		/* Get the audio related node */
+		XmlNode audioNode = xmlDoc.DocumentElement.SelectSingleNode(
+			AudioFilesSettings.xmlSettingsNameOfNodeBase + 
+			AudioFilesSettings.xmlSettingsNameOfNodeAudio);
+
+		/* Declare local variables */
 		int playerTmpIndx;
 		string tmpString;
-		string[] posStrings;
 		string tmpPath;
-		
+		string[] posStrings;
+
+		/* Iterate on audio's node children nodes */
 		foreach (XmlNode playerNode in audioNode.ChildNodes) {
 			
-			/* The player index */
+			/* Get the players' index */
 			playerTmpIndx = Convert.ToInt16(playerNode.Attributes["index"].InnerText) - 1;
 			this.audioFilesPerPlayer.Add(new List<AudioFileForGame>());
 			
@@ -330,6 +338,29 @@ public class AudioFilesSettings {
 		/* Assign their number */
 		this.nOfPlayers_min = Convert.ToInt16(playersNode.InnerText);
 	} /* End private void xmlParsingGetPlayersAmount(ref XmlDocument xmlDoc) */
+
+
+
+	/**
+	 * 
+	 */
+	private void xmlParsingGetExistingSettings(ref XmlDocument xmlDoc) {
+
+		/* Get the node */
+		XmlNode settingsNode = xmlDoc.SelectSingleNode (
+			AudioFilesSettings.xmlSettingsNameOfNodeBase + 
+			AudioFilesSettings.xmlSettingsNameOfNodeGeneralSettings + 
+			AudioFilesSettings.xmlSettingsNameOfNodeSettings);
+
+		/* Check if the container for settings is initialised or not and do it */
+		if (this.audioSettings == null) this.audioSettings = new List<string> ();
+
+		/* And iterate through its children to get all settings */
+		foreach (XmlNode settingsChildNode in settingsNode.ChildNodes) {
+			this.audioSettings.Add(settingsChildNode.InnerText);
+		}
+
+	} /* End private void xmlParsingGetExistingSettings(ref XmlDocument xmlDoc) */
 
 
 	/**
@@ -418,6 +449,10 @@ public class AudioFilesSettings {
 	private static string xmlSettingsNameOfNodeMaxPlayers = "/maximum";
 	/*!< The min players' node of xml file */
 	private static string xmlSettingsNameOfNodeMinPlayers = "/minimum";
+	/*!< The audio node of xml file */
+	private static string xmlSettingsNameOfNodeAudio = "/audio";
+	/*!< The settings node of xml file */
+	private static string xmlSettingsNameOfNodeSettings = "/settings";
 }
 
 /* Scripts/SoundGraphicsEngine/AudioFilesSettings.cs */
