@@ -1,0 +1,5 @@
+﻿interface IUnityRenderable {
+
+    string getPrefab();
+
+}
