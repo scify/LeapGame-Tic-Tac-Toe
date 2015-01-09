@@ -16,3 +16,7 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# MAC OS X specific hidden files
+.DS_Store
+
