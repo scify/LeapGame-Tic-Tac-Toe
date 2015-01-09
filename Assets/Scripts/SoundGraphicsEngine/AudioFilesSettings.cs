@@ -1,6 +1,18 @@
 /**
+ * This file contains the AudioFilesSettings class. 
+ * 
+ * This class is responsible for loading and handling
+ * the audio settings. Audio settings contain the amount
+ * of players that the game can hold, the cases at which
+ * sound will be reproduced, the corresponding positions of
+ * sound reproduction and the relative (to the application)
+ * paths of the sounds. 
+ * 
+ * //TODO Add legal stuff.... (have to? )
+ * 
  * @file AudioFilesSettings.cs
  * @author Konstantinos Drossos
+ * @copyright ??? distributed as is under MIT Licence.
  */ 
 
 using System;
@@ -33,78 +45,22 @@ public class AudioFilesSettings {
 	 */
 	public AudioFilesSettings (string gameName) {
 
-		/* Check just in case */
-        if (!Directory.Exists(AudioFilesSettings.settingsBaseDir))
-			throw new ApplicationException ("Error to audio settings path!" + AudioFilesSettings.messageParentPathNotFound);
-		
-		/* First get all files from the sound settings XML */
+		/* Initiliase the Lists that are used  if havent' been */
+		if (this.audioFilesPerPlayer == null) this.audioFilesPerPlayer = new List<List<AudioFileForGame>> ();
+
 		try {
-
-			DirectoryInfo theInfo = new DirectoryInfo(AudioFilesSettings.settingsBaseDir);
-
-			FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
-
-			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
-
-			/* Initiliase the Lists that are used */
-			this.theAudioFiles = new List<List<AudioFileForGame>> ();
-
 			/* Get the Xml Document */
-			XmlDocument gameSettings = new XmlDocument();
-			gameSettings.Load(AudioFilesSettings.settingsBaseDir + files[0].Name);
+			XmlDocument gameSettings = this.xmlParsingGetTheSettingsDocument(gameName);
 
-			/* Get the amount of maximum players */
-			XmlNode tmpNode = gameSettings.DocumentElement.SelectSingleNode("/theFile/general/players/maximum");
-			this.nOfPlayers_max = Convert.ToInt16(tmpNode.InnerText);
+			/* Parse the general section */
+			this.xmlParsingGeneralSection(ref gameSettings);
 
-			/* Get the amount of minimum players */
-			tmpNode = gameSettings.DocumentElement.SelectSingleNode("/theFile/general/players/minimum");
-			this.nOfPlayers_min = Convert.ToInt16(tmpNode.InnerText);
-
-			/* Get all settings */
-            tmpNode = gameSettings.DocumentElement.SelectSingleNode("/theFile/audio");
-			int playerTmpIndx;
-			string tmpString;
-            string[] posStrings;
-			string tmpPath;
-
-			foreach (XmlNode playerNode in tmpNode.ChildNodes) {
-
-				/* The player index */
-				playerTmpIndx = Convert.ToInt16(playerNode.Attributes["index"].InnerText) - 1;
-				this.theAudioFiles.Add(new List<AudioFileForGame>());
-
-				/* Iterate through XML nodes and get the info needed */
-				foreach(XmlNode tmpSetting in playerNode.ChildNodes) {
-
-					//this.audioFilesSettingsNames.Add(tmpSetting.Attributes["name"].InnerText);
-
-					foreach(XmlNode tmpAudioFile in tmpSetting.ChildNodes) {
-                        tmpString = tmpAudioFile.SelectSingleNode("position_vals").InnerText;
-                        posStrings = tmpString.Split('=');
-						tmpPath = tmpAudioFile.SelectSingleNode("path").InnerText;
-
-						/* Treat possible quotation marks */
-						if (tmpPath.Substring(0, 1).Equals("\"")) tmpPath = tmpPath.Substring(1);
-						if (tmpPath.Substring(tmpPath.Length-1, 1).Equals("\"")) tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
-
-						/* Check if there is an ending by chekcing the fourth from the end char and append the chosen ending */
-						if (!tmpPath.Substring(tmpPath.Length - 4).Equals("."))
-							tmpPath = tmpPath;// + ".wav";
-
-
-						this.theAudioFiles[playerTmpIndx].Add(new AudioFileForGame(tmpAudioFile.Attributes["case"].InnerText,
-                            new UnityEngine.Vector3(Convert.ToSingle(posStrings[0]), Convert.ToSingle(posStrings[1]), Convert.ToSingle(posStrings[2])),
-                            "Sounds/" + tmpPath));
-					}
-				}
-			}
+			/* Parse the audio files section */
+			this.xmlParsingAudioFileSection(ref gameSettings);
 
 		} catch (Exception e) {
-            Debug.Log(e.Message);
-			//TODO Add proper try/catch usage
+            Debug.Log(e.Message); throw e;
 		}
-
 	} /* End public AudioFilesSettings */
 
 
@@ -124,38 +80,28 @@ public class AudioFilesSettings {
 	 */
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
 
-		string tmpString = this.theAudioFiles [player].Find (
+		return this.audioFilesPerPlayer [player].Find (
 			delegate (AudioFileForGame af) {
-			if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin))
-				return true;
-			else
-				return false;
-		}).ThePath;
-
-		/*return this.theAudioFiles [player].Find (
-			delegate (AudioFileForGame af) {
-						if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin))
-								return true;
-						else
-								return false;
-				}).ThePath;*/
-		return tmpString;
-	}
+				if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin)) return true;
+				else return false;
+			}).ThePath;
+	} /* End public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) */
 
 
 
 	/**
-	 * Returns the verbal descriptions of positions for sounds.
+	 * Returns the cases for sound reproduction.
 	 * 
-	 * This public method returns all acceptable verbal descriptions
-	 * of positions for the sounds.
+	 * This public method returns all acceptable cases
+	 * for sound reproduction of the particular game.
 	 * 
-	 * @return List<string> - the verbal descriptions of positions
+	 * @return List<string> - the cases
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public List<string> getAllSoundsCases() {
-		return this.audioFilesCases;
+		return null;
+		//return this.audioFilesCases;
 	} /* End public List<string> getAllSoundsCases() */
 
 
@@ -177,8 +123,10 @@ public class AudioFilesSettings {
 	public UnityEngine.Vector3 getSoundPosition(int nOfPlayer, string theCase) {
 
 		/* Check for bad arguments */
-		if (!this.existsPlayer (nOfPlayer) ) throw new ArgumentOutOfRangeException("nOfPlayer", nOfPlayer, AudioFilesSettings.messageGreaterPlayerIndex);
-		if (!this.existsCase (theCase)) throw new KeyNotFoundException ("Case: " + theCase + " not found!");
+		if (!this.existsPlayer (nOfPlayer) ) 
+			throw new ArgumentOutOfRangeException("nOfPlayer", nOfPlayer, AudioFilesSettings.messageGreaterPlayerIndex);
+		if (!this.existsCase (theCase)) 
+			throw new KeyNotFoundException ("Case: " + theCase + " not found!");
 
 		/* Find the case based on player index */
 
@@ -203,9 +151,11 @@ public class AudioFilesSettings {
 	public List<string> getPathForAllSoundsOfPlayer (int nOfPlayer) {
 
 		if (this.existsPlayer(nOfPlayer))
-			throw new ArgumentOutOfRangeException ("nOfPlayer", nOfPlayer, AudioFilesSettings.messageGreaterPlayerIndex);
+			throw new ArgumentOutOfRangeException ("nOfPlayer", 
+			                                       nOfPlayer, AudioFilesSettings.messageGreaterPlayerIndex);
 
-		return this.audioFilesPath [nOfPlayer];
+		//return this.audioFilesPath [nOfPlayer];
+		return null;
 	} /* End public List<string> getPathForAllSoundsOfPlayer (int nOfPlayer) */
 
 
@@ -243,6 +193,145 @@ public class AudioFilesSettings {
 	}
 
 
+
+	/**
+	 * Gets the xml document containing the audio settings.
+	 * 
+	 * This private method gets the xml document which contains the
+	 * audio settings. It cares of the existence of document and the
+	 * sanity of path. 
+	 * 
+	 * @param gameName - the game for which the settings will be parsed (string)
+	 * @return XmlDocument - the XML document with the settings
+	 * @access Private
+	 * @author Konstantinos Drossos
+	 */
+	private XmlDocument xmlParsingGetTheSettingsDocument(string gameName) {
+
+		/* Check just in case */
+		if (!Directory.Exists(AudioFilesSettings.settingsBaseDir))
+			throw new ApplicationException ("Error to audio settings path!" + 
+			                                AudioFilesSettings.messageParentPathNotFound);
+
+		/* Get the base directory of the audio settings */
+		DirectoryInfo theInfo = new DirectoryInfo(AudioFilesSettings.settingsBaseDir);
+		
+		FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
+		
+		if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
+
+		XmlDocument gameSettings = new XmlDocument();
+		gameSettings.Load(AudioFilesSettings.settingsBaseDir + files[0].Name);
+
+		return gameSettings;
+	}
+
+
+
+	/**
+	 * Parses the general section of the settings' document.
+	 * 
+	 * This private method parses the general section of the 
+	 * settings' xml document. It accepts a reference of the XML
+	 * document containing the settings. 
+	 * 
+	 * @param xmlDoc - the XML document with the settings (ref XmlDocument)
+	 * @access Private
+	 * @author Konstantinos Drossos
+	 */
+	private void xmlParsingGeneralSection(ref XmlDocument xmlDoc) {
+		this.xmlParsingGetPlayersAmount (ref xmlDoc);
+	}
+
+
+
+	/**
+	 * 
+	 */
+	private void xmlParsingAudioFileSection(ref XmlDocument xmlDoc) {
+		XmlNode audioNode = xmlDoc.DocumentElement.SelectSingleNode("/theFile/audio");
+		int playerTmpIndx;
+		string tmpString;
+		string[] posStrings;
+		string tmpPath;
+		
+		foreach (XmlNode playerNode in audioNode.ChildNodes) {
+			
+			/* The player index */
+			playerTmpIndx = Convert.ToInt16(playerNode.Attributes["index"].InnerText) - 1;
+			this.audioFilesPerPlayer.Add(new List<AudioFileForGame>());
+			
+			/* Iterate through XML nodes and get the info needed */
+			foreach(XmlNode tmpSetting in playerNode.ChildNodes) {
+				
+				/* Iterate through the actual settings nodes */
+				foreach(XmlNode tmpAudioFile in tmpSetting.ChildNodes) {
+					
+					/* Get the position values */
+					tmpString = tmpAudioFile.SelectSingleNode("position_vals").InnerText;
+					posStrings = tmpString.Split('=');
+					tmpPath = tmpAudioFile.SelectSingleNode("path").InnerText;
+					
+					/* Treat possible quotation marks */
+					if (tmpPath.Substring(0, 1).Equals("\"")) 
+						tmpPath = tmpPath.Substring(1);
+					if (tmpPath.Substring(tmpPath.Length-1, 1).Equals("\"")) 
+						tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
+					
+					/* Check for file ending and if does, remove it */
+					if (!tmpPath.Substring(tmpPath.Length - 4).Equals("."))
+						tmpPath = tmpPath.Substring(0, tmpPath.Length-4);
+					
+					
+					this.audioFilesPerPlayer[playerTmpIndx].Add(
+						new AudioFileForGame(tmpAudioFile.Attributes["case"].InnerText,
+	                    new UnityEngine.Vector3(Convert.ToSingle(posStrings[0]), 
+		                        Convert.ToSingle(posStrings[1]), 
+		                        Convert.ToSingle(posStrings[2])),
+	                    "Sounds/" + tmpPath));
+				}
+			}
+		}
+	} /* End private void xmlParsingAudioFileSection(ref XmlDocument xmlDoc) */
+
+
+
+	/**
+	 * Gets the players' amount from settings.
+	 * 
+	 * This private method parses the xml document which contains the
+	 * audio settings and extracts the maximum and minimum amount of
+	 * players. The amount of players is assigned to the appropriate 
+	 * members of the AudioFilesSettings object. The xml document 
+	 * must be passed as reference. 
+	 * 
+	 * @param xmlDoc - the XML document (ref XmlDocument)
+	 * @access Private
+	 * @author Konstantinos Drossos
+	 */
+	private void xmlParsingGetPlayersAmount(ref XmlDocument xmlDoc) {
+		/* Get the node for maximum players */
+		XmlNode playersNode = xmlDoc.DocumentElement.SelectSingleNode (
+			AudioFilesSettings.xmlSettingsNameOfNodeBase + 
+			AudioFilesSettings.xmlSettingsNameOfNodeGeneralSettings + 
+			AudioFilesSettings.xmlSettingsNameOfNodePlayers + 
+			AudioFilesSettings.xmlSettingsNameOfNodeMaxPlayers);
+
+		/* Assign their number */
+		this.nOfPlayers_max = Convert.ToInt16(playersNode.InnerText);
+		
+		/* Get the node for minimum players */
+		playersNode = xmlDoc.DocumentElement.SelectSingleNode (
+			AudioFilesSettings.xmlSettingsNameOfNodeBase + 
+			AudioFilesSettings.xmlSettingsNameOfNodeGeneralSettings + 
+			AudioFilesSettings.xmlSettingsNameOfNodePlayers + 
+			AudioFilesSettings.xmlSettingsNameOfNodeMinPlayers);
+
+		/* Assign their number */
+		this.nOfPlayers_min = Convert.ToInt16(playersNode.InnerText);
+	} /* End private void xmlParsingGetPlayersAmount(ref XmlDocument xmlDoc) */
+
+
 	/**
 	 * Check if a player exists.
 	 * 
@@ -273,26 +362,13 @@ public class AudioFilesSettings {
 	 * @author Konstantinos Drossos
 	 */
 	private bool existsCase (string theCase) {
-		return this.audioFilesCases.Exists (c => c.Equals(theCase));
+		//return this.audioFilesCases.Exists (c => c.Equals(theCase));
+		return true;
 	} /* End private bool existsCase (string theCase) */
 
+	/* ==============  Members section ==============  */
 
-
-	private Dictionary<string, List<string> > getSettingsFromFile() {
-		return this.getSettingsFromFile (AudioFilesSettings.settingsPathDefault, AudioFilesSettings.settingsFileName);
-	}
-
-	private Dictionary<string, List<string> > getSettingsFromFile(string settingsFileName) {
-		return this.getSettingsFromFile (AudioFilesSettings.settingsPathDefault, settingsFileName);
-	}
-
-	private Dictionary<string, List<string> > getSettingsFromFile(string thePath, string settingsFileName) {
-		return null;
-		
-	}
-
-	/* ==============  Arguments section ==============  */
-
+	/*!< Private class for gathering the audio files */
 	private class AudioFileForGame {
 
 		public AudioFileForGame(string theCase, UnityEngine.Vector3 thePosition, string thePath) {
@@ -316,26 +392,32 @@ public class AudioFilesSettings {
 			set { thePath = value; }
 		}
 
-		private string theCase;
-		private UnityEngine.Vector3 thePosition;
-		private string thePath;
+		private string theCase; /*!< The case of sound reproduction */
+		private UnityEngine.Vector3 thePosition; /*!< The position of sound reproduction */
+		private string thePath; /*!< The path of sound file */
 	}
 	
 	private int nOfPlayers_max;	/*!< Number of maximum players for the game */
 	private int nOfPlayers_min;	/*!< Number of minimum players for the game */
 
-	private List<List<AudioFileForGame> > theAudioFiles;
+	private List<List<AudioFileForGame> > audioFilesPerPlayer; /*!< The audio files for each player */
+	private List<string> audioCases; /*!< The cases for audio reproduction */
+	private List<string> audioSettings; /*!< The available audio settings */
 
-	private List<List<string> > audioFilesPath; /*!< Path to each file for each player */
-	private List<string> audioFilesCases; /*!< List of cases for each audio file */
-	private List<UnityEngine.Vector3> audioFilesPositions; /*!< List of positions' values for each audio file */
-	private List<string> audioFilesSettingsNames; /*!< List of settings for audio files (default, etc) */
-
-    private static string settingsPathDefault = Application.dataPath + "/Resources/Sounds/TicTacToe/default/"; /*!< Default path for setting */
-	private static string settingsFileName = "audioSettings.xml"; /*!< The name of the file holding the audio files' settings */
     private static string settingsBaseDir = Application.dataPath + "/Resources/Sounds/"; /*!< Default base dir for the settings file */
 	private static string messageGreaterPlayerIndex = "The specified index of player is greater than the amount of total players"; /*!< Message for exception of player index */
 	private static string messageParentPathNotFound = "Path does not exist"; /*!< Message for path not exists */
+
+	/*!< The base node of the settings' xml file */
+	private static string xmlSettingsNameOfNodeBase = "/theFile"; 
+	/*!< The general settings node of xml file */
+	private static string xmlSettingsNameOfNodeGeneralSettings = "/general"; 
+	/*!< The player's node of xml file */
+	private static string xmlSettingsNameOfNodePlayers = "/players";
+	/*!< The max players' node of xml file */
+	private static string xmlSettingsNameOfNodeMaxPlayers = "/maximum";
+	/*!< The min players' node of xml file */
+	private static string xmlSettingsNameOfNodeMinPlayers = "/minimum";
 }
 
 /* Scripts/SoundGraphicsEngine/AudioFilesSettings.cs */
