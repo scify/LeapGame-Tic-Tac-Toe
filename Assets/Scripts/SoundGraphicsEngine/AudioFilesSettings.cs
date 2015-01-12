@@ -216,8 +216,10 @@ public class AudioFilesSettings {
 		
 		if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
 
+
 		XmlDocument gameSettings = new XmlDocument();
-		gameSettings.Load(AudioFilesSettings.settingsBaseDir + files[0].Name);
+		TextAsset xmlText = (TextAsset) Resources.Load ("Sounds/" + files [0].Name.Substring(0, files[0].Name.Length-4));
+		gameSettings.LoadXml (xmlText.text);
 
 		return gameSettings;
 	}
