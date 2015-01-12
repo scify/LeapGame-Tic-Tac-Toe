@@ -6,6 +6,7 @@ using UnityEngine;
 public class TTTGameState : GameState {
 
     public int[,] board = new int[3, 3];
+    public List<TTTSoundObject> blockingSounds = new List<TTTSoundObject>();
 
     public TTTGameState(List<Actor> actors, List<WorldObject> environment, List<Player> players) {
         timestamp = 0;
