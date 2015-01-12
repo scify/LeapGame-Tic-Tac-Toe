@@ -150,8 +150,10 @@ public class AudioEngine {
 			if (this.currentPlayer.Equals (-1)) throw new KeyNotFoundException ("Player: " + player + " not found!");
 			player = this.currentPlayer;
 		}
+
+		AudioClip tmp = (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForPlayer (player, theCase, soundOrigin), typeof(AudioClip));
 	
-		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForPlayer (player, theCase, soundOrigin), typeof(AudioClip));
+		return tmp;
 	}
 
 

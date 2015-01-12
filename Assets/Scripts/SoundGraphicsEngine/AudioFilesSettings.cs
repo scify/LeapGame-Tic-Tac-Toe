@@ -287,7 +287,7 @@ public class AudioFilesSettings {
 						tmpPath = tmpPath.Substring(0, tmpPath.Length-1);
 					
 					/* Check for file ending and if does, remove it */
-					if (!tmpPath.Substring(tmpPath.Length - 4).Equals("."))
+					if (tmpPath.Substring(tmpPath.Length - 4).Equals("."))
 						tmpPath = tmpPath.Substring(0, tmpPath.Length-4);
 					
 					
