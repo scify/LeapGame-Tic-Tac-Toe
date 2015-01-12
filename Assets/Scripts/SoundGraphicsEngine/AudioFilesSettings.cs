@@ -204,21 +204,34 @@ public class AudioFilesSettings {
 	 */
 	private XmlDocument xmlParsingGetTheSettingsDocument(string gameName) {
 
-		/* Check just in case */
-		if (!Directory.Exists(AudioFilesSettings.settingsBaseDir))
-			throw new ApplicationException ("Error to audio settings path!" + 
-			                                AudioFilesSettings.messageParentPathNotFound);
+		string theSettingsFileName;
 
-		/* Get the base directory of the audio settings */
-		DirectoryInfo theInfo = new DirectoryInfo(AudioFilesSettings.settingsBaseDir);
-		
-		FileInfo[] files = theInfo.GetFiles("*_" + gameName + ".xml");
-		
-		if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
+		if (Application.platform.Equals (RuntimePlatform.OSXEditor) || 
+			Application.platform.Equals (RuntimePlatform.OSXEditor)) {
+
+			/* Check just in case */
+			if (!Directory.Exists (AudioFilesSettings.settingsBaseDir))
+					throw new ApplicationException ("Error to audio settings path!" + 
+							AudioFilesSettings.messageParentPathNotFound);
+
+			/* Get the base directory of the audio settings */
+			DirectoryInfo theInfo = new DirectoryInfo (AudioFilesSettings.settingsBaseDir);
+
+			FileInfo[] files = theInfo.GetFiles ("*_" + gameName + ".xml");
+
+			if (files.Length < 1)
+					throw new FileNotFoundException ("Audio settings file not found!");
+
+
+			theSettingsFileName = files [0].Name.Substring(0, files[0].Name.Length-4);
+		} else {
+			theSettingsFileName = "sound_settings_" + gameName;
+		}
+
 
 
 		XmlDocument gameSettings = new XmlDocument();
-		TextAsset xmlText = (TextAsset) Resources.Load ("Sounds/" + files [0].Name.Substring(0, files[0].Name.Length-4));
+		TextAsset xmlText = (TextAsset) Resources.Load (theSettingsFileName);
 		gameSettings.LoadXml (xmlText.text);
 
 		return gameSettings;
@@ -437,7 +450,7 @@ public class AudioFilesSettings {
 	private List<string> audioCases; /*!< The cases for audio reproduction */
 	private List<string> audioSettings; /*!< The available audio settings */
 
-    private static string settingsBaseDir = Application.dataPath + "/Resources/Sounds/"; /*!< Default base dir for the settings file */
+    private static string settingsBaseDir = Application.dataPath + "/Resources/"; /*!< Default base dir for the settings file */
 	private static string messageGreaterPlayerIndex = "The specified index of player is greater than the amount of total players"; /*!< Message for exception of player index */
 	private static string messageParentPathNotFound = "Path does not exist"; /*!< Message for path not exists */
 
