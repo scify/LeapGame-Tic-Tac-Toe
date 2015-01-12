@@ -21,3 +21,9 @@ sysinfo.txt
 # MAC OS X specific hidden files
 .DS_Store
 
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
