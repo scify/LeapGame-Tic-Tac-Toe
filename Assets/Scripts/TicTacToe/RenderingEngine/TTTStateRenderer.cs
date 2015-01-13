@@ -25,6 +25,9 @@ public class TTTStateRenderer : StateRenderer {
         }
         foreach (WorldObject so in toRemove) {
             rendered.Remove(so);
+            if (so is TTTSoundObject) {
+                state.blockingSounds.Remove(so as TTTSoundObject);
+            }
         }
     }
 

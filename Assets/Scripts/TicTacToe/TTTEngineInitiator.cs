@@ -42,6 +42,13 @@ public class TTTEngineInitiator : MonoBehaviour {
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            if (state.blockingSounds.Count != 0) {
+                return false;
+            }
+            return true;
+        }));
+
+        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (state.timestamp >= 10 && eve.payload.Equals("enter")) {
                 (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
                 return false;
@@ -83,7 +90,9 @@ public class TTTEngineInitiator : MonoBehaviour {
                         string symbol = state.curPlayer == 0 ? "X" : "O";
                         engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
                         audioClip = auEngine.getSound(symbol.ToLower() + "filled", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
-                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position));
+                        TTTSoundObject sound = new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position);
+                        engine.state.environment.Add(sound);
+                        engine.state.blockingSounds.Add(sound);
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
                         state.timestamp++;
                     }

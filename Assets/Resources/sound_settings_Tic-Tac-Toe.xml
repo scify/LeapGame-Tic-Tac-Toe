@@ -5,6 +5,9 @@
 			<maximum>2</maximum>
 			<minimum>2</minimum>
 		</players>
+		<settings>
+			<name>default</name>
+		</settings>
 	</general>
 	<audio>
 		<player index="1">
