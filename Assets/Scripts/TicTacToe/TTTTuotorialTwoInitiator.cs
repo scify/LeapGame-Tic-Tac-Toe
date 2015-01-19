@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TTTEngineInitiator : MonoBehaviour {
+public class TTTTuotorialTwoInitiator : MonoBehaviour {
 
     public float offset_x;
     public float offset_y;

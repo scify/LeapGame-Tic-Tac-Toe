@@ -79,7 +79,6 @@ public class AudioFilesSettings {
 	 * @author Konstantinos Drossos
 	 */
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
-
 		return this.audioFilesPerPlayer [player].Find (
 			delegate (AudioFileForGame af) {
 				if (af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin)) return true;

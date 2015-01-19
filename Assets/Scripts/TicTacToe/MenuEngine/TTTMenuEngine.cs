@@ -3,27 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class TTTGameEngine : GameEngine {
+public class TTTMenuEngine : GameEngine {
 
     public new TTTStateRenderer renderer;
     public TTTRuleset rules;
-    public TTTGameState state;
-    public List<Actor> actors;
+    public TTTMenuState state;
     public List<WorldObject> environment;
-    public List<Player> players;
     public Queue<GameEvent> events;
 
     private bool initialized = false;
 
-    public void initialize(TTTRuleset rules, List<Actor> actors, List<WorldObject> environment, List<Player> players, TTTStateRenderer renderer) {
+    public void initialize(TTTRuleset rules, List<WorldObject> environment, TTTStateRenderer renderer) {
         this.rules = rules;
-        this.actors = actors;
         this.environment = environment;
-        this.players = players;
         this.renderer = renderer;
-        state = new TTTGameState(actors, environment, players);
+        state = new TTTMenuState(environment);
         events = new Queue<GameEvent>();
-        state.curPlayer = new System.Random().Next(players.Count);
+        state.curPlayer = -1;
         initialized = true;
     }
 
@@ -41,11 +37,6 @@ public class TTTGameEngine : GameEngine {
     public override void loop() {
         if (!initialized) {
             return;
-        }
-        foreach (Player p in players) {
-            if (p is TTTAIPlayer) {
-                (p as TTTAIPlayer).notify(this);
-            }
         }
         while (events.Count != 0) {
             if (state.result.gameOver()) {
