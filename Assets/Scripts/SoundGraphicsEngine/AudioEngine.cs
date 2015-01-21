@@ -31,7 +31,8 @@ public class AudioEngine {
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public AudioEngine(string gameName):this(-1, gameName) {}
+	public AudioEngine(string gameName):
+	this(-1, gameName) {}
 
 
 
@@ -80,8 +81,8 @@ public class AudioEngine {
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public AudioClip getSound(string theCase, UnityEngine.Vector3 soundOrigin) {
-		return this.getSound (theCase, this.currentPlayer, soundOrigin);
+	public AudioClip getSoundForPlayer(string theCase, UnityEngine.Vector3 soundOrigin) {
+		return this.getSoundForPlayer (theCase, this.currentPlayer, soundOrigin);
 	}
 
 
@@ -101,8 +102,8 @@ public class AudioEngine {
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-    public AudioClip getSound(string theCase, UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
-		return this.getSound(theCase, this.currentPlayer, this.calculateSoundOrigin(playerPosition, soundOrigin));
+    public AudioClip getSoundForPlayer(string theCase, UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
+		return this.getSoundForPlayer(theCase, this.currentPlayer, this.calculateSoundOrigin(playerPosition, soundOrigin));
 	}
 
 
@@ -123,8 +124,8 @@ public class AudioEngine {
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public AudioClip getSound(string theCase, int player, UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
-		return this.getSound(theCase, player, this.calculateSoundOrigin(playerPosition, soundOrigin));
+	public AudioClip getSoundForPlayer(string theCase, int player, UnityEngine.Vector3 playerPosition, UnityEngine.Vector3 soundOrigin) {
+		return this.getSoundForPlayer(theCase, player, this.calculateSoundOrigin(playerPosition, soundOrigin));
 	}
 
 
@@ -144,17 +145,27 @@ public class AudioEngine {
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public AudioClip getSound(string theCase, int player, UnityEngine.Vector3 soundOrigin) {
+	public AudioClip getSoundForPlayer(string theCase, int player, UnityEngine.Vector3 soundOrigin) {
 
 		if (player.Equals (-1)) {
 			if (this.currentPlayer.Equals (-1)) throw new KeyNotFoundException ("Player: " + player + " not found!");
 			player = this.currentPlayer;
 		}
 
-		AudioClip tmp = (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForPlayer (player, theCase, soundOrigin), typeof(AudioClip));
 	
-		return tmp;
+		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForPlayer (
+			player, theCase, soundOrigin), typeof(AudioClip));
 	}
+
+
+
+	/**
+	 * TODO Add comments
+	 */
+	public AudioClip getSoundForMenu(string theCase) {
+		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForMenu(theCase), typeof(AudioClip));
+	}
+
 
 
 
@@ -196,24 +207,41 @@ public class AudioEngine {
 	
 	
 	/**
-	 * Gets all sound settings.
+	 * Gets all sound settings for players
 	 * 
 	 * This public method returns all sound settings that 
 	 * exist for the current game according to 
 	 * AudioFilesSettings object.  
 	 * 
-	 * @return List<string> - the existing settings
+	 * @return List<string> - the existing players settings
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public List<string> getAllSoundSettings() {
-		return this.audioFilesSettings.getAllSoundsCases ();
+	public List<string> getSettingsAudioForPlayers() {
+		return this.audioFilesSettings.getSettingsForPlayers ();
 	} /* End public List<string> getAllSoundSettings() */
+
+
+
+	/**
+	 * Gets all sound settings for menu.
+	 * 
+	 * This public method returns all sound settings that 
+	 * exist for the current game according to 
+	 * AudioFilesSettings object.  
+	 * 
+	 * @return List<string> - the existing settings for menu
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public List<string> getSettingsAudioForMenu() {
+		return this.audioFilesSettings.getSettingsForMenu ();
+	} /* End public List<string> getSettingsAudioForMenu() */
 	
 	
 	
 	/**
-	 * Checks if a setting exists.
+	 * Checks if a setting exists for players.
 	 * 
 	 * This public method checks if a specified setting
 	 * exists for the current game according to 
@@ -221,30 +249,34 @@ public class AudioEngine {
 	 * question and returns a boolean value representing its
 	 * existence. The search is case sensitive. 
 	 * 
-	 * @param theCase - the case in question (string)
+	 * @param theSetting - the setting in question (string)
 	 * @return bool - true if the case exists, false otherwise. 
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public bool isSettingExists(string theCase) {
-		return this.audioFilesSettings.isSettingExists (theCase);
-	} /* End public bool isSettingExists(string theCase) */
-	
-	
+	public bool isSettingExistsForPlayers(string theSetting) {
+		return this.audioFilesSettings.isAudioSettingExistsForPlayer (theSetting);
+	} /* End public bool isSettingExistsForPlayers(string theSetting) */
+
+
+
 	/**
-	 * Returns the cases for sound reproduction.
+	 * Checks if a setting exists for menu.
 	 * 
-	 * This public method returns all acceptable cases
-	 * for sound reproduction of the particular game.
+	 * This public method checks if a specified setting
+	 * exists for the current game according to 
+	 * AudioFilesSettings object. Accepts the setting in
+	 * question and returns a boolean value representing its
+	 * existence. The search is case sensitive. 
 	 * 
-	 * @return List<string> - the cases
+	 * @param theSetting - the setting in question (string)
+	 * @return bool - true if the case exists, false otherwise. 
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public List<string> getAllSoundsCases() {
-		return null;
-		//return this.audioFilesCases;
-	} /* End public List<string> getAllSoundsCases() */
+	public bool isSettingExistsForMenu(string theSetting) {
+		return this.audioFilesSettings.isAudioSettingExistsForMenu (theSetting);
+	} /* End public bool isSettingExistsForPlayers(string theSetting) */
 
 
 
