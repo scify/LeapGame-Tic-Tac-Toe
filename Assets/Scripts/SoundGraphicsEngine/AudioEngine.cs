@@ -43,17 +43,34 @@ public class AudioEngine {
 	 * the index of the player and creates the appropriate
 	 * AudioEngine object.
 	 * 
-	 * @param gameName - the name of the game (string)
 	 * @param player - the index of the player (int)
+	 * @param gameName - the name of the game (string)
 	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
-	public AudioEngine(int player, string gameName) {
+	public AudioEngine(int player, string gameName):
+	this(player, gameName, "default") {}
+
+
+
+	/**
+	 * Constructor of AudioEngine class.
+	 * 
+	 * This constructor accepts the name of the game, 
+	 * the index of the player and the desired game settings
+	 * and creates the appropriate AudioEngine object.
+	 * 
+	 * @param player - the index of the player (int)
+	 * @param gameName - the name of the game (string)
+	 * @param settingsName - the name of the settings (string)
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public AudioEngine(int player, string gameName, string settingsName) {
 		AudioEngine.nOfAudioEngines++;
 		this.currentPlayer = player;
-		this.audioFilesSettings = new AudioFilesSettings (gameName, "no repeat");
+		this.audioFilesSettings = new AudioFilesSettings (gameName, settingsName);
 	}
-
 
 
 	/**
