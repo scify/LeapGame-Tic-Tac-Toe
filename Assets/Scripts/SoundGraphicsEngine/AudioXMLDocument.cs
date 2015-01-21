@@ -34,7 +34,7 @@ public class AudioXMLDocument : XmlDocument {
 			DirectoryInfo theInfo = new DirectoryInfo (AudioXMLDocument.settingsBaseDir);
 			FileInfo[] files = theInfo.GetFiles ("*_" + filename + ".xml");
 			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
-			theSettingsFileName = files [0].Name.Substring(0, files[0].Name.Length-4);
+			theSettingsFileName = AudioXMLDocument.settingsBaseDir + files [0].Name.Substring(0, files[0].Name.Length-4)+ ".xml";
 			
 		} else theSettingsFileName = "sound_settings_" + filename;
 
@@ -87,7 +87,7 @@ public class AudioXMLDocument : XmlDocument {
 
 		audioNode = audioNode.SelectSingleNode ("player");
 
-		while (!Convert.ToInt16(audioNode.Attributes["index"].InnerText).Equals(playerIndex)) {
+		while (Convert.ToInt16(audioNode.Attributes["index"].InnerText) != playerIndex + 1) {
 			audioNode = audioNode.NextSibling;
 			if (audioNode == null) throw new Exception () ;
 		}
@@ -140,7 +140,7 @@ public class AudioXMLDocument : XmlDocument {
 
 		audioNode = audioNode.SelectSingleNode ("settings");
 		
-		while (!audioNode.Attributes["name"].InnerText.Equals(forSettings)) {
+		while (audioNode.Attributes["name"].InnerText != forSettings) {
 			audioNode = audioNode.NextSibling;
 			if (audioNode == null) throw new Exception () ;
 		}

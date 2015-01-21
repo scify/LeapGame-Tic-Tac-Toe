@@ -51,7 +51,7 @@ public class AudioEngine {
 	public AudioEngine(int player, string gameName) {
 		AudioEngine.nOfAudioEngines++;
 		this.currentPlayer = player;
-		this.audioFilesSettings = new AudioFilesSettings (gameName);
+		this.audioFilesSettings = new AudioFilesSettings (gameName, "no repeat");
 	}
 
 
