@@ -237,6 +237,24 @@ public class AudioEngine {
 	public List<string> getSettingsAudioForMenu() {
 		return this.audioFilesSettings.getSettingsForMenu ();
 	} /* End public List<string> getSettingsAudioForMenu() */
+
+
+	
+	public void changeSettingsForPlayer(string newSettings) {
+		this.audioFilesSettings.changeSettingsForPlayer (newSettings);
+	}
+	
+	
+
+	public void changeSettingsForPlayer(int playerIndex, string newSettings) {
+		this.audioFilesSettings.changeSettingsForPlayer (playerIndex, newSettings);
+	} 
+	
+	
+	
+	public void changeSettingsForMenu (string newSettings) {
+		this.audioFilesSettings.changeSettingsForMenu (newSettings);
+	}
 	
 	
 	
