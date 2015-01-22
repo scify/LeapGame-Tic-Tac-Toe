@@ -6,7 +6,8 @@ public class TTTGameResult : GameResult {
         Ongoing = 0,
         Won = 1,
         Draw = 2,
-        Over = 3
+        Over = 3,
+        Replay = 4
     }
 
     public GameStatus status;
@@ -18,7 +19,7 @@ public class TTTGameResult : GameResult {
 	}
 
     public override bool gameOver() {
-        return status == GameStatus.Over;
+        return status == GameStatus.Over || status == GameStatus.Replay;
     }
 
     public override int getWinner() {

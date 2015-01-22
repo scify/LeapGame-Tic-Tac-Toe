@@ -5,7 +5,7 @@ using System;
 
 public class TTTGameEngine : GameEngine {
 
-    public TTTStateRenderer renderer;
+    public new TTTStateRenderer renderer;
     public TTTRuleset rules;
     public TTTGameState state;
     public List<Actor> actors;
@@ -55,7 +55,7 @@ public class TTTGameEngine : GameEngine {
             GameEvent curEvent = events.Dequeue();
             rules.applyTo(state, curEvent, this);
         }
-        renderer.render(state);
+        renderer.render(this);
         if (state.result.gameOver()) {
             cleanUp();
         }
@@ -74,7 +74,7 @@ public class TTTGameEngine : GameEngine {
     }
 
     public override void cleanUp() {
-        Application.LoadLevel(0);
+        Application.LoadLevel("mainMenu");
 	}
 
 }
