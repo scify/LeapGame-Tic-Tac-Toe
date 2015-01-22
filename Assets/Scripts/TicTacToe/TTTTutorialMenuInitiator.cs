@@ -14,9 +14,9 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Χώρος", "tutorialOne", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, -offset_y), false, true));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Κανόνες", "tutorialTwo", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, 0), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Πίσω", "mainMenu", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Χώρος", "tutorialOne", auEngine.getSoundForMenu("space"), new Vector3(0, 0, -offset_y), false, true));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Κανόνες", "tutorialTwo", auEngine.getSoundForMenu("rules"), new Vector3(0, 0, 0), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Πίσω", "mainMenu", auEngine.getSoundForMenu("mainMenu"), new Vector3(0, 0, offset_y), false));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {

@@ -24,7 +24,7 @@ public class AudioXMLDocument : XmlDocument {
 
 		string theSettingsFileName;
 		
-		if (Application.platform.Equals (RuntimePlatform.OSXEditor) || 
+		if (Application.platform.Equals (RuntimePlatform.WindowsEditor) || 
 		    Application.platform.Equals (RuntimePlatform.OSXEditor)) {
 			
 			if (!Directory.Exists (AudioXMLDocument.settingsBaseDir))
@@ -94,9 +94,9 @@ public class AudioXMLDocument : XmlDocument {
 
 		audioNode = audioNode.SelectSingleNode ("settings");
 
-		while (!audioNode.Attributes["name"].InnerText.Equals(forSettings)) {
+		while (audioNode.Attributes["name"].InnerText != forSettings) {
 			audioNode = audioNode.NextSibling;
-			if (audioNode == null) throw new Exception () ;
+			if (audioNode == null) throw new Exception ();
 		}
 
 		string tmpString;

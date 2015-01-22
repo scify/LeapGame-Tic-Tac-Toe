@@ -37,6 +37,15 @@ public class TTTMenuUserInterface : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             engine.postEvent(new UIEvent("escape", "action", "player0"));
         }
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            engine.postEvent(new UIEvent("", "soundSettings", "player0"));
+        }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            engine.postEvent(new UIEvent("pitch shifted", "soundSettings", "player0"));
+        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            engine.postEvent(new UIEvent("no repeat", "soundSettings", "player0"));
+        }
 
 	}
 	

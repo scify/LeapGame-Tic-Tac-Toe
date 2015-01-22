@@ -9,7 +9,7 @@ public class TTTEngineInitiator : MonoBehaviour {
 	void Start () {
 
         TTTStateRenderer renderer = new TTTStateRenderer();
-        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe");
+        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", "no repeat");
 
         List<Actor> actors = new List<Actor>();
         actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {
@@ -42,6 +42,11 @@ public class TTTEngineInitiator : MonoBehaviour {
                 Application.LoadLevel("mainMenu");
                 return false;
             }
+            return true;
+        }));
+
+        rules.Add(new TTTRule("soundSettings", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            auEngine = new AudioEngine(0, "Tic-Tac-Toe", eve.payload);
             return true;
         }));
 
@@ -102,7 +107,6 @@ public class TTTEngineInitiator : MonoBehaviour {
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            Debug.Log(eve.payload);
             if (eve.payload.Equals("enter")) {
                 foreach (Actor actor in state.actors) {
                     bool overlap = false;
