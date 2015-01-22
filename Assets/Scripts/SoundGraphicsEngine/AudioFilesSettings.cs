@@ -65,7 +65,8 @@ public class AudioFilesSettings {
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
 
 		try { 
-			gameSettings.Load(gameName); 
+			//gameSettings.Load(gameName); 
+			gameSettings.LoadSettingsXML(gameName); 
 		} catch (Exception e) { Debug.Log (e.Message); throw e; }
 
 		this.initialiseLists ();
@@ -166,7 +167,8 @@ public class AudioFilesSettings {
 	public void changeSettingsForPlayer(int playerIndex, string newSettings) {
 
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
-		gameSettings.Load (this.gameName);
+		//gameSettings.Load (this.gameName);
+		gameSettings.LoadSettingsXML (this.gameName);
 
 		this.audioFilesForPlayer [playerIndex].Clear ();
 		this.audioFilesForPlayer [playerIndex] = gameSettings.getFilesForPlayer (playerIndex, newSettings);
@@ -187,7 +189,8 @@ public class AudioFilesSettings {
 	 */
 	public void changeSettingsForMenu (string newSettings) {
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
-		gameSettings.Load (this.gameName);
+		//gameSettings.Load (this.gameName);
+		gameSettings.LoadSettingsXML (this.gameName);
 
 		this.audioFilesForMenu = gameSettings.getFilesForMenu(newSettings);
 		this.currentAudioSettingForMenu = newSettings;

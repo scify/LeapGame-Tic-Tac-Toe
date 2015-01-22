@@ -20,25 +20,29 @@ public class AudioXMLDocument : XmlDocument {
 	public AudioXMLDocument ():
 	base() {}
 
-	public override void Load (string filename) {
+	public void LoadSettingsXML (string filename) {
 
 		string theSettingsFileName;
 		
 		if (Application.platform.Equals (RuntimePlatform.WindowsEditor) || 
-		    Application.platform.Equals (RuntimePlatform.OSXEditor)) {
+						Application.platform.Equals (RuntimePlatform.OSXEditor)) {
 			
-			if (!Directory.Exists (AudioXMLDocument.settingsBaseDir))
+			if (!Directory.Exists (AudioXMLDocument.settingsBaseDir)) 
 				throw new ApplicationException ("Error to audio settings path!" + 
-				                                AudioXMLDocument.messageParentPathNotFound);
-			
+                        AudioXMLDocument.messageParentPathNotFound);
+
 			DirectoryInfo theInfo = new DirectoryInfo (AudioXMLDocument.settingsBaseDir);
 			FileInfo[] files = theInfo.GetFiles ("*_" + filename + ".xml");
 			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
-			theSettingsFileName = AudioXMLDocument.settingsBaseDir + files [0].Name.Substring(0, files[0].Name.Length-4)+ ".xml";
-			
-		} else theSettingsFileName = "sound_settings_" + filename;
-
-		base.Load (theSettingsFileName);
+			theSettingsFileName = AudioXMLDocument.settingsBaseDir + 
+				files [0].Name.Substring (0, files [0].Name.Length - 4) + 
+					".xml";
+			this.Load (theSettingsFileName);
+		} else {
+			theSettingsFileName = "sound_settings_" + filename;
+			TextAsset xmlText = (TextAsset)Resources.Load (theSettingsFileName);
+			this.LoadXml (xmlText.text);
+		}
 	}
 
 	public int MaximumPlayers {
