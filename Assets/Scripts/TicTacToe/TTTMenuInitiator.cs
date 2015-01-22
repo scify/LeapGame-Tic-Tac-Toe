@@ -14,9 +14,9 @@ public class TTTMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Νέο Παιχνίδι", "newGame", auEngine.getSound("xfilled", new Vector3(0, 0, 0)), new Vector3(0, 0, -offset_y), false, true));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Οδηγίες", "tutorialMenu", auEngine.getSound("xfilled", new Vector3(0, 0, 0)), new Vector3(0, 0, 0), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Έξοδος", "exitScene", auEngine.getSound("xfilled", new Vector3(0, 0, 0)), new Vector3(0, 0, offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Νέο Παιχνίδι", "newGame", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, -offset_y), false, true));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Οδηγίες", "tutorialMenu", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, 0), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Έξοδος", "exitScene", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, offset_y), false));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
@@ -69,7 +69,7 @@ public class TTTMenuInitiator : MonoBehaviour {
                     if (temp.selected) {
                         if (eve.payload == "_up" || eve.payload == "left") {
                             if (previous == null) {
-                                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(1, 0, 0));
+                                AudioClip audioClip = auEngine.getSoundForMenu("boundary");
                                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
                                 break;
                             }
@@ -95,7 +95,7 @@ public class TTTMenuInitiator : MonoBehaviour {
                 }
             }
             if (change) {
-                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(0, 1, 0));
+                AudioClip audioClip = auEngine.getSoundForMenu("boundary");
                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             }
             return true;

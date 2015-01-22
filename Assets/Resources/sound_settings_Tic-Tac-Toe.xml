@@ -19,9 +19,78 @@
 	<audio>
 		<menu>
 			<settings name="default">
-				<audio_file case="tutorial1">
-					<path>"tic-tac-toe/default/menu_sounds/xxx"</path>
+				<audio_file case="intro">
+					<path>"tic-tac-toe/default/menu_sounds/intro.wav"</path>
 				</audio_file>
+        <audio_file case="mainMenu">
+          <path>"tic-tac-toe/default/menu_sounds/mainMenu.wav"</path>
+        </audio_file>
+        <audio_file case="newGame">
+          <path>"tic-tac-toe/default/menu_sounds/newGame.wav"</path>
+        </audio_file>
+        <audio_file case="tutorials">
+          <path>"tic-tac-toe/default/menu_sounds/tutorials.wav"</path>
+        </audio_file>
+        <audio_file case="exit">
+          <path>"tic-tac-toe/default/menu_sounds/exit.wav"</path>
+        </audio_file>
+        <audio_file case="outro">
+          <path>"tic-tac-toe/default/menu_sounds/outro.wav"</path>
+        </audio_file>
+        <audio_file case="gameIntro">
+          <path>"tic-tac-toe/default/menu_sounds/gameIntro.wav"</path>
+        </audio_file>
+        <audio_file case="space">
+          <path>"tic-tac-toe/default/menu_sounds/space.wav"</path>
+        </audio_file>
+        <audio_file case="rules">
+          <path>"tic-tac-toe/default/menu_sounds/rules.wav"</path>
+        </audio_file>
+        <audio_file case="spaceTextFail">
+          <path>"tic-tac-toe/default/menu_sounds/spaceTextFail.wav"</path>
+        </audio_file>
+        <audio_file case="rulesText0">
+          <path>"tic-tac-toe/default/menu_sounds/rulesText0.wav"</path>
+        </audio_file>
+        <audio_file case="rulesText1">
+          <path>"tic-tac-toe/default/menu_sounds/rulesText1.wav"</path>
+        </audio_file>
+        <audio_file case="rulesTextFail">
+          <path>"tic-tac-toe/default/menu_sounds/rulesTextFail.wav"</path>
+        </audio_file>
+        <audio_file case="tutorialOutro">
+          <path>"tic-tac-toe/default/menu_sounds/tutorialOutro.wav"</path>
+        </audio_file>
+        <audio_file case="gameWon">
+          <path>"tic-tac-toe/default/menu_sounds/gameWon.wav"</path>
+        </audio_file>
+        <audio_file case="gameLost">
+          <path>"tic-tac-toe/default/menu_sounds/gameLost.wav"</path>
+        </audio_file>
+        <audio_file case="gameDraw">
+          <path>"tic-tac-toe/default/menu_sounds/gameDraw.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText0">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText0.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText1">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText1.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText2">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText2.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText3">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText3.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText4">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText4.wav"</path>
+        </audio_file>
+        <audio_file case="spaceText5">
+          <path>"tic-tac-toe/default/menu_sounds/spaceText5.wav"</path>
+        </audio_file>
+        <audio_file case="boundary">
+          <path>"tic-tac-toe/default/menu_sounds/boundary.wav"</path>
+        </audio_file>
 			</settings>
 		</menu>
 		<player index="1">

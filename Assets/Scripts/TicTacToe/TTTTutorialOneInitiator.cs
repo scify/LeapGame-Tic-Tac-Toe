@@ -15,10 +15,10 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
         actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {
             if (wo is TTTStaticObject && engine is TTTGameEngine) {
                 if ((wo as TTTStaticObject).prefab.Contains("TTT/O")) {
-                    AudioClip audioClip = auEngine.getSound("ofilled", new Vector3(wo.position.x / offset_x, wo.position.z / offset_y, 0));
+                    AudioClip audioClip = auEngine.getSoundForPlayer("ofilled", new Vector3(wo.position.x / offset_x, wo.position.z / offset_y, 0));
                     (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
                 } else if ((wo as TTTStaticObject).prefab.Contains("TTT/X")) {
-                    AudioClip audioClip = auEngine.getSound("xfilled", new Vector3(wo.position.x / offset_x, wo.position.z / offset_y, 0));
+                    AudioClip audioClip = auEngine.getSoundForPlayer("xfilled", new Vector3(wo.position.x / offset_x, wo.position.z / offset_y, 0));
                     (engine as TTTGameEngine).state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, wo.position));
                 }
             }
@@ -82,37 +82,37 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                     engine.state.timestamp = 1;
                     break;
                 case 1:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 2;
                     break;
                 case 2:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 25;
                     break;
                 case 25:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("ofilled", Vector3.down), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("ofilled", Vector3.down), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 3;
                     break;
                 case 3:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 35;
                     break;
                 case 35:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("xfilled", Vector3.down), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("xfilled", Vector3.down), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 4;
                     break;
                 case 4:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 5;
                     break;
                 case 5:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 6;
                     break;
@@ -128,7 +128,7 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
         }));
 
         rules.Add(new TTTRule("initialization", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+            engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
             engine.state.environment.Add(engine.state.blockingSound);
             engine.state.timestamp = 0;
             return false;
@@ -170,11 +170,11 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        audioClip = auEngine.getSound("selected", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
+                        audioClip = auEngine.getSoundForPlayer("selected", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         engine.state.timestamp = 10;
                     } else {
-                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSound("selected", Vector3.zero), Vector3.zero);
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("selected", Vector3.zero), Vector3.zero);
                         engine.state.environment.Add(engine.state.blockingSound);
                     }
                 }
@@ -218,7 +218,7 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                     int x = (int)(actor.position.x / offset_x) + dx;
                     int y = (int)(actor.position.z / offset_y) + dy;
                     if (x < -1 || x > 1 || y < -1 || y > 1) {
-                        AudioClip audioClip = auEngine.getSound("boundary", new Vector3(dx, dy, 0));
+                        AudioClip audioClip = auEngine.getSoundForPlayer("boundary", new Vector3(dx, dy, 0));
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         return false;
                     }
