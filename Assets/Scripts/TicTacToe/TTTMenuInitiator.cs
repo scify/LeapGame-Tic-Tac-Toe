@@ -20,8 +20,18 @@ public class TTTMenuInitiator : MonoBehaviour {
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            AudioClip audioClip = auEngine.getSoundForMenu("intro");
+            AudioClip audioClip = auEngine.getSoundForMenu("mainMenu");
             engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
+            state.timestamp = 0;
+            return false;
+        }));
+
+        rules.Add(new TTTRule("soundOver", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
+            if (state.timestamp == 0) {
+                AudioClip audioClip = auEngine.getSoundForMenu("newGame");
+                engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
+                state.timestamp = 1;
+            }
             return false;
         }));
 
@@ -47,30 +57,17 @@ public class TTTMenuInitiator : MonoBehaviour {
             return true;
         }));
 
-        rules.Add(new TTTRule("action", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            if (eve.payload.Equals("select")) {
-                foreach (WorldObject obj in state.environment) {
-                    if (obj is TTTMenuItem) {
-                        if ((obj as TTTMenuItem).selected) {
-                            //TODO: play sound
-                            return false;
-                        }
-                    }
-                }
-            }
-            return true;
-        }));
-
         rules.Add(new TTTRule("move", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
             TTTMenuItem previous = null;
             bool change = false;
+            AudioClip audioClip;
             foreach (WorldObject obj in state.environment) {
                 if (obj is TTTMenuItem) {
                     TTTMenuItem temp = obj as TTTMenuItem;
                     if (temp.selected) {
                         if (eve.payload == "_up" || eve.payload == "left") {
                             if (previous == null) {
-                                AudioClip audioClip = auEngine.getSoundForMenu("boundary");
+                                audioClip = auEngine.getSoundForMenu("boundary");
                                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
                                 break;
                             }
@@ -78,7 +75,7 @@ public class TTTMenuInitiator : MonoBehaviour {
                             temp.prefab = temp.prefab.Replace("Selected", "Default");
                             previous.selected = true;
                             previous.prefab = previous.prefab.Replace("Default", "Selected");
-                            //TODO: Play sound
+                            engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", previous.audioMessage, Vector3.zero));
                             break;
                         } else {
                             change = true;
@@ -89,14 +86,14 @@ public class TTTMenuInitiator : MonoBehaviour {
                         previous.prefab = previous.prefab.Replace("Selected", "Default");
                         previous.selected = false;
                         change = false;
-                        //TODO: Play sound
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", temp.audioMessage, Vector3.zero));
                         break;
                     }
                     previous = temp;
                 }
             }
             if (change) {
-                AudioClip audioClip = auEngine.getSoundForMenu("boundary");
+                audioClip = auEngine.getSoundForMenu("boundary");
                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             }
             return true;

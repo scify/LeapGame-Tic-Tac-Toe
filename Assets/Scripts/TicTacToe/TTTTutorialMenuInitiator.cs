@@ -20,7 +20,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            AudioClip audioClip = auEngine.getSoundForMenu("boundary");
+            AudioClip audioClip = auEngine.getSoundForMenu("space");
             engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             return false;
         }));
@@ -39,24 +39,6 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                     if (obj is TTTMenuItem) {
                         if ((obj as TTTMenuItem).selected) {
                             Application.LoadLevel((obj as TTTMenuItem).target);
-                            return false;
-                        }
-                    }
-                }
-            }
-            return true;
-        }));
-
-        rules.Add(new TTTRule("action", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            if (eve.payload.Equals("select")) {
-                foreach (WorldObject obj in state.environment) {
-                    if (obj is TTTMenuItem) {
-                        if ((obj as TTTMenuItem).selected) {
-                            foreach (TTTSoundObject so in state.stoppableSounds) {
-                                state.environment.Remove(so);
-                            }
-                            state.stoppableSounds.Clear();
-                            //TODO: play sound
                             return false;
                         }
                     }
@@ -90,7 +72,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                                 state.environment.Remove(so);
                             }
                             state.stoppableSounds.Clear();
-                            //TODO: Play sound
+                            engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", previous.audioMessage, Vector3.zero));
                             break;
                         } else {
                             change = true;
@@ -105,7 +87,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                             state.environment.Remove(so);
                         }
                         state.stoppableSounds.Clear();
-                        //TODO: Play sound
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", temp.audioMessage, Vector3.zero));
                         break;
                     }
                     previous = temp;
