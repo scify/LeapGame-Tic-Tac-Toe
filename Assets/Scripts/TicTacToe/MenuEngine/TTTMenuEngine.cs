@@ -46,7 +46,7 @@ public class TTTMenuEngine : GameEngine {
             GameEvent curEvent = events.Dequeue();
             rules.applyTo(state, curEvent, this);
         }
-        renderer.render(state);
+        renderer.render(this);
         if (state.result.gameOver()) {
             cleanUp();
         }

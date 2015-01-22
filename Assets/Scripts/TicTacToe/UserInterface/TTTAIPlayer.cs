@@ -12,7 +12,7 @@ public class TTTAIPlayer : AIPlayer {
             throw new ArgumentException("Invalid game engine type! Expected a TTTGameEngine, got " + engine.GetType().ToString());
         }
         if ((engine.getState().result as TTTGameResult).status == TTTGameResult.GameStatus.Ongoing && ("player" + engine.getState().curPlayer).Equals(code)) {
-            if ((engine as TTTGameEngine).state.blockingSounds.Count != 0) {
+            if ((engine as TTTGameEngine).state.blockingSound != null) {
                 return;
             }
             List<KeyValuePair<int, int>> points = new List<KeyValuePair<int, int>>();

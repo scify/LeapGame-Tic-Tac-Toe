@@ -29,9 +29,6 @@ public class TTTMenuInitiator : MonoBehaviour {
                 Application.LoadLevel("mainMenu");
                 return false;
             }
-            if (state.stoppableSounds.Count != 0) {
-                return false;
-            }
             return true;
         }));
 
@@ -72,7 +69,7 @@ public class TTTMenuInitiator : MonoBehaviour {
                     if (temp.selected) {
                         if (eve.payload == "_up" || eve.payload == "left") {
                             if (previous == null) {
-                                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(0, -1, 0));
+                                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(1, 0, 0));
                                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
                                 break;
                             }

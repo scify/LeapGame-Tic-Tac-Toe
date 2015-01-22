@@ -29,9 +29,6 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                 Application.LoadLevel("mainMenu");
                 return false;
             }
-            if (state.stoppableSounds.Count != 0) {
-                return false;
-            }
             return true;
         }));
 
@@ -54,6 +51,10 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                 foreach (WorldObject obj in state.environment) {
                     if (obj is TTTMenuItem) {
                         if ((obj as TTTMenuItem).selected) {
+                            foreach (TTTSoundObject so in state.stoppableSounds) {
+                                state.environment.Remove(so);
+                            }
+                            state.stoppableSounds.Clear();
                             //TODO: play sound
                             return false;
                         }
@@ -72,7 +73,11 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                     if (temp.selected) {
                         if (eve.payload == "_up" || eve.payload == "left") {
                             if (previous == null) {
-                                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(0, -1, 0));
+                                foreach (TTTSoundObject so in state.stoppableSounds) {
+                                    state.environment.Remove(so);
+                                }
+                                state.stoppableSounds.Clear();
+                                AudioClip audioClip = auEngine.getSound("boundary", new Vector3(1, 0, 0));
                                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
                                 break;
                             }
@@ -80,6 +85,10 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                             temp.prefab = temp.prefab.Replace("Selected", "Default");
                             previous.selected = true;
                             previous.prefab = previous.prefab.Replace("Default", "Selected");
+                            foreach (TTTSoundObject so in state.stoppableSounds) {
+                                state.environment.Remove(so);
+                            }
+                            state.stoppableSounds.Clear();
                             //TODO: Play sound
                             break;
                         } else {
@@ -91,6 +100,10 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                         previous.prefab = previous.prefab.Replace("Selected", "Default");
                         previous.selected = false;
                         change = false;
+                        foreach (TTTSoundObject so in state.stoppableSounds) {
+                            state.environment.Remove(so);
+                        }
+                        state.stoppableSounds.Clear();
                         //TODO: Play sound
                         break;
                     }
@@ -98,6 +111,10 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                 }
             }
             if (change) {
+                foreach (TTTSoundObject so in state.stoppableSounds) {
+                    state.environment.Remove(so);
+                }
+                state.stoppableSounds.Clear();
                 AudioClip audioClip = auEngine.getSound("boundary", new Vector3(0, 1, 0));
                 engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             }

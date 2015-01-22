@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TTTTuotorialTwoInitiator : MonoBehaviour {
+public class TTTTutotorialTwoInitiator : MonoBehaviour {
 
     public float offset_x;
     public float offset_y;
@@ -37,12 +37,21 @@ public class TTTTuotorialTwoInitiator : MonoBehaviour {
         players.Add(new TTTAIPlayer("player1", "AI"));
 
         TTTRuleset rules = new TTTRuleset();
+        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            if (eve.payload.Equals("escape")) {
+                Application.LoadLevel("mainMenu");
+                return false;
+            }
+            return true;
+        }));
+
+        
         rules.Add(new TTTRule("ALL", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             return !eve.initiator.StartsWith("player") || eve.initiator.Equals("player" + state.curPlayer);
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            if (state.blockingSounds.Count != 0) {
+            if (state.blockingSound != null) {
                 return false;
             }
             return true;
@@ -90,9 +99,8 @@ public class TTTTuotorialTwoInitiator : MonoBehaviour {
                         string symbol = state.curPlayer == 0 ? "X" : "O";
                         engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
                         audioClip = auEngine.getSound(symbol.ToLower() + "filled", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
-                        TTTSoundObject sound = new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position);
-                        engine.state.environment.Add(sound);
-                        engine.state.blockingSounds.Add(sound);
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position);
+                        engine.state.environment.Add(engine.state.blockingSound);
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
                         state.timestamp++;
                     }
