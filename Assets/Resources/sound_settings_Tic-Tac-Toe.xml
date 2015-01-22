@@ -579,7 +579,7 @@
 					<position_vals>0=-1=0</position_vals>
 				</audio_file>
 				<audio_file case="xfilled">
-					<path>"tic-tac-toe/default/player2/x22"</path>
+					<path>"tic-tac-toe/no repeat/player2/x22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
 			</settings>

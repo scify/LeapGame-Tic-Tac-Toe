@@ -127,6 +127,7 @@ public class TTTEngineInitiator : MonoBehaviour {
                         string symbol = state.curPlayer == 0 ? "X" : "O";
                         engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
                         audioClip = auEngine.getSoundForPlayer(symbol.ToLower() + "filled", new Vector3(actor.position.x / offset_x, -actor.position.z / offset_y, 0));
+                        Debug.Log(audioClip);
                         engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource",  audioClip, actor.position);
                         engine.state.environment.Add(engine.state.blockingSound);
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
