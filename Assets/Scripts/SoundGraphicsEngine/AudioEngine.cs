@@ -180,7 +180,7 @@ public class AudioEngine {
 	 * TODO Add comments
 	 */
 	public AudioClip getSoundForMenu(string theCase) {
-		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForMenu(theCase), typeof(AudioClip));
+		return (AudioClip) Resources.Load(this.audioFilesSettings.getSoundForMenu(theCase).Replace(".wav", ""), typeof(AudioClip));
 	}
 
 

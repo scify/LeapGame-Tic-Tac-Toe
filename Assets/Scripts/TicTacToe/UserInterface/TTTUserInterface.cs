@@ -62,7 +62,7 @@ public class TTTUserInterface : MonoBehaviour {
             engine.postEvent(new UIEvent("enter", "action", "player0"));
         }
         if (Input.GetKeyDown(KeyCode.Q)) {
-            engine.postEvent(new UIEvent("", "soundSettings", "player0"));
+            engine.postEvent(new UIEvent("default", "soundSettings", "player0"));
         }
         if (Input.GetKeyDown(KeyCode.W)) {
             engine.postEvent(new UIEvent("pitch shifted", "soundSettings", "player0"));

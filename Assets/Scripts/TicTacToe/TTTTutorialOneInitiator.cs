@@ -9,7 +9,7 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
 	void Start () {
 
         TTTStateRenderer renderer = new TTTStateRenderer();
-        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe");
+        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", "no repeat");
 
         List<Actor> actors = new List<Actor>();
         actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {

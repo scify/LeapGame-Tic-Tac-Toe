@@ -14,13 +14,14 @@ public class TTTMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Νέο Παιχνίδι", "newGame", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, -offset_y), false, true));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Οδηγίες", "tutorialMenu", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, 0), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Έξοδος", "exitScene", auEngine.getSoundForMenu("xfilled"), new Vector3(0, 0, offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Νέο Παιχνίδι", "newGame", auEngine.getSoundForMenu("newGame"), new Vector3(0, 0, -offset_y), false, true));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Οδηγίες", "tutorialMenu", auEngine.getSoundForMenu("tutorials"), new Vector3(0, 0, 0), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Έξοδος", "exitScene", auEngine.getSoundForMenu("exit"), new Vector3(0, 0, offset_y), false));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            //TODO: Play intro
+            AudioClip audioClip = auEngine.getSoundForMenu("intro");
+            engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             return false;
         }));
 

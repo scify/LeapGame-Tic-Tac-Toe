@@ -20,7 +20,8 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
-            //TODO: Play intro
+            AudioClip audioClip = auEngine.getSoundForMenu("boundary");
+            engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero));
             return false;
         }));
 
