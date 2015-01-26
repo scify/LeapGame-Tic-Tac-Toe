@@ -26,7 +26,6 @@ public class AudioXMLDocument : XmlDocument {
 	 * a AudioXMLDocument object according to the 
 	 * XmlDocument's class default constructor. 
 	 * 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioXMLDocument (): base() {}
@@ -41,7 +40,6 @@ public class AudioXMLDocument : XmlDocument {
 	 * @param gameName - game's name as appears in the settings' file name
 	 * @throw ApplicationException - when the directory of settings not exists
 	 * @throw FileNotFoundException - if the settings file not found
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void LoadSettingsXML (string gameName) {

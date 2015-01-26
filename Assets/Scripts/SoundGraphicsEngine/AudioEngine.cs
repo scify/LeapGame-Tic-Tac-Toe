@@ -24,7 +24,6 @@ using System.IO;
  * class in order to get the appropriate files and creates
  * the appropriate AudioClip objects. 
  * 
- * @access Public
  * @author Konstantinos Drossos
  */
 public class AudioEngine {
@@ -41,7 +40,6 @@ public class AudioEngine {
 	 * to the default ones. 
 	 * 
 	 * @param gameName - the name of the game (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioEngine(string gameName):this(-1, gameName) {}
@@ -60,7 +58,6 @@ public class AudioEngine {
 	 * 
 	 * @param player - the index of the player (int)
 	 * @param gameName - the name of the game (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioEngine(int player, string gameName): this(player, gameName, "default") {}
@@ -78,7 +75,6 @@ public class AudioEngine {
 	 * @param player - the index of the player (int)
 	 * @param gameName - the name of the game (string)
 	 * @param settingsName - the name of the settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioEngine(int player, string gameName, string settingsName) {
@@ -91,7 +87,6 @@ public class AudioEngine {
 	/**
 	 * Destructor of AudioEngine.
 	 * 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	~AudioEngine() {
@@ -110,7 +105,6 @@ public class AudioEngine {
 	 * @param theCase - the case for sound as defined in the audio settings (string)
 	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
 	 * @return AudioClip - the audio clip with the appropriate sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioClip getSoundForPlayer(string theCase, UnityEngine.Vector3 soundOrigin) {
@@ -131,7 +125,6 @@ public class AudioEngine {
 	 * @param playerPosition - the player's position (UnityEngine.Vector3) 
 	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
 	 * @return AudioClip - the audio clip with the appropriate sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
     public AudioClip getSoundForPlayer(string theCase, UnityEngine.Vector3 playerPosition, 
@@ -155,7 +148,6 @@ public class AudioEngine {
 	 * @param playerPosition - the player's position (UnityEngine.Vector3) 
 	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
 	 * @return AudioClip - the audio clip with the appropriate sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioClip getSoundForPlayer(string theCase, int player, UnityEngine.Vector3 playerPosition, 
@@ -178,7 +170,6 @@ public class AudioEngine {
 	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
 	 * @return AudioClip - the audio clip with the appropriate sound
 	 * @throw KeyNotFoundException - thrown when player is not found or not appropriate settings for player
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioClip getSoundForPlayer(string theCase, int player, UnityEngine.Vector3 soundOrigin) {
@@ -205,7 +196,6 @@ public class AudioEngine {
 	 * 
 	 * @param theCase - the specified case for which the sound is sought (string)
 	 * @return AudioClip - the AudioClip object containing the sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioClip getSoundForMenu(string theCase) {
@@ -239,7 +229,6 @@ public class AudioEngine {
 	 * of created AudioEngine objects. 
 	 * 
 	 * @return int - the amount of created AudioEngine objects
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public static int getNOfAudioEngines () {
@@ -256,7 +245,6 @@ public class AudioEngine {
 	 * AudioFilesSettings object. 
 	 * 
 	 * @return int - the total amount of settings
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public int getAmountOfSoundSettings() { 
@@ -273,7 +261,6 @@ public class AudioEngine {
 	 * AudioFilesSettings object.  
 	 * 
 	 * @return List<string> - the existing players settings
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public List<string> getSettingsAudioForPlayers() {
@@ -290,7 +277,6 @@ public class AudioEngine {
 	 * AudioFilesSettings object.  
 	 * 
 	 * @return List<string> - the existing settings for menu
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public List<string> getSettingsAudioForMenu() {
@@ -308,7 +294,6 @@ public class AudioEngine {
 	 * the game's settings XML document. 
 	 * 
 	 * @param newSettings - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForPlayer(string newSettings) {
@@ -330,7 +315,6 @@ public class AudioEngine {
 	 * 
 	 * @param playerIndex - the player's index
 	 * @param newSettings - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForPlayer(int playerIndex, string newSettings) {
@@ -349,7 +333,6 @@ public class AudioEngine {
 	 * audio settings. 
 	 * 
 	 * @param newSetting - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForMenu (string newSettings) {
@@ -369,7 +352,6 @@ public class AudioEngine {
 	 * 
 	 * @param theSetting - the setting in question (string)
 	 * @return bool - true if the case exists, false otherwise. 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public bool isSettingExistsForPlayers(string theSetting) {
@@ -389,7 +371,6 @@ public class AudioEngine {
 	 * 
 	 * @param theSetting - the setting in question (string)
 	 * @return bool - true if the case exists, false otherwise. 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public bool isSettingExistsForMenu(string theSetting) {
@@ -407,7 +388,6 @@ public class AudioEngine {
 	 * @param playerPosition - the player's position (UnityEngine.Vector3)
 	 * @param soundOrigin - the sound original origin (UnityEngine.Vector3)
 	 * @return UnityEngine.Vector3 - the appropriate sound origin
-	 * @access Private
 	 * @author Konstantinos Drossos
 	 */
 	private UnityEngine.Vector3 calculateSoundOrigin(UnityEngine.Vector3 playerPosition,
