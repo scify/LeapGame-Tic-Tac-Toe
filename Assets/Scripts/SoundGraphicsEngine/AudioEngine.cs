@@ -82,8 +82,13 @@ public class AudioEngine {
 		this.currentPlayer = player;
 		this.audioFilesSettings = new AudioFilesSettings (gameName, settingsName);
 	}
-	
-	
+
+    public AudioEngine(int player, string gameName, string menuSettings, string gameSettings) {
+        AudioEngine.nOfAudioEngines++;
+        this.currentPlayer = player;
+        this.audioFilesSettings = new AudioFilesSettings(gameName, menuSettings, gameSettings);
+    }
+
 	/**
 	 * Destructor of AudioEngine.
 	 * 

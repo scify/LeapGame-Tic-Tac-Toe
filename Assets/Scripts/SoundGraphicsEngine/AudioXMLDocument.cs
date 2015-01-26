@@ -122,7 +122,7 @@ public class AudioXMLDocument : XmlDocument {
 
 		while (audioNode.Attributes["name"].InnerText != forSettings) {
 			audioNode = audioNode.NextSibling;
-			if (audioNode == null) throw new Exception ();
+			if (audioNode == null) throw new Exception ("No audio nodes found for: " + forSettings);
 		}
 
 		string tmpString;
@@ -168,7 +168,7 @@ public class AudioXMLDocument : XmlDocument {
 		
 		while (audioNode.Attributes["name"].InnerText != forSettings) {
 			audioNode = audioNode.NextSibling;
-			if (audioNode == null) throw new Exception () ;
+			if (audioNode == null) throw new Exception ("No settings found for: " + forSettings) ;
 		}
 
 		string tmpPath;

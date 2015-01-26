@@ -55,6 +55,9 @@ public class TTTUserInterface : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Keypad9)) {
             engine.postEvent(new UIEvent("02", "move", "player0"));
         }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            engine.postEvent(new UIEvent("escape", "action", "player0"));
+        }
         if (Input.GetKeyDown(KeyCode.Space)) {
             engine.postEvent(new UIEvent("select", "action", "player0"));
         }

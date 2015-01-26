@@ -116,7 +116,7 @@ public class AudioFilesSettings {
 	 */
 	public string getSoundForMenu (string theCase) {
 		return this.audioFilesForMenu.Find ( delegate (AudioFileForGame af) { 
-			if ( af.TheCase.Equals (theCase) ) return true; else return false; 
+		    return af.TheCase.Equals (theCase); 
 		}).ThePath;
 	}
 
