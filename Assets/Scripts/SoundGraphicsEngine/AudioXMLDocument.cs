@@ -17,6 +17,17 @@ using System.Xml;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+/**
+ * Class to handle the XML settings document.
+ * 
+ * This class inherits from the XmlDocument class
+ * and is used to handle the XML document with the
+ * audio settings for a game. 
+ * 
+ * @author Konstantinos Drossos
+ */ 
 public class AudioXMLDocument : XmlDocument {
 
 	/**
