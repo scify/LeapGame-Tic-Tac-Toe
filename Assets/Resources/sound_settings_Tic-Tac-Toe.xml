@@ -18,81 +18,335 @@
 	</general>
 	<audio>
 		<menu>
-			<settings name="default">
-				<audio_file case="intro">
-					<path>"tic-tac-toe/default/menu_sounds/intro.wav"</path>
-				</audio_file>
-        <audio_file case="mainMenu">
-          <path>"tic-tac-toe/default/menu_sounds/mainMenu.wav"</path>
-        </audio_file>
-        <audio_file case="newGame">
-          <path>"tic-tac-toe/default/menu_sounds/newGame.wav"</path>
-        </audio_file>
-        <audio_file case="tutorials">
-          <path>"tic-tac-toe/default/menu_sounds/tutorials.wav"</path>
+      <settings name="default">
+        <audio_file case="boundary">
+          <path>"tic-tac-toe/default/menu_sounds/boundary.wav"</path>
         </audio_file>
         <audio_file case="exit">
           <path>"tic-tac-toe/default/menu_sounds/exit.wav"</path>
         </audio_file>
+        <audio_file case="game_draw_alt1">
+          <path>"tic-tac-toe/default/menu_sounds/game_draw_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt2">
+          <path>"tic-tac-toe/default/menu_sounds/game_draw_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt3">
+          <path>"tic-tac-toe/default/menu_sounds/game_draw_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt4">
+          <path>"tic-tac-toe/default/menu_sounds/game_draw_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="game_intro">
+          <path>"tic-tac-toe/default/menu_sounds/game_intro.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt1">
+          <path>"tic-tac-toe/default/menu_sounds/game_lost_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt2">
+          <path>"tic-tac-toe/default/menu_sounds/game_lost_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt3">
+          <path>"tic-tac-toe/default/menu_sounds/game_lost_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt4">
+          <path>"tic-tac-toe/default/menu_sounds/game_lost_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt1">
+          <path>"tic-tac-toe/default/menu_sounds/game_won_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt2">
+          <path>"tic-tac-toe/default/menu_sounds/game_won_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt3">
+          <path>"tic-tac-toe/default/menu_sounds/game_won_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt4">
+          <path>"tic-tac-toe/default/menu_sounds/game_won_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="intro1">
+          <path>"tic-tac-toe/default/menu_sounds/intro1.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text1">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text2">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text3">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text4">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text5">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text6">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text7">
+          <path>"tic-tac-toe/default/menu_sounds/intro1_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro2">
+          <path>"tic-tac-toe/default/menu_sounds/intro2.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text1">
+          <path>"tic-tac-toe/default/menu_sounds/intro2_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text2">
+          <path>"tic-tac-toe/default/menu_sounds/intro2_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text3">
+          <path>"tic-tac-toe/default/menu_sounds/intro2_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text4">
+          <path>"tic-tac-toe/default/menu_sounds/intro2_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro3">
+          <path>"tic-tac-toe/default/menu_sounds/intro3.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text1">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text2">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text3">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text4">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text5">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text6">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text7">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text8">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text8.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text9">
+          <path>"tic-tac-toe/default/menu_sounds/intro3_text9.wav"</path>
+        </audio_file>
+        <audio_file case="intro4">
+          <path>"tic-tac-toe/default/menu_sounds/intro4.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text1">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text2">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text3">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text4">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text5">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text6">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text7">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text8">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text8.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text9">
+          <path>"tic-tac-toe/default/menu_sounds/intro4_text9.wav"</path>
+        </audio_file>
+        <audio_file case="main_menu">
+          <path>"tic-tac-toe/default/menu_sounds/main_menu.wav"</path>
+        </audio_file>
+        <audio_file case="new_game">
+          <path>"tic-tac-toe/default/menu_sounds/new_game.wav"</path>
+        </audio_file>
+        <audio_file case="new_game_intro">
+          <path>"tic-tac-toe/default/menu_sounds/new_game_intro.wav"</path>
+        </audio_file>
         <audio_file case="outro">
           <path>"tic-tac-toe/default/menu_sounds/outro.wav"</path>
         </audio_file>
-        <audio_file case="gameIntro">
-          <path>"tic-tac-toe/default/menu_sounds/gameIntro.wav"</path>
+        <audio_file case="tutorials">
+          <path>"tic-tac-toe/default/menu_sounds/tutorials.wav"</path>
         </audio_file>
-        <audio_file case="space">
-          <path>"tic-tac-toe/default/menu_sounds/space.wav"</path>
+        <audio_file case="tutorials_intro">
+          <path>"tic-tac-toe/default/menu_sounds/tutorials_intro.wav"</path>
         </audio_file>
-        <audio_file case="rules">
-          <path>"tic-tac-toe/default/menu_sounds/rules.wav"</path>
-        </audio_file>
-        <audio_file case="spaceTextFail">
-          <path>"tic-tac-toe/default/menu_sounds/spaceTextFail.wav"</path>
-        </audio_file>
-        <audio_file case="rulesText0">
-          <path>"tic-tac-toe/default/menu_sounds/rulesText0.wav"</path>
-        </audio_file>
-        <audio_file case="rulesText1">
-          <path>"tic-tac-toe/default/menu_sounds/rulesText1.wav"</path>
-        </audio_file>
-        <audio_file case="rulesTextFail">
-          <path>"tic-tac-toe/default/menu_sounds/rulesTextFail.wav"</path>
-        </audio_file>
-        <audio_file case="tutorialOutro">
-          <path>"tic-tac-toe/default/menu_sounds/tutorialOutro.wav"</path>
-        </audio_file>
-        <audio_file case="gameWon">
-          <path>"tic-tac-toe/default/menu_sounds/gameWon.wav"</path>
-        </audio_file>
-        <audio_file case="gameLost">
-          <path>"tic-tac-toe/default/menu_sounds/gameLost.wav"</path>
-        </audio_file>
-        <audio_file case="gameDraw">
-          <path>"tic-tac-toe/default/menu_sounds/gameDraw.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText0">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText0.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText1">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText1.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText2">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText2.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText3">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText3.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText4">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText4.wav"</path>
-        </audio_file>
-        <audio_file case="spaceText5">
-          <path>"tic-tac-toe/default/menu_sounds/spaceText5.wav"</path>
-        </audio_file>
+      </settings>
+      <settings name="electra">
         <audio_file case="boundary">
           <path>"tic-tac-toe/default/menu_sounds/boundary.wav"</path>
         </audio_file>
-			</settings>
-		</menu>
+        <audio_file case="exit">
+          <path>"tic-tac-toe/electra/menu_sounds/exit.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt1">
+          <path>"tic-tac-toe/electra/menu_sounds/game_draw_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt2">
+          <path>"tic-tac-toe/electra/menu_sounds/game_draw_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt3">
+          <path>"tic-tac-toe/electra/menu_sounds/game_draw_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_draw_alt4">
+          <path>"tic-tac-toe/electra/menu_sounds/game_draw_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="game_intro">
+          <path>"tic-tac-toe/electra/menu_sounds/game_intro.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt1">
+          <path>"tic-tac-toe/electra/menu_sounds/game_lost_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt2">
+          <path>"tic-tac-toe/electra/menu_sounds/game_lost_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt3">
+          <path>"tic-tac-toe/electra/menu_sounds/game_lost_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_lost_alt4">
+          <path>"tic-tac-toe/electra/menu_sounds/game_lost_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt1">
+          <path>"tic-tac-toe/electra/menu_sounds/game_won_alt1.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt2">
+          <path>"tic-tac-toe/electra/menu_sounds/game_won_alt2.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt3">
+          <path>"tic-tac-toe/electra/menu_sounds/game_won_alt3.wav"</path>
+        </audio_file>
+        <audio_file case="game_won_alt4">
+          <path>"tic-tac-toe/electra/menu_sounds/game_won_alt4.wav"</path>
+        </audio_file>
+        <audio_file case="intro1">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text1">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text2">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text3">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text4">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text5">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text6">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro1_text7">
+          <path>"tic-tac-toe/electra/menu_sounds/intro1_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro2">
+          <path>"tic-tac-toe/electra/menu_sounds/intro2.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text1">
+          <path>"tic-tac-toe/electra/menu_sounds/intro2_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text2">
+          <path>"tic-tac-toe/electra/menu_sounds/intro2_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text3">
+          <path>"tic-tac-toe/electra/menu_sounds/intro2_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro2_text4">
+          <path>"tic-tac-toe/electra/menu_sounds/intro2_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro3">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text1">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text2">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text3">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text4">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text5">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text6">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text7">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text8">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text8.wav"</path>
+        </audio_file>
+        <audio_file case="intro3_text9">
+          <path>"tic-tac-toe/electra/menu_sounds/intro3_text9.wav"</path>
+        </audio_file>
+        <audio_file case="intro4">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text1">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text1.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text2">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text2.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text3">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text3.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text4">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text4.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text5">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text5.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text6">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text6.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text7">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text7.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text8">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text8.wav"</path>
+        </audio_file>
+        <audio_file case="intro4_text9">
+          <path>"tic-tac-toe/electra/menu_sounds/intro4_text9.wav"</path>
+        </audio_file>
+        <audio_file case="main_menu">
+          <path>"tic-tac-toe/electra/menu_sounds/main_menu.wav"</path>
+        </audio_file>
+        <audio_file case="new_game">
+          <path>"tic-tac-toe/electra/menu_sounds/new_game.wav"</path>
+        </audio_file>
+        <audio_file case="new_game_intro">
+          <path>"tic-tac-toe/electra/menu_sounds/new_game_intro.wav"</path>
+        </audio_file>
+        <audio_file case="outro">
+          <path>"tic-tac-toe/electra/menu_sounds/outro.wav"</path>
+        </audio_file>
+        <audio_file case="tutorials">
+          <path>"tic-tac-toe/electra/menu_sounds/tutorials.wav"</path>
+        </audio_file>
+        <audio_file case="tutorials_intro">
+          <path>"tic-tac-toe/electra/menu_sounds/tutorials_intro.wav"</path>
+        </audio_file>
+      </settings>
+    </menu>
 		<player index="1">
 			<settings name="default">
 				<audio_file case="boundary">
@@ -583,6 +837,7 @@
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
 			</settings>
+      <settings name="electra"></settings>
 		</player>
 		<player index="2">
 			<settings name="default">
@@ -911,7 +1166,6 @@
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
 			</settings>
-			
 			<settings name="no repeat">
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/no repeat/player2/b0"</path>
@@ -1075,6 +1329,7 @@
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
 			</settings>
+      <settings name="electra"></settings>
 		</player>
 	</audio>
 </theFile>
