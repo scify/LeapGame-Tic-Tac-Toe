@@ -26,6 +26,7 @@ public class AudioXMLDocument : XmlDocument {
 	 * a AudioXMLDocument object according to the 
 	 * XmlDocument's class default constructor. 
 	 * 
+	 * @see XmlDocument
 	 * @author Konstantinos Drossos
 	 */
 	public AudioXMLDocument (): base() {}
@@ -67,6 +68,16 @@ public class AudioXMLDocument : XmlDocument {
 		}
 	}
 
+	/**
+	 * Property for the maximum amount of players. 
+	 * 
+	 * This public property is get only and returns
+	 * the maximum amount of players for the specified
+	 * game, as it is defined in the settings XML document. 
+	 * 
+	 * @return int - the maximum amount of players
+	 * @author Konstantinos Drossos
+	 */
 	public int MaximumPlayers {
 		get {
 			return Convert.ToInt16(this.DocumentElement.SelectSingleNode (
@@ -77,6 +88,18 @@ public class AudioXMLDocument : XmlDocument {
 		}
 	}
 
+
+
+	/**
+	 * Property for the minimum amount of players. 
+	 * 
+	 * This public property is get only and returns
+	 * the minimum amount of players for the specified
+	 * game, as it is defined in the settings XML document. 
+	 * 
+	 * @return int - the minimum amount of players
+	 * @author Konstantinos Drossos
+	 */
 	public int MinimumPlayers {
 		get {
 			return Convert.ToInt16(this.DocumentElement.SelectSingleNode (
@@ -87,6 +110,22 @@ public class AudioXMLDocument : XmlDocument {
 		}
 	}
 
+
+
+	/**
+	 * Returns the available settings for a game's element.
+	 * 
+	 * This public method returns the available settings of
+	 * the specified game and for the element of the game that
+	 * is passed as argument to the method. E.g., it can return
+	 * the available seetings for players or menu. The element
+	 * of the game must be specified in the XML document with 
+	 * the settings. 
+	 * 
+	 * @param ofWhom - the element of the game (string).
+	 * @return List<string> - the available settings for the specified element
+	 * @author Konstantinos Drossos
+	 */
 	public List<string> getAudioSettingsOf(string ofWhom) {
 		XmlNode settingsNode = this.SelectSingleNode (AudioXMLDocument.xmlSettingsNameOfNodeBase + 
 		                                              AudioXMLDocument.xmlSettingsNameOfNodeGeneralSettings + 
@@ -103,6 +142,20 @@ public class AudioXMLDocument : XmlDocument {
 		return toReturn;
 	}
 
+
+
+	/**
+	 * Gets the paths of the player's audio files.
+	 * 
+	 * This public method returns the paths for the sound of a player and
+	 * specified settings. Both player and settings are given as arguments to
+	 * the method.
+	 * 
+	 * @param playerIndex - the index of the player (int)
+	 * @param forSettings - the settings for which the file is sought
+	 * @return List<string> - the list of the audio files
+	 * @author Konstantinos Drossos
+	 */
 	public List<AudioFileForGame> getFilesForPlayer(int playerIndex, string forSettings) {
 
 		List<AudioFileForGame> toReturn;
@@ -154,6 +207,19 @@ public class AudioXMLDocument : XmlDocument {
 		return toReturn;
 	}
 
+
+
+	/**
+	 * Gets the paths of the menu's audio files.
+	 * 
+	 * This public method returns the paths for the sound of the menu and
+	 * specified settings. The settings are given as argument to
+	 * the method.
+	 * 
+	 * @param forSettings - the settings for which the file is sought
+	 * @return List<string> - the list of the audio files
+	 * @author Konstantinos Drossos
+	 */
 	public List<AudioFileForGame> getFilesForMenu(string forSettings) {
 
 		List<AudioFileForGame> toReturn;

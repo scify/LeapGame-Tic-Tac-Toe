@@ -83,10 +83,26 @@ public class AudioEngine {
 		this.audioFilesSettings = new AudioFilesSettings (gameName, settingsName);
 	}
 
+
+
+	/**
+	 * Constructor of AudioEngine class.
+	 * 
+	 * This constructor accepts the name of the game, 
+	 * the index of the player and the desired game audio 
+	 * settings for both menu and players and creates the
+	 * appropriate AudioEngine object.
+	 * 
+	 * @param player - the index of the player (int)
+	 * @param gameName - the name of the game (string)
+	 * @param menuSettings - the menu settings (string)
+	 * @param settingsName - the name of the settings (string)
+	 * @author Konstantinos Drossos
+	 */
     public AudioEngine(int player, string gameName, string menuSettings, string gameSettings) {
         AudioEngine.nOfAudioEngines++;
         this.currentPlayer = player;
-        this.audioFilesSettings = new AudioFilesSettings(gameName, menuSettings, gameSettings);
+		this.audioFilesSettings = new AudioFilesSettings(gameName, gameSettings, menuSettings);
     }
 
 	/**

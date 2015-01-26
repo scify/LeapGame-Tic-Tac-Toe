@@ -47,10 +47,39 @@ public class AudioFilesSettings {
 	public AudioFilesSettings (string gameName):
 	this(gameName, "default", "default"){}
 
+
+
+	/** 
+	 * Constructor of the AudioFilesSettings class.
+	 * 
+	 * The constructor of the AudioFilesSettings class accepts
+	 * the game name and players' settings and sets up the audio 
+	 * files' settings for the specified game. 
+	 * 
+	 * @param gameName - the name of the game to be played (string)
+	 * @param playersSettings - the settings for the players
+	 * @throw Exception - rethrows all catched exceptions after print their message to debug log
+	 * @author Konstantinos Drossos
+	 */
 	public AudioFilesSettings(string gameName, string playersSettings):
-	this(gameName, "default", playersSettings){}
-	
-	public AudioFilesSettings(string gameName, string menuSetting, string playerSetting) {
+	this(gameName, playersSettings, "default"){}
+
+
+
+	/** 
+	 * Constructor of the AudioFilesSettings class.
+	 * 
+	 * The constructor of the AudioFilesSettings class accepts
+	 * the game name, players' settings and menu settings and 
+	 * sets up the audio  files' settings for the specified game. 
+	 * 
+	 * @param gameName - the name of the game to be played (string)
+	 * @param playersSettings - the settings for the players
+	 * @param menuSetting - the settings for menu
+	 * @throw Exception - rethrows all catched exceptions after print their message to debug log
+	 * @author Konstantinos Drossos
+	 */
+	public AudioFilesSettings(string gameName, string playerSetting, string menuSetting) {
 
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
 
@@ -79,7 +108,6 @@ public class AudioFilesSettings {
 		} catch (Exception e) { Debug.Log (e.Message); throw e; }
 
 		this.gameName = gameName;
-
 	}
 	
 
@@ -324,7 +352,6 @@ public class AudioFilesSettings {
 	private int nOfPlayers_min;	
 	/*!< The name of the current game */
 	private string gameName; 
-
 	/*!< The players' settings */
 	private List<string> audioSettingsForPlayers; 
 	/*!< The available audio menu settings */
@@ -333,12 +360,10 @@ public class AudioFilesSettings {
 	private List<List<AudioFileForGame>> audioFilesForPlayer; 
 	/*!< The audio files for the game menu */
 	private List<AudioFileForGame> audioFilesForMenu;
-
 	/*!< The current audio settings for menu */
 	private string currentAudioSettingForMenu;
 	/*!< The current audio settings for player(s) */
 	private string currentAudioSettingForPlayer;
-
 }
 
 /* Scripts/SoundGraphicsEngine/AudioFilesSettings.cs */
