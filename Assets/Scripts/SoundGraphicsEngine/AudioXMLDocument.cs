@@ -1,11 +1,13 @@
-/** The file of AudioXMLDocument class. 
+/**
+ * The file for the AudioXMLDocument class. 
  * 
- * This file holds the declaration and 
- * implementation of the AudioXMLDocument class.
+ * This file holds the definition and implementation 
+ * of AudioXMLDocument class. This file is part of
+ * the LEAP project. 
  * 
  * @file AudioXMLDocument.cs
  * @version 1.0
- * @date 21/01/2015 (dd/mm/yyyy)
+ * @date 14/01/2015 (dd/mm/yyyy)
  * @author Konstantinos Drossos
  * @copyright ??? distributed as is under MIT Licence.
  */
@@ -17,10 +19,32 @@ using UnityEngine;
 
 public class AudioXMLDocument : XmlDocument {
 
-	public AudioXMLDocument ():
-	base() {}
+	/**
+	 * Default constructor.
+	 * 
+	 * The default constructor just instantiates
+	 * a AudioXMLDocument object according to the 
+	 * XmlDocument's class default constructor. 
+	 * 
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public AudioXMLDocument (): base() {}
 
-	public void LoadSettingsXML (string filename) {
+
+
+	/**
+	 * Parses the audio settings XML document. 
+	 * 
+	 * This public method
+	 * 
+	 * @param gameName - game's name as appears in the settings' file name
+	 * @throw ApplicationException - when the directory of settings not exists
+	 * @throw FileNotFoundException - if the settings file not found
+	 * @access Public
+	 * @author Konstantinos Drossos
+	 */
+	public void LoadSettingsXML (string gameName) {
 
 		string theSettingsFileName;
 		
@@ -32,14 +56,14 @@ public class AudioXMLDocument : XmlDocument {
                         AudioXMLDocument.messageParentPathNotFound);
 
 			DirectoryInfo theInfo = new DirectoryInfo (AudioXMLDocument.settingsBaseDir);
-			FileInfo[] files = theInfo.GetFiles ("*_" + filename + ".xml");
+			FileInfo[] files = theInfo.GetFiles ("*_" + gameName + ".xml");
 			if (files.Length < 1) throw new FileNotFoundException ("Audio settings file not found!");
 			theSettingsFileName = AudioXMLDocument.settingsBaseDir + 
 				files [0].Name.Substring (0, files [0].Name.Length - 4) + 
 					".xml";
 			this.Load (theSettingsFileName);
 		} else {
-			theSettingsFileName = "sound_settings_" + filename;
+			theSettingsFileName = "sound_settings_" + gameName;
 			TextAsset xmlText = (TextAsset)Resources.Load (theSettingsFileName);
 			this.LoadXml (xmlText.text);
 		}
@@ -171,13 +195,8 @@ public class AudioXMLDocument : XmlDocument {
 
 	/*!< Default base dir for the settings file */
 	private static string settingsBaseDir = Application.dataPath + "/Resources/"; 
-	/*!< Message for exception of player index */
-	//private static string messageGreaterPlayerIndex = 
-	//	"The specified index of player is greater than the amount of total players"; 
 	/*!< Message for path not exists */
 	private static string messageParentPathNotFound = "Path does not exist"; 
-	/*!< Menu sounds player index */
-	//private static int xmlSettingsPlayerIndexMenuSounds = -1;
 	/*!< The base node of the settings' xml file */
 	private static string xmlSettingsNameOfNodeBase = "/theFile"; 
 	/*!< The general settings node of xml file */

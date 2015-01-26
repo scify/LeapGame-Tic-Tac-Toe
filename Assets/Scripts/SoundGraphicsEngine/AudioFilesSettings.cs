@@ -1,12 +1,9 @@
 /**
- * This file contains the AudioFilesSettings class. 
+ * The file for the AudioFilesSettings class. 
  * 
- * This class is responsible for loading and handling
- * the audio settings. Audio settings contain the amount
- * of players that the game can hold, the cases at which
- * sound will be reproduced, the corresponding positions of
- * sound reproduction and the relative (to the application)
- * paths of the sounds. 
+ * This file holds the definition and implementation 
+ * of AudioFilesSettings class. This file is part of
+ * the LEAP project.
  * 
  * //TODO Add legal stuff.... (have to? )
  * 
@@ -28,14 +25,9 @@ using UnityEngine;
  * The audio file settings for players.
  * 
  * This class handles the audio file settings for
- * all players in a specified game. Public methods are:
- * 
- *   - AudioFilesSettings (string )
- *   - string getSoundForPlayer (int , string , UnityEngine.Vector3 )
- *   - string getMenuSound(string )
- *   - int getAmountOfSoundSettings()
- *   - List<string> getAllSoundSettings()
- *   - bool isSettingExists(string theCase)
+ * all players in a specified game. It is responsible
+ * for managing all the audio settings and the
+ * retrieval of sounds for the games. 
  * 
  * @access Public
  * @author Konstantinos Drossos
@@ -91,7 +83,7 @@ public class AudioFilesSettings {
 
 		this.gameName = gameName;
 
-	} /* End public AudioFilesSettings(string gameName, string menuSetting, string playerSetting) */
+	}
 	
 
 
@@ -112,7 +104,7 @@ public class AudioFilesSettings {
 		return this.audioFilesForPlayer [player].Find ( delegate (AudioFileForGame af) {
 			if ( af.TheCase.Equals (theCase) && af.ThePosition.Equals (soundOrigin) ) return true; else return false; 
 		}).ThePath;
-	} /* End public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) */
+	}
 
 
 
@@ -145,11 +137,9 @@ public class AudioFilesSettings {
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForPlayer(string newSettings) {
-
 		foreach (int playerIndx in Enumerable.Range(0, this.nOfPlayers_max - 1) ) 
 			this.changeSettingsForPlayer(playerIndx, newSettings);
-
-	} /* End public void changePlayerSettings(int playerIndex, string newSettings) */
+	}
 
 
 
@@ -167,13 +157,12 @@ public class AudioFilesSettings {
 	public void changeSettingsForPlayer(int playerIndex, string newSettings) {
 
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
-		//gameSettings.Load (this.gameName);
 		gameSettings.LoadSettingsXML (this.gameName);
 
 		this.audioFilesForPlayer [playerIndex].Clear ();
 		this.audioFilesForPlayer [playerIndex] = gameSettings.getFilesForPlayer (playerIndex, newSettings);
 		this.currentAudioSettingForPlayer = newSettings;
-	} /* End public void changePlayerSettings(int playerIndex, string newSettings) */
+	}
 
 
 
@@ -189,7 +178,6 @@ public class AudioFilesSettings {
 	 */
 	public void changeSettingsForMenu (string newSettings) {
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
-		//gameSettings.Load (this.gameName);
 		gameSettings.LoadSettingsXML (this.gameName);
 
 		this.audioFilesForMenu = gameSettings.getFilesForMenu(newSettings);
@@ -238,7 +226,7 @@ public class AudioFilesSettings {
 	public int getAmountOfSoundSettings() { 
 		if (this.audioSettingsForMenu == null) throw new MemberAccessException("Uninitialised variable");
 		return this.audioSettingsForMenu.Count; 
-	} /* End public int getAmountOfSoundSettings() */
+	}
 
 
 
@@ -254,7 +242,7 @@ public class AudioFilesSettings {
 	 */
 	public List<string> getSettingsForPlayers () {
 		return this.audioSettingsForPlayers;
-	} /* End public List<string> getSettingsForPlayers () */
+	}
 
 
 
@@ -270,7 +258,7 @@ public class AudioFilesSettings {
 	 */
 	public List<string> getSettingsForMenu () {
 		return this.audioSettingsForMenu;
-	} /* End public List<string> getSettingsForMenu () */
+	}
 
 
 
@@ -289,7 +277,7 @@ public class AudioFilesSettings {
 	 */
 	public bool isAudioSettingExistsForMenu(string theSetting) {
 		return this.audioSettingsForMenu.Exists (c => c.Equals (theSetting));
-	} /* End public bool isAudioMenuSettingExists(string theCase) */
+	}
 
 
 
@@ -308,7 +296,7 @@ public class AudioFilesSettings {
 	 */
 	public bool isAudioSettingExistsForPlayer(string theSetting) {
 		return this.audioSettingsForPlayers.Exists (c => c.Equals (theSetting));
-	} /* End public bool isAudioPlayerSettingExists(string theCase) */
+	}
 	
 	
 	
@@ -326,7 +314,7 @@ public class AudioFilesSettings {
 		this.audioFilesForPlayer = new List<List<AudioFileForGame>> ();
 		this.audioSettingsForMenu = new List<string> ();
 		this.audioSettingsForPlayers = new List<string> ();
-	} /* End private void initialiseLists () */
+	}
 
 
 
@@ -344,7 +332,7 @@ public class AudioFilesSettings {
 	private bool existsPlayer (int nOfPlayer) {
 		if (nOfPlayer > this.nOfPlayers_max || nOfPlayer < this.nOfPlayers_min) return false;
 		else return true;
-	} /* End private bool playerExists (int nOfPlayer) */
+	}
 
 
 	/*!< Number of maximum players for the game */
