@@ -13,6 +13,8 @@
 *.pidb
 *.booproj
 *.wav
+*.zip
+*.zip.meta
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
