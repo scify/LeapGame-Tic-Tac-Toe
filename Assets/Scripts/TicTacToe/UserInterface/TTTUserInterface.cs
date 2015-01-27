@@ -73,6 +73,12 @@ public class TTTUserInterface : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             engine.postEvent(new UIEvent("no repeat", "soundSettings", "player0"));
         }
+        if (Input.GetKeyDown(KeyCode.R)) {
+            engine.postEvent(new UIEvent("funky", "soundSettings", "player0"));
+        }
+        if (Input.GetKeyDown(KeyCode.T)) {
+            engine.postEvent(new UIEvent("funky elevated", "soundSettings", "player0"));
+        }
 
 	}
 	
