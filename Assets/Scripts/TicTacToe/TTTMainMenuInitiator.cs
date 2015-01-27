@@ -8,9 +8,7 @@ public class TTTMainMenuInitiator : MonoBehaviour {
 
     void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
-        Debug.Log(Settings.menu_sounds);
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
-        Debug.Log(Settings.game_sounds);
 
         List<WorldObject> environment = new List<WorldObject>();
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));

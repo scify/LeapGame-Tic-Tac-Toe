@@ -151,7 +151,7 @@ public class TTTTutorialThreeInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        audioClip = auEngine.getSoundForPlayer("error", new Vector3(actor.position.x / offset_x, -actor.position.z / offset_y, 0));
+                        audioClip = auEngine.getSoundForPlayer("error", Vector3.zero);
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         break;
                     } else {

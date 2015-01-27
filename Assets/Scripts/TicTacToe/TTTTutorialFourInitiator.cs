@@ -6,6 +6,8 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
     public float offset_x;
     public float offset_y;
 
+    private Vector3 lastCursor = Vector3.zero;
+
     void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
@@ -157,7 +159,7 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        audioClip = auEngine.getSoundForPlayer("error", new Vector3(actor.position.x / offset_x, -actor.position.z / offset_y, 0));
+                        audioClip = auEngine.getSoundForPlayer("error", Vector3.zero);
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         break;
                     } else {
@@ -170,6 +172,10 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
                         engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position);
                         engine.state.environment.Add(engine.state.blockingSound);
                         state.curPlayer = engine.players.Count - state.curPlayer - 1;
+                        Actor ac = state.actors[0];
+                        ac.position += lastCursor;
+                        lastCursor = ac.position - lastCursor;
+                        ac.position -= lastCursor;
                         state.timestamp++;
                         break;
                     }
