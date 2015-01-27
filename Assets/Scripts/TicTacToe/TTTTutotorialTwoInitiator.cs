@@ -6,10 +6,9 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
     public float offset_x;
     public float offset_y;
 
-	void Start () {
-
+    void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
-        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", "no repeat");
+        AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
 
         List<Actor> actors = new List<Actor>();
         actors.Add(new TTTActor("cursor", "Prefabs/TTT/Cursor", new Vector3(0, 0, 0), false, (WorldObject wo, GameEngine engine) => {
@@ -34,9 +33,15 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
 
         List<Player> players = new List<Player>();
         players.Add(new Player("player0", "Nick"));
-        players.Add(new TTTAIPlayer("player1", "AI"));
 
         TTTRuleset rules = new TTTRuleset();
+        rules.Add(new TTTRule("initialization", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text1"), Vector3.zero);
+            state.environment.Add(state.blockingSound);
+            state.timestamp = 0;
+            return false;
+        }));
+
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (eve.payload.Equals("escape")) {
                 Application.LoadLevel("mainMenu");
@@ -45,12 +50,38 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
             return true;
         }));
 
-        
-        rules.Add(new TTTRule("ALL", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            return !eve.initiator.StartsWith("player") || eve.initiator.Equals("player" + state.curPlayer);
+        rules.Add(new TTTRule("soundSettings", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            Settings.game_sounds = eve.payload;
+            auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
+            return true;
         }));
 
-        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+        rules.Add(new TTTRule("soundOver", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            int id = int.Parse(eve.payload);
+            if (state.blockingSound != null && id == state.blockingSound.clip.GetInstanceID()) {
+                state.environment.Remove(state.blockingSound);
+                state.blockingSound = null;
+            } else {
+                WorldObject toRemove = null;
+                foreach (WorldObject go in state.environment) {
+                    if (go is TTTSoundObject && (go as TTTSoundObject).clip.GetInstanceID() == id) {
+                        toRemove = go;
+                        break;
+                    }
+                }
+                if (toRemove != null) {
+                    state.environment.Remove(toRemove);
+                }
+            }
+            if (engine.state.timestamp == 11) {
+                engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text2"), Vector3.zero);
+                engine.state.environment.Add(engine.state.blockingSound);
+                engine.state.timestamp = 2;
+            }
+            return false;
+        }));
+
+        rules.Add(new TTTRule("ALL", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (state.blockingSound != null) {
                 return false;
             }
@@ -58,23 +89,8 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            if (state.timestamp >= 10 && eve.payload.Equals("enter")) {
-                (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
-                return false;
-            }
-            return true;
-        }));
-
-        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            if (eve.payload.Equals("select")) {
-                foreach (Actor actor in state.actors) {
-                    foreach (WorldObject wo in state.environment) {
-                        if (wo.position == actor.position) {
-                            actor.interact(wo, engine);
-                            break;
-                        }
-                    }
-                }
+            if (state.timestamp == 10 && eve.payload.Equals("enter")) {
+                Application.LoadLevel("mainMenu");
             }
             return true;
         }));
@@ -90,19 +106,36 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        audioClip = auEngine.getSoundForPlayer("selected", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
-                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text4"), Vector3.zero);
+                        engine.state.environment.Add(engine.state.blockingSound);
+                        break;
                     } else {
                         int x = (int)(actor.position.x / offset_x + 1);
                         int y = (int)(actor.position.z / offset_y + 1);
                         state.board[x, y] = state.curPlayer;
-                        string symbol = state.curPlayer == 0 ? "X" : "O";
-                        engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/" + symbol, actor.position, false));
-                        audioClip = auEngine.getSoundForPlayer(symbol.ToLower() + "filled", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
+                        engine.state.environment.Add(new TTTStaticObject("Prefabs/TTT/X", actor.position, false));
+                        audioClip = auEngine.getSoundForPlayer("xfilled", new Vector3(actor.position.x / offset_x, -actor.position.z / offset_y, 0));
                         engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position);
                         engine.state.environment.Add(engine.state.blockingSound);
-                        state.curPlayer = engine.players.Count - state.curPlayer - 1;
-                        state.timestamp++;
+                        engine.state.timestamp++;
+                        if (engine.state.timestamp == 2) {
+                            engine.state.timestamp = 11;
+                        }
+                        break;
+                    }
+                }
+            }
+            return true;
+        }));
+
+        rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            if (eve.payload.Equals("select")) {
+                foreach (Actor actor in state.actors) {
+                    foreach (WorldObject wo in state.environment) {
+                        if (wo.position == actor.position) {
+                            actor.interact(wo, engine);
+                            break;
+                        }
                     }
                 }
             }
@@ -145,8 +178,8 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
                     int x = (int)(actor.position.x / offset_x) + dx;
                     int y = (int)(actor.position.z / offset_y) + dy;
                     if (x < -1 || x > 1 || y < -1 || y > 1) {
-                        AudioClip audioClip = auEngine.getSoundForPlayer("boundary", new Vector3(dx, dy, 0));
-                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
+                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("boundary", new Vector3(1, 0, 0)), actor.position);
+                        engine.state.environment.Add(state.blockingSound);
                         return false;
                     }
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
@@ -156,39 +189,12 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
         }));
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            if (eve.payload.Equals("enter")) {
-                bool finished = false;
-                for (int i = 0; i < 3; i++) {
-                    if (state.board[i, 0] == state.board[i, 1] && state.board[i, 0] == state.board[i, 2] && state.board[i, 0] != -1) {
-                        finished = true;
-                    }
-                }
-                for (int i = 0; i < 3; i++) {
-                    if (state.board[0, i] == state.board[1, i] && state.board[0, i] == state.board[2, i] && state.board[0, i] != -1) {
-                        finished = true;
-                    }
-                }
-                if (state.board[0, 0] == state.board[1, 1] && state.board[0, 0] == state.board[2, 2] && state.board[0, 0] != -1) {
-                    finished = true;
-                }
-                if (state.board[0, 2] == state.board[1, 1] && state.board[0, 2] == state.board[2, 0] && state.board[0, 2] != -1) {
-                    finished = true;
-                }
-                if (finished) {
-                    (state.result as TTTGameResult).winner = state.curPlayer;
-                    (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Won;
-                    state.timestamp = 10;
-                    state.curPlayer = 0;
-                    return false;
-                }
-                if (state.timestamp == 9) {
-                    (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Draw;
-                    state.timestamp++;
-                    state.curPlayer = 0;
-                    return false;
-                }
+            if (eve.payload.Equals("enter") && state.timestamp == 9) {
+                engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text3"), Vector3.zero);
+                engine.state.environment.Add(engine.state.blockingSound);
+                engine.state.timestamp++;
             }
-            return true;
+            return false;
         }));
 
         gameObject.AddComponent<TTTGameEngine>();
@@ -196,5 +202,5 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
         gameObject.GetComponent<TTTGameEngine>().initialize(rules, actors, environment, players, renderer);
         gameObject.GetComponent<TTTUserInterface>().initialize(gameObject.GetComponent<TTTGameEngine>());
         gameObject.GetComponent<TTTGameEngine>().postEvent(new GameEvent("", "initialization", "unity"));
-	}
+    }
 }

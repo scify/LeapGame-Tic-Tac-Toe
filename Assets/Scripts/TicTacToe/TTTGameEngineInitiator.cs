@@ -7,7 +7,6 @@ public class TTTGameEngineInitiator : MonoBehaviour {
     public float offset_y;
 
 	void Start () {
-
         TTTStateRenderer renderer = new TTTStateRenderer();
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
 
@@ -34,11 +33,18 @@ public class TTTGameEngineInitiator : MonoBehaviour {
 
         List<Player> players = new List<Player>();
         players.Add(new Player("player0", "Nick"));
-        players.Add(new TTTAIPlayer("player1", "AI"));
+        players.Add(new TTTAIPlayer("player1", "AI", true));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
-            TTTSoundObject tso = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("new_game_intro"), Vector3.zero);
+            AudioClip auClip;
+            if (Settings.first_game) {
+                auClip = auEngine.getSoundForMenu("new_game_intro");
+                Settings.first_game = false;
+            } else {
+                auClip = auEngine.getSoundForMenu("new_game");
+            }
+            TTTSoundObject tso = new TTTSoundObject("Prefabs/TTT/AudioSource", auClip, Vector3.zero);
             state.environment.Add(tso);
             state.blockingSound = tso;
             return false;
