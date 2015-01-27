@@ -353,6 +353,9 @@
 
 		<player index="1">
 			<settings name="default">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/default/player1/error.wav"</path>
+		        </audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/default/player1/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -405,6 +408,44 @@
 					<path>"tic-tac-toe/default/player1/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player1/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/default/player1/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -517,6 +558,9 @@
 
 
 			<settings name="pitch shifted">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/pitch shifted/player1/error.wav"</path>
+		        </audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/pitch shifted/player1/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -569,6 +613,44 @@
 					<path>"tic-tac-toe/pitch shifted/player1/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player1/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/pitch shifted/player1/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -681,6 +763,9 @@
 
 			
 			<settings name="no repeat">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/no repeat/player1/error.wav"</path>
+		        </audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/no repeat/player1/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -733,6 +818,44 @@
 					<path>"tic-tac-toe/no repeat/player1/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player1/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/no repeat/player1/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -845,6 +968,9 @@
 
 			
 			<settings name="funky elevated">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/funky elevated/player1/error.wav"</path>
+		        </audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/funky elevated/player1/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -897,6 +1023,44 @@
 					<path>"tic-tac-toe/funky elevated/player1/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player1/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/funky elevated/player1/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -1009,6 +1173,9 @@
 
 			
 			<settings name="funky">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/funky/player1/error.wav"</path>
+		        </audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/funky/player1/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1057,6 +1224,44 @@
 					<path>"tic-tac-toe/funky/player1/e21"</path>
 					<position_vals>0=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player1/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="empty">
 					<path>"tic-tac-toe/funky/player1/e22"</path>
 					<position_vals>1=-1=0</position_vals>
@@ -1178,9 +1383,10 @@
 
 
 		<player index="2">
-
-			
 			<settings name="default">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/default/player2/error.wav"</path>
+		    	</audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/default/player2/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1233,6 +1439,44 @@
 					<path>"tic-tac-toe/default/player2/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/default/player2/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/default/player2/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -1345,6 +1589,9 @@
 
 			
 			<settings name="pitch shifted">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/pitch shifted/player2/error.wav"</path>
+		    	</audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/pitch shifted/player2/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1397,6 +1644,44 @@
 					<path>"tic-tac-toe/pitch shifted/player2/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/pitch shifted/player2/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/pitch shifted/player2/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -1509,6 +1794,9 @@
 
 			
 			<settings name="no repeat">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/no repeat/player2/error.wav"</path>
+		    	</audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/no repeat/player2/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1561,6 +1849,44 @@
 					<path>"tic-tac-toe/no repeat/player2/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/no repeat/player2/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/no repeat/player2/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -1673,6 +1999,9 @@
 
 			
 			<settings name="funky elevated">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/funky elevated/player2/error.wav"</path>
+		    	</audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/funky elevated/player2/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1725,6 +2054,44 @@
 					<path>"tic-tac-toe/funky elevated/player2/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky elevated/player2/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/funky elevated/player2/os00"</path>
 					<position_vals>-1=1=0</position_vals>
@@ -1837,6 +2204,9 @@
 
 			
 			<settings name="funky">
+				<audio_file case="error">
+		          <path>"tic-tac-toe/funky/player2/error.wav"</path>
+		    	</audio_file>
 				<audio_file case="boundary">
 					<path>"tic-tac-toe/funky/player2/b0"</path>
 					<position_vals>0=1=0</position_vals>
@@ -1889,6 +2259,44 @@
 					<path>"tic-tac-toe/funky/player2/e22"</path>
 					<position_vals>1=-1=0</position_vals>
 				</audio_file>
+
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm00"</path>
+					<position_vals>-1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm01"</path>
+					<position_vals>0=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm02"</path>
+					<position_vals>1=1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm10"</path>
+					<position_vals>-1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm11"</path>
+					<position_vals>0=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm12"</path>
+					<position_vals>1=0=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm20"</path>
+					<position_vals>-1=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm21"</path>
+					<position_vals>0=-1=0</position_vals>
+				</audio_file>
+				<audio_file case="just moved">
+					<path>"tic-tac-toe/funky/player2/jm22"</path>
+					<position_vals>1=-1=0</position_vals>
+				</audio_file>
+
 				<audio_file case="selected">
 					<path>"tic-tac-toe/funky/player2/os00"</path>
 					<position_vals>-1=1=0</position_vals>
