@@ -29,7 +29,6 @@ using UnityEngine;
  * for managing all the audio settings and the
  * retrieval of sounds for the games. 
  * 
- * @access Public
  * @author Konstantinos Drossos
  */
 public class AudioFilesSettings {
@@ -43,21 +42,48 @@ public class AudioFilesSettings {
 	 * 
 	 * @param gameName - the name of the game to be played (string)
 	 * @throw Exception - rethrows all catched exceptions after print their message to debug log
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public AudioFilesSettings (string gameName):
 	this(gameName, "default", "default"){}
 
+
+
+	/** 
+	 * Constructor of the AudioFilesSettings class.
+	 * 
+	 * The constructor of the AudioFilesSettings class accepts
+	 * the game name and players' settings and sets up the audio 
+	 * files' settings for the specified game. 
+	 * 
+	 * @param gameName - the name of the game to be played (string)
+	 * @param playersSettings - the settings for the players
+	 * @throw Exception - rethrows all catched exceptions after print their message to debug log
+	 * @author Konstantinos Drossos
+	 */
 	public AudioFilesSettings(string gameName, string playersSettings):
-	this(gameName, "default", playersSettings){}
-	
-	public AudioFilesSettings(string gameName, string menuSetting, string playerSetting) {
+	this(gameName, playersSettings, "default"){}
+
+
+
+	/** 
+	 * Constructor of the AudioFilesSettings class.
+	 * 
+	 * The constructor of the AudioFilesSettings class accepts
+	 * the game name, players' settings and menu settings and 
+	 * sets up the audio  files' settings for the specified game. 
+	 * 
+	 * @param gameName - the name of the game to be played (string)
+	 * @param playersSettings - the settings for the players
+	 * @param menuSetting - the settings for menu
+	 * @throw Exception - rethrows all catched exceptions after print their message to debug log
+	 * @author Konstantinos Drossos
+	 */
+	public AudioFilesSettings(string gameName, string playerSetting, string menuSetting) {
 
 		AudioXMLDocument gameSettings = new AudioXMLDocument() ;
 
 		try { 
-			//gameSettings.Load(gameName); 
 			gameSettings.LoadSettingsXML(gameName); 
 		} catch (Exception e) { Debug.Log (e.Message); throw e; }
 
@@ -82,7 +108,6 @@ public class AudioFilesSettings {
 		} catch (Exception e) { Debug.Log (e.Message); throw e; }
 
 		this.gameName = gameName;
-
 	}
 	
 
@@ -97,7 +122,6 @@ public class AudioFilesSettings {
 	 * @param theCase - the case of the sound (string)
 	 * @param soundOrigin - the origin of the sound (UnityEngine.Vector3)
 	 * @return string - the path of the sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public string getSoundForPlayer (int player, string theCase, UnityEngine.Vector3 soundOrigin) {
@@ -116,7 +140,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @param theCase - the menu case (string)
 	 * @return string - the path of the sound
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public string getSoundForMenu (string theCase) {
@@ -133,7 +156,6 @@ public class AudioFilesSettings {
 	 * This public method changes the current sound settings for all players.
 	 * 
 	 * @param newSettings - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForPlayer(string newSettings) {
@@ -151,7 +173,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @param playerIndex - the index of the specified player (int)
 	 * @param newSettings - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForPlayer(int playerIndex, string newSettings) {
@@ -173,7 +194,6 @@ public class AudioFilesSettings {
 	 * for menu.
 	 * 
 	 * @param newSettings - the name of the new settings (string)
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public void changeSettingsForMenu (string newSettings) {
@@ -189,7 +209,6 @@ public class AudioFilesSettings {
 	/**
 	 * The current audio settings for the menu.
 	 * 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public string CurrentAudioSettingForMenu {
@@ -201,7 +220,6 @@ public class AudioFilesSettings {
 	/**
 	 * The current audio settings for the player(s).
 	 * 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public string CurrentAudioSettingForPlayer {
@@ -220,7 +238,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @return int - the total amount of settings
 	 * @throw MemberAccessException - if the appropriate variable is not initialised
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public int getAmountOfSoundSettings() { 
@@ -237,7 +254,6 @@ public class AudioFilesSettings {
 	 * exist for the current game. 
 	 * 
 	 * @return List<string> - the existing settings
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public List<string> getSettingsForPlayers () {
@@ -253,7 +269,6 @@ public class AudioFilesSettings {
 	 * exist for the current game. 
 	 * 
 	 * @return List<string> - the existing settings
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public List<string> getSettingsForMenu () {
@@ -272,7 +287,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @param theSetting - the case in question (string)
 	 * @return bool - true if the case exists, false otherwise. 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public bool isAudioSettingExistsForMenu(string theSetting) {
@@ -291,7 +305,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @param theSetting - the case in question (string)
 	 * @return bool - true if the case exists, false otherwise. 
-	 * @access Public
 	 * @author Konstantinos Drossos
 	 */
 	public bool isAudioSettingExistsForPlayer(string theSetting) {
@@ -306,7 +319,6 @@ public class AudioFilesSettings {
 	 * This private method initiliased all lists that will be used 
 	 * by the current object. 
 	 * 
-	 * @access Private
 	 * @author Konstantinos Drossos
 	 */
 	private void initialiseLists () {
@@ -326,7 +338,6 @@ public class AudioFilesSettings {
 	 * 
 	 * @param nOfPlayer - the index of the player (int)
 	 * @return bool - True if the player exists, false otherwise
-	 * @access Private
 	 * @author Konstantinos Drossos
 	 */ 
 	private bool existsPlayer (int nOfPlayer) {
@@ -341,7 +352,6 @@ public class AudioFilesSettings {
 	private int nOfPlayers_min;	
 	/*!< The name of the current game */
 	private string gameName; 
-
 	/*!< The players' settings */
 	private List<string> audioSettingsForPlayers; 
 	/*!< The available audio menu settings */
@@ -350,12 +360,10 @@ public class AudioFilesSettings {
 	private List<List<AudioFileForGame>> audioFilesForPlayer; 
 	/*!< The audio files for the game menu */
 	private List<AudioFileForGame> audioFilesForMenu;
-
 	/*!< The current audio settings for menu */
 	private string currentAudioSettingForMenu;
 	/*!< The current audio settings for player(s) */
 	private string currentAudioSettingForPlayer;
-
 }
 
 /* Scripts/SoundGraphicsEngine/AudioFilesSettings.cs */
