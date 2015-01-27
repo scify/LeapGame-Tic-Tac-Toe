@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TTTTutorialOneInitiator : MonoBehaviour {
+public class TTTTutotorialThreeInitiator : MonoBehaviour {
 
     public float offset_x;
     public float offset_y;
 
-	void Start () {
+    void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
 
@@ -210,5 +210,5 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
         gameObject.GetComponent<TTTGameEngine>().initialize(rules, actors, environment, players, renderer);
         gameObject.GetComponent<TTTUserInterface>().initialize(gameObject.GetComponent<TTTGameEngine>());
         gameObject.GetComponent<TTTGameEngine>().postEvent(new GameEvent("", "initialization", "unity"));
-	}
+    }
 }

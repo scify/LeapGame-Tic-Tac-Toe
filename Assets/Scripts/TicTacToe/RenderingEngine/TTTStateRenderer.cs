@@ -54,6 +54,9 @@ public class TTTStateRenderer : StateRenderer {
                     go.transform.position = so.position;
                     rendered.Add(so, go);
                     prefabs.Add(so, (so as IUnityRenderable).getPrefab());
+                    if (so is CanvasObject) {
+                        go.GetComponent<Canvas>().worldCamera = Camera.main;
+                    }
                     if (so is TTTMenuItem) {
                         go.GetComponentInChildren<TextMesh>().text = (so as TTTMenuItem).message;
                     }
