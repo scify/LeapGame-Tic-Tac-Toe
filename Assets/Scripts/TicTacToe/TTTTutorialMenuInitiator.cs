@@ -7,12 +7,6 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
     public float offset_y;
 
     void Start() {
-        if (!Settings.initialized) {
-            Settings.initialized = true;
-            Settings.game_sounds = "no repeat";
-            Settings.menu_sounds = "default";
-        }
-
         TTTStateRenderer renderer = new TTTStateRenderer();
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
 
