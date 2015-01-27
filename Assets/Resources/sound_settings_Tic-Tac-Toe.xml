@@ -354,7 +354,7 @@
 		<player index="1">
 			<settings name="default">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/default/player1/error.wav"</path>
+		          <path>"tic-tac-toe/default/player1/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		        </audio_file>
 				<audio_file case="boundary">
@@ -560,7 +560,7 @@
 
 			<settings name="pitch shifted">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/pitch shifted/player1/error.wav"</path>
+		          <path>"tic-tac-toe/pitch shifted/player1/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		        </audio_file>
 				<audio_file case="boundary">
@@ -766,7 +766,7 @@
 			
 			<settings name="no repeat">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/no repeat/player1/error.wav"</path>
+		          <path>"tic-tac-toe/no repeat/player1/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		        </audio_file>
 				<audio_file case="boundary">
@@ -972,7 +972,7 @@
 			
 			<settings name="funky elevated">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/funky elevated/player1/error.wav"</path>
+		          <path>"tic-tac-toe/funky elevated/player1/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		        </audio_file>
 				<audio_file case="boundary">
@@ -1178,7 +1178,7 @@
 			
 			<settings name="funky">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/funky/player1/error.wav"</path>
+		          <path>"tic-tac-toe/funky/player1/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		        </audio_file>
 				<audio_file case="boundary">
@@ -1390,7 +1390,7 @@
 		<player index="2">
 			<settings name="default">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/default/player2/error.wav"</path>
+		          <path>"tic-tac-toe/default/player2/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		    	</audio_file>
 				<audio_file case="boundary">
@@ -1596,7 +1596,7 @@
 			
 			<settings name="pitch shifted">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/pitch shifted/player2/error.wav"</path>
+		          <path>"tic-tac-toe/pitch shifted/player2/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		    	</audio_file>
 				<audio_file case="boundary">
@@ -1802,7 +1802,7 @@
 			
 			<settings name="no repeat">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/no repeat/player2/error.wav"</path>
+		          <path>"tic-tac-toe/no repeat/player2/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		    	</audio_file>
 				<audio_file case="boundary">
@@ -2008,7 +2008,7 @@
 			
 			<settings name="funky elevated">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/funky elevated/player2/error.wav"</path>
+		          <path>"tic-tac-toe/funky elevated/player2/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		    	</audio_file>
 				<audio_file case="boundary">
@@ -2214,7 +2214,7 @@
 			
 			<settings name="funky">
 				<audio_file case="error">
-		          <path>"tic-tac-toe/funky/player2/error.wav"</path>
+		          <path>"tic-tac-toe/funky/player2/error"</path>
 		          <position_vals>0=0=0</position_vals>
 		    	</audio_file>
 				<audio_file case="boundary">
