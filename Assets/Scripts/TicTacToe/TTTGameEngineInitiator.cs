@@ -63,7 +63,12 @@ public class TTTGameEngineInitiator : MonoBehaviour {
         rules.Add(new TTTRule("soundSettings", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             Settings.game_sounds = eve.payload;
             auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
-            return true;
+            return false;
+        }));
+
+        rules.Add(new TTTRule("autoSelect", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
+            Settings.auto_select = !Settings.auto_select;
+            return false;
         }));
 
         rules.Add(new TTTRule("soundOver", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
@@ -194,9 +199,13 @@ public class TTTGameEngineInitiator : MonoBehaviour {
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         return false;
                     }
-                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
-                    engine.state.environment.Add(state.blockingSound);
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
+                    if (Settings.auto_select) {
+                        engine.postEvent(new UIEvent("select", "action", "engine"));
+                    } else {
+                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
+                        engine.state.environment.Add(state.blockingSound);
+                    }
                 }
             }
             return true;

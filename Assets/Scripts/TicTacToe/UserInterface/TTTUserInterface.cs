@@ -79,6 +79,9 @@ public class TTTUserInterface : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.T)) {
             engine.postEvent(new UIEvent("funky elevated", "soundSettings", "player0"));
         }
+        if (Input.GetKeyDown(KeyCode.A)) {
+            engine.postEvent(new UIEvent("true", "autoSelect", "player0"));
+        }
 
 	}
 	
