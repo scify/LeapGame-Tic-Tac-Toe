@@ -79,7 +79,7 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                 case 1:
                     engine.state.timestamp = 2;
                     break;
-                case 2:
+                case 20:
                     engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro1_text2"), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 21;
@@ -109,6 +109,11 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 5;
                     break;
+                case 55:
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro1_text6"), Vector3.zero);
+                    engine.state.environment.Add(engine.state.blockingSound);
+                    engine.state.timestamp = 6;
+                    break;
                 case 7:
                     engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro1_text7"), Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
@@ -134,9 +139,7 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (engine.getState().timestamp == 5 && eve.payload.Equals("select")) {
-                engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro1_text6"), Vector3.zero);
-                engine.state.environment.Add(engine.state.blockingSound);
-                engine.state.timestamp = 6;
+                engine.state.timestamp = 55;
                 Actor ac = state.actors[0];
                 float x = ac.position.x / offset_x >= 0 ? ac.position.x - offset_x : ac.position.x + offset_x;
                 float z = ac.position.z / offset_y >= 0 ? ac.position.z - offset_y : ac.position.z + offset_y;
@@ -203,8 +206,13 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
                         if (state.timestamp > 20 && state.timestamp < 25) {
                             state.timestamp++;
                         }
+                        if (state.timestamp == 2) {
+                            state.timestamp = 20;
+                        }
                         return false;
                     }
+                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
+                    engine.state.environment.Add(state.blockingSound);
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
                 }
             }

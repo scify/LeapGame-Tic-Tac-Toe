@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class TTTTutotorialTwoInitiator : MonoBehaviour {
+public class TTTTutorialTwoInitiator : MonoBehaviour {
 
     public float offset_x;
     public float offset_y;
@@ -106,8 +106,8 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        audioClip = auEngine.getSoundForPlayer("error", Vector3.zero);
-                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text4"), Vector3.zero);
+                        engine.state.environment.Add(engine.state.blockingSound);
                         break;
                     } else {
                         int x = (int)(actor.position.x / offset_x + 1);
@@ -188,6 +188,8 @@ public class TTTTutotorialTwoInitiator : MonoBehaviour {
                         engine.state.environment.Add(state.blockingSound);
                         return false;
                     }
+                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
+                    engine.state.environment.Add(state.blockingSound);
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
                 }
             }
