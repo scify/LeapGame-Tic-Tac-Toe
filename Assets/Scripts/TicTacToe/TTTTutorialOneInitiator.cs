@@ -145,11 +145,17 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
             }
             if (eve.payload.Equals("select") && engine.state.timestamp >= 5) {
                 foreach (Actor actor in state.actors) {
+                    bool found = false;
                     foreach (WorldObject wo in state.environment) {
                         if (wo.position == actor.position) {
                             actor.interact(wo, engine);
+                            found = true;
                             break;
                         }
+                    }
+                    if (!found) {
+                        AudioClip audioClip = auEngine.getSoundForPlayer("empty", new Vector3(actor.position.x / offset_x, actor.position.z / offset_y, 0));
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                     }
                 }
             }
