@@ -265,8 +265,7 @@ public class TTTTutorialThreeInitiator : MonoBehaviour {
                         engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, actor.position));
                         return false;
                     }
-                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
-                    engine.state.environment.Add(state.blockingSound);
+                    engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position));
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
                 }
             }

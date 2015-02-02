@@ -184,12 +184,11 @@ public class TTTTutorialTwoInitiator : MonoBehaviour {
                     int x = (int)(actor.position.x / offset_x) + dx;
                     int y = (int)(actor.position.z / offset_y) + dy;
                     if (x < -1 || x > 1 || y < -1 || y > 1) {
-                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("boundary", new Vector3(1, 0, 0)), actor.position);
+                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("boundary", new Vector3(dx, -dy, 0)), actor.position);
                         engine.state.environment.Add(state.blockingSound);
                         return false;
                     }
-                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
-                    engine.state.environment.Add(state.blockingSound);
+                    engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position));
                     actor.position = new Vector3(offset_x * x, 0, offset_y * y);
                 }
             }

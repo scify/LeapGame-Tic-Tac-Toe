@@ -203,8 +203,7 @@ public class TTTGameEngineInitiator : MonoBehaviour {
                     if (Settings.auto_select) {
                         engine.postEvent(new UIEvent("select", "action", "engine"));
                     } else {
-                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position);
-                        engine.state.environment.Add(state.blockingSound);
+                        engine.state.environment.Add(new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForPlayer("just moved", new Vector3(x, y, 0)), actor.position));
                     }
                 }
             }
