@@ -7,5 +7,5 @@ public class Settings {
     public static bool auto_select = false;
     public static string game_sounds = "funky elevated";
     public static string menu_sounds = "default";
-
+    public static string previousMenu = "mainMenu";
 }

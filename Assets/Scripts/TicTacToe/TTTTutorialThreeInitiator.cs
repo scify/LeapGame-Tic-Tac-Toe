@@ -6,6 +6,8 @@ public class TTTTutorialThreeInitiator : MonoBehaviour {
     public float offset_x;
     public float offset_y;
 
+    private int clip_id;
+
     void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
         AudioEngine auEngine = new AudioEngine(0, "Tic-Tac-Toe", Settings.menu_sounds, Settings.game_sounds);
@@ -74,26 +76,35 @@ public class TTTTutorialThreeInitiator : MonoBehaviour {
                     state.environment.Remove(toRemove);
                 }
             }
+            AudioClip audioClip;
             switch (engine.state.timestamp) {
                 case 11:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text3"), Vector3.zero);
+                    audioClip = auEngine.getSoundForMenu("intro3_text3");
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 111;
+                    clip_id = audioClip.GetInstanceID();
                     break;
                 case 111:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text4"), Vector3.zero);
-                    engine.state.environment.Add(engine.state.blockingSound);
-                    engine.state.timestamp = 2;
+                    if (eve.payload.Equals(clip_id + "")) {
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text4"), Vector3.zero);
+                        engine.state.environment.Add(engine.state.blockingSound);
+                        engine.state.timestamp = 2;
+                    }
                     break;
                 case 12:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text6"), Vector3.zero);
+                    audioClip = auEngine.getSoundForMenu("intro3_text6");
+                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
                     engine.state.environment.Add(engine.state.blockingSound);
                     engine.state.timestamp = 121;
+                    clip_id = audioClip.GetInstanceID();
                     break;
                 case 121:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text7"), Vector3.zero);
-                    engine.state.environment.Add(engine.state.blockingSound);
-                    engine.state.timestamp = 3;
+                    if (eve.payload.Equals(clip_id + "")) {
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text7"), Vector3.zero);
+                        engine.state.environment.Add(engine.state.blockingSound);
+                        engine.state.timestamp = 3;
+                    }
                     break;
                 case 13:
                     engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro3_text9"), Vector3.zero);

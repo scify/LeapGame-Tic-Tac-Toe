@@ -26,6 +26,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
             TTTSoundObject tso = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
             state.environment.Add(tso);
             state.stoppableSounds.Add(tso);
+            Settings.previousMenu = "tutorialMenu";
             return false;
         }));
 
@@ -89,7 +90,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                     if (temp.selected) {
                         if (eve.payload == "_up" || eve.payload == "left") {
                             if (previous == null) {
-                                audioClip = auEngine.getSoundForMenu("boundary");
+                                audioClip = auEngine.getSoundForPlayer("boundary", Vector3.up);
                                 tso = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
                                 state.environment.Add(tso);
                                 state.stoppableSounds.Add(tso);
@@ -121,7 +122,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
                 }
             }
             if (change) {
-                audioClip = auEngine.getSoundForMenu("boundary");
+                audioClip = auEngine.getSoundForPlayer("boundary", Vector3.down);
                 tso = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
                 state.environment.Add(tso);
                 state.stoppableSounds.Add(tso);

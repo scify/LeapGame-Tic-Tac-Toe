@@ -7,6 +7,7 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
     public float offset_y;
 
     private Vector3 lastCursor = Vector3.zero;
+    private int clip_id;
 
     void Start() {
         TTTStateRenderer renderer = new TTTStateRenderer();
@@ -113,10 +114,12 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
                     state.timestamp = 16;
                     break;
                 case 16:
-                    engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro4_text9"), Vector3.zero);
-                    engine.state.environment.Add(engine.state.blockingSound);
-                    state.timestamp = 10;
-                    state.curPlayer = 0;
+                    if (eve.payload.Equals(clip_id + "")) {
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro4_text9"), Vector3.zero);
+                        engine.state.environment.Add(engine.state.blockingSound);
+                        state.timestamp = 10;
+                        state.curPlayer = 0;
+                    }
                     break;
             }
             return false;
@@ -256,14 +259,19 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
                 if (state.board[0, 2] == state.board[1, 1] && state.board[0, 2] == state.board[2, 0] && state.board[0, 2] != -1) {
                     finished = true;
                 }
+                AudioClip audioClip;
                 if (finished) {
                     (state.result as TTTGameResult).winner = state.curPlayer;
                     (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Won;
                     state.timestamp = 15;
                     if (state.curPlayer != 0) {
-                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro4_text6"), Vector3.zero);
+                        audioClip = auEngine.getSoundForMenu("intro4_text6");
+                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
+                        clip_id = audioClip.GetInstanceID();
                     } else {
-                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro4_text7"), Vector3.zero);
+                        audioClip = auEngine.getSoundForMenu("intro4_text8");
+                        state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
+                        clip_id = audioClip.GetInstanceID();
                     }
                     state.environment.Add(state.blockingSound);
                     state.curPlayer = 0;
@@ -273,7 +281,9 @@ public class TTTTutorialFourInitiator : MonoBehaviour {
                     (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Draw;
                     state.timestamp = 15;
                     state.curPlayer = 0;
-                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro4_text8"), Vector3.zero);
+                    audioClip = auEngine.getSoundForMenu("intro4_text7");
+                    state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", audioClip, Vector3.zero);
+                    clip_id = audioClip.GetInstanceID();
                     state.environment.Add(state.blockingSound);
                     return false;
                 }

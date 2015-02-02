@@ -152,7 +152,8 @@ public class TTTTutorialOneInitiator : MonoBehaviour {
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if ((engine.state.result as TTTGameResult).status == TTTGameResult.GameStatus.Won && eve.payload.Equals("enter")) {
-                Application.LoadLevel("mainMenu");
+                (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
+                return false;
             }
             return true;
         }));

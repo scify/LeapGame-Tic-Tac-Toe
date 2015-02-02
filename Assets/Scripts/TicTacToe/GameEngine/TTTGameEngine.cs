@@ -74,7 +74,7 @@ public class TTTGameEngine : GameEngine {
     }
 
     public override void cleanUp() {
-        Application.LoadLevel("mainMenu");
+        Application.LoadLevel(Settings.previousMenu);
 	}
 
 }

@@ -90,7 +90,8 @@ public class TTTTutorialTwoInitiator : MonoBehaviour {
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (state.timestamp == 10 && eve.payload.Equals("enter")) {
-                Application.LoadLevel("mainMenu");
+                (state.result as TTTGameResult).status = TTTGameResult.GameStatus.Over;
+                return false;
             }
             return true;
         }));
