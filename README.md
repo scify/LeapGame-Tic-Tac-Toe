@@ -5,7 +5,9 @@ Current version
 ---------------
 Current version in master branch is 1.1
 
-### File structure
+File structure
+--------------
+
 In order to have a full working code audio files must be included in the UNITY project. 
 
 These files can be found at the appropriate [file section](http://www.kodiz.net/projects/tic-tac-toe/files) of the current project.
