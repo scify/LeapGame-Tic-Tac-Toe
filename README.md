@@ -10,7 +10,6 @@ LEAP is a version of the legacy Tic-Tac-Toe game, especially modified for visual
 
 * [SciFY](http://www.scify.gr/site/en/)
 * [Lab. of Audiovisual Signal Processing, Dept. of Audiovisual Arts, Ionian University](http://epoasi.eu/en/)
-* [CafeBabel](http://www.cafebabel.co.uk/athens/)
 
 ## Current stable version
 -------------------------
