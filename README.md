@@ -27,5 +27,5 @@ These files can be obtained by request. Current version of audio files is 1.0.
 
 ## Executable files
 -------------------
-The executable files for Linux, MAC OS and Windows can be found at the [files section of LEAP Project](http://www.kodiz.net/projects/leap/files) in the [kodiz platform](www.kodiz.net). 
+The executable files for Linux, MAC OS and Windows can be found at the  www.gamesfortheblind.org
 
