@@ -107,7 +107,7 @@ public class TTTTutorialTwoInitiator : MonoBehaviour {
                     }
                     AudioClip audioClip;
                     if (overlap) {
-                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text4"), Vector3.zero);
+                        engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text3"), Vector3.zero);
                         engine.state.environment.Add(engine.state.blockingSound);
                         break;
                     } else {
@@ -198,7 +198,7 @@ public class TTTTutorialTwoInitiator : MonoBehaviour {
 
         rules.Add(new TTTRule("action", (TTTGameState state, GameEvent eve, TTTGameEngine engine) => {
             if (eve.payload.Equals("enter") && state.timestamp == 9) {
-                engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text3"), Vector3.zero);
+                engine.state.blockingSound = new TTTSoundObject("Prefabs/TTT/AudioSource", auEngine.getSoundForMenu("intro2_text4"), Vector3.zero);
                 engine.state.environment.Add(engine.state.blockingSound);
                 engine.state.timestamp++;
             }
