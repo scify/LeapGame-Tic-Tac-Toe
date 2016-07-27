@@ -1,27 +1,3 @@
-LeapGame - Tic-Tac-Toe
-======================
-
-Current stable version
----------------
-Current version in master branch is 1.1
-
-File structure
---------------
-
-In order to have a full working code audio files must be included in the UNITY project. 
-
-These files can be found at the appropriate [file section](http://www.kodiz.net/projects/tic-tac-toe/files) of the current project.
-
-Current version of audio files is 1.0.
-
-Audio files must be placed at the following path *PROJECT_ROOT/Assets/Resources/Sounds/tic-tac-toe*. In the */tic-tac-toe* directory **should be** one named as *default*. All sounds that are in it are considered as the default sounds for the game. 
-
-Executable files
-----------------
-
-The executable files for Linux, MAC OS and Windows can be found at the [files section of LEAP Project](http://www.kodiz.net/projects/leap/files) in the [kodiz platform](www.kodiz.net). 
-
-
 # LEAP - Tic-Tac-Toe
 --------------------
 Listen, lEArn, Play.
@@ -41,7 +17,7 @@ Current version is 1.1
 
 ## Extra Soundsets
 ------------------
-Under the folder "Extra Soundsets" you will find two female voice soundsets, one in Greek and one in English. You can add your own soundsets and allow people from all over the world to enjoy this game in their own language! In this folder you will also find the source code for a soundset manager created specifically to help you create soundsets for the leap tic-tac-toe game. Under the "compiled" folder you can also find compiled versions of the soundset manager for your convenience.
+You can add your own soundsets and allow people from all over the world to enjoy this game in their own language! Under the folder "Extra Soundsets" you will find the source code for a soundset manager created specifically to help you create soundsets for the leap tic-tac-toe game. Under the "compiled" folder you can also find compiled versions of the soundset manager for your convenience.
 
 ## Extra Soundsets Folder Structure
 -----------------------------------
