@@ -30,3 +30,7 @@ Is built with the free version of the UNITY3D engine and, apart from it, there a
 ## Executable files
 -------------------
 The executable files for Linux, MAC OS and Windows can be found at www.gamesfortheblind.org
+
+## License
+-------------------
+The project is licensed under Apache license (v2.0).
