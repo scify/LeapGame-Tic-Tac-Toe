@@ -28,6 +28,7 @@ public class Settings : MonoBehaviour {
     public static string[] soundsets;
     public static readonly Settings instance = new Settings();
     public static string default_soundset = "Θοδωρής";
+    public static string default_lang = "el";
     public static AudioSettingsDocument audio_settings_document;
     public static Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 }

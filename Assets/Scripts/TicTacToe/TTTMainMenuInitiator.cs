@@ -16,6 +16,7 @@
  */
 using UnityEngine;
 using System.Collections.Generic;
+using SmartLocalization;
 
 public class TTTMainMenuInitiator : MonoBehaviour {
 
@@ -30,9 +31,13 @@ public class TTTMainMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Νέο Παιχνίδι", "newGame", "new_game", auEngine.getSoundForMenu("new_game"), new Vector3(0, 0, -offset_y), false, true));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Οδηγίες", "tutorialMenu", "tutorials", auEngine.getSoundForMenu("tutorials"), new Vector3(0, 0, 0), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Έξοδος", "exitScene", "exit", auEngine.getSoundForMenu("exit"), new Vector3(0, 0, offset_y), false));
+
+        LanguageManager languageManager = LanguageManager.Instance;
+        languageManager.ChangeLanguage(Settings.default_lang);
+
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", languageManager.GetTextValue("SmartLocalization.NewGame"), "newGame", "new_game", auEngine.getSoundForMenu("new_game"), new Vector3(0, 0, -offset_y), false, true));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.Instructions"), "tutorialMenu", "tutorials", auEngine.getSoundForMenu("tutorials"), new Vector3(0, 0, 0), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.Exit"), "exitScene", "exit", auEngine.getSoundForMenu("exit"), new Vector3(0, 0, offset_y), false));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {

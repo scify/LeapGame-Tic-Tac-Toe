@@ -16,6 +16,7 @@
  */
 using UnityEngine;
 using System.Collections.Generic;
+using SmartLocalization;
 
 public class TTTTutorialMenuInitiator : MonoBehaviour {
 
@@ -30,11 +31,14 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -2 * offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", "Εισαγωγή 1", "tutorialOne", "intro1", auEngine.getSoundForMenu("intro1"), new Vector3(0, 0, -2f * offset_y), false, true));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Εισαγωγή 2", "tutorialTwo", "intro2", auEngine.getSoundForMenu("intro2"), new Vector3(0, 0, -1f * offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Εισαγωγή 3", "tutorialThree", "intro3", auEngine.getSoundForMenu("intro3"), new Vector3(0, 0, 0f * offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Εισαγωγή 4", "tutorialFour", "intro4", auEngine.getSoundForMenu("intro4"), new Vector3(0, 0, 1f * offset_y), false));
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", "Πίσω", "mainMenu", "main_menu", auEngine.getSoundForMenu("main_menu"), new Vector3(0, 0, 2f * offset_y), false));
+
+        LanguageManager languageManager = LanguageManager.Instance;
+
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", languageManager.GetTextValue("SmartLocalization.TutorialIntro1"), "tutorialOne", "intro1", auEngine.getSoundForMenu("intro1"), new Vector3(0, 0, -2f * offset_y), false, true));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.TutorialIntro2"), "tutorialTwo", "intro2", auEngine.getSoundForMenu("intro2"), new Vector3(0, 0, -1f * offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.TutorialIntro3"), "tutorialThree", "intro3", auEngine.getSoundForMenu("intro3"), new Vector3(0, 0, 0f * offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.TutorialIntro4"), "tutorialFour", "intro4", auEngine.getSoundForMenu("intro4"), new Vector3(0, 0, 1f * offset_y), false));
+        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.Back"), "mainMenu", "main_menu", auEngine.getSoundForMenu("main_menu"), new Vector3(0, 0, 2f * offset_y), false));
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
