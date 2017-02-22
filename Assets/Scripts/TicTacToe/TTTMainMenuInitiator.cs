@@ -30,7 +30,7 @@ public class TTTMainMenuInitiator : MonoBehaviour {
         List<WorldObject> environment = new List<WorldObject>();
         environment.Add(new TTTStaticObject("Prefabs/TTT/Camera_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(-2 * offset_x, 0, -offset_y), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Logos", new Vector3(-2 * offset_x, 0, -offset_y), false));
 
         LanguageManager languageManager = LanguageManager.Instance;
         languageManager.ChangeLanguage(Settings.default_lang);
