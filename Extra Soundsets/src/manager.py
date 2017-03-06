@@ -1,10 +1,11 @@
+#!/usr/bin/python
 import os
 import re
 import shutil
 import sys
 import xml.etree.ElementTree as ET
 
-tree = ET.parse('sound_settings_Tennis.xml')
+tree = ET.parse('sound_settings_Tic-Tac-Toe.xml')
 root = tree.getroot()
 menu_dict = {}
 menu_rdict = {}

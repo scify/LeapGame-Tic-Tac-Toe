@@ -31,12 +31,13 @@ public class TTTSoundSelectionInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(10000, 0, 0), false));
         int i = 0;
-        environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", Settings.default_soundset, "default", "default_", null, new Vector3(0, 0, -offset_y), false, true));
+
         foreach (string s in auEngine.getSettingsAudioForMenu()) {
-            if (s == "default") {
-                continue;
+            if (s == Settings.default_soundset) {
+                environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", Settings.default_soundset_btn_name,  s, s + "_", null, new Vector3(0, 0, -offset_y), false, true));
+            } else {
+                //environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", s, s, s + "_", null, new Vector3(0, 0, i++ * offset_y), false, false));
             }
-            environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", s, s, s + "_", null, new Vector3(0, 0, i++ * offset_y), false, false));
         }
 
         TTTRuleset rules = new TTTRuleset();

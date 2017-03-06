@@ -22,8 +22,8 @@ public class ExitScript : MonoBehaviour {
     public AudioSource source;
 	
 	void Update () {
-        if (!source.isPlaying) {
+        //if (!source.isPlaying) {
             Application.Quit();
-        }
+        //}
 	}
 }
