@@ -31,5 +31,5 @@ $RECYCLE.BIN/
 *.x86
 *.x86_64
 *_Data/
-*_Soundsets/
 *.exe
+*.app
