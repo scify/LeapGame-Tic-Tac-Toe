@@ -96,10 +96,10 @@ public class TTTLoadingInitiator : MonoBehaviour {
     void loadSoundset(string path, string name) {
         DirectoryInfo menu = new DirectoryInfo(path + "menu_sounds");
         Settings.audio_settings_document.addFiles(name, menu.GetFiles());
-        for (int i = 1; i <= Settings.audio_settings_document.MaximumPlayers; i++) {
+        /*for (int i = 1; i <= Settings.audio_settings_document.MaximumPlayers; i++) {
             DirectoryInfo player = new DirectoryInfo(path + "player" + i);
             Settings.audio_settings_document.addPlayerFiles(name, i, player.GetFiles());
-        }
+        }*/
         foreach (FileInfo file in new DirectoryInfo(path).GetFiles("*.wav")) {
             Settings.audio_settings_document.addPlayerFile("default", name, file);
         }
@@ -130,7 +130,7 @@ public class TTTLoadingInitiator : MonoBehaviour {
         }
         WWW www = new WWW(url);
         yield return www;
-        Settings.audioClips[path] = www.GetAudioClip();
+        Settings.audioClips[path] = www.GetAudioClip(false);
         done++;
     }
 }
