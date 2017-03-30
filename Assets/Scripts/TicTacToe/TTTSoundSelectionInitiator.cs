@@ -29,7 +29,7 @@ public class TTTSoundSelectionInitiator : MonoBehaviour {
         List<WorldObject> environment = new List<WorldObject>();
         environment.Add(movingCamera);
         environment.Add(new TTTStaticObject("Prefabs/TTT/Light_Default", new Vector3(0, 10, 0), false));
-        environment.Add(new TTTStaticObject("Prefabs/TTT/Logo", new Vector3(10000, 0, 0), false));
+        environment.Add(new TTTStaticObject("Prefabs/TTT/Logos", new Vector3(10000, 0, 0), false));
         int i = 0;
 
         foreach (string s in auEngine.getSettingsAudioForMenu()) {
