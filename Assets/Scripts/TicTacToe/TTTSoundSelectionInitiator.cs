@@ -39,6 +39,8 @@ public class TTTSoundSelectionInitiator : MonoBehaviour {
                 //environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", s, s, s + "_", null, new Vector3(0, 0, i++ * offset_y), false, false));
             }
         }
+        // load main menu screen
+        Application.LoadLevel("mainMenu");
 
         TTTRuleset rules = new TTTRuleset();
         rules.Add(new TTTRule("initialization", (TTTMenuState state, GameEvent eve, TTTMenuEngine engine) => {
