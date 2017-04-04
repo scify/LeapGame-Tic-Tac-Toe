@@ -129,15 +129,15 @@
 		<value>Nytt spill	</value>
 	</data>
 	<data name="SmartLocalization.TutorialIntro1" xml:space="preserve">
-		<value>Første øvelsesspill</value>
+		<value>Første øvels.</value>
 	</data>
 	<data name="SmartLocalization.TutorialIntro2" xml:space="preserve">
-		<value>Andre øvelsesspill</value>
+		<value>Andre øvels.</value>
 	</data>
 	<data name="SmartLocalization.TutorialIntro3" xml:space="preserve">
-		<value>Tredje øvelsesspill</value>
+		<value>Tredje øvels.</value>
 	</data>
 	<data name="SmartLocalization.TutorialIntro4" xml:space="preserve">
-		<value>Fjerde øvelsesspill</value>
+		<value>Fjerde øvels.</value>
 	</data>
 </root>

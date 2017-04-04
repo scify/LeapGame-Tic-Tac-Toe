@@ -33,6 +33,7 @@ public class TTTTutorialMenuInitiator : MonoBehaviour {
         environment.Add(new TTTStaticObject("Prefabs/TTT/Logos", new Vector3(-2 * offset_x, 0, -offset_y), false));
 
         LanguageManager languageManager = LanguageManager.Instance;
+        languageManager.ChangeLanguage(Settings.default_lang);
 
         environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonSelected", languageManager.GetTextValue("SmartLocalization.TutorialIntro1"), "tutorialOne", "intro1", auEngine.getSoundForMenu("intro1"), new Vector3(0, 0, -2f * offset_y), false, true));
         environment.Add(new TTTMenuItem("Prefabs/TTT/ButtonDefault", languageManager.GetTextValue("SmartLocalization.TutorialIntro2"), "tutorialTwo", "intro2", auEngine.getSoundForMenu("intro2"), new Vector3(0, 0, -1f * offset_y), false));
