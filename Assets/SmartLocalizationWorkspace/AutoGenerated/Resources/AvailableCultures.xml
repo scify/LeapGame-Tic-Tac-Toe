@@ -14,5 +14,11 @@
       <nativeName>English</nativeName>
       <isRightToLeft>false</isRightToLeft>
     </CultureInfo>
+    <CultureInfo>
+      <languageCode>no</languageCode>
+      <englishName>Norwegian</englishName>
+      <nativeName>norsk</nativeName>
+      <isRightToLeft>false</isRightToLeft>
+    </CultureInfo>
   </CultureInfos>
 </SmartCultureCollections>

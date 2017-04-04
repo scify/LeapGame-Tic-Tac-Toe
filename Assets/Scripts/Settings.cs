@@ -29,18 +29,18 @@ public class Settings : MonoBehaviour {
     //by setting this value to "MyPack" the sounds will be loaded from this pack initially.
     //the default sound pack has the name "default".
     //when the game starts, it will load this sound pack as it's default.
-    public static string game_sounds = "English";
+    public static string game_sounds = "Norwegian";
     //data pack name for menu sounds. For example, if there is a data pack named "MyPack" in *_Soundsets folder,
     //by setting this value to "MyPack" the sounds will be loaded from this pack initially.
     //the default sound pack has the name "default".
     //when the game starts, it will load this sound pack as it's default.
-    public static string menu_sounds = "English";
+    public static string menu_sounds = "Norwegian";
     //this variable defines how the default soundset directory name. Must be "default" The Assets/Resources/Sounds/tennis/{DEFAULT_SOUND_PACK}
-    public static string default_soundset = "English";
+    public static string default_soundset = "Norwegian";
     //how the default soundset btn will be named (in soundset selection screen)
-    public static string default_soundset_btn_name = "English";
+    public static string default_soundset_btn_name = "Norwegian";
     //default lang has nothing to do with sound packs. It refers only to the smart localization plugin, for localized strings.
-    public static string default_lang = "en";
+    public static string default_lang = "no";
     public static AudioSettingsDocument audio_settings_document;
     public static Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 }
